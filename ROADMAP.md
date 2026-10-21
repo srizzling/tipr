@@ -27,7 +27,9 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [ ] Cloudflare API token and account id added as Actions secrets, first deploy to `*.pages.dev`
 - [ ] Read the Games Lantern terms of use, then add data credit to the footer
 - [ ] Verify unconfirmed data against the game (see "Data to verify")
-- [ ] Original icons and fonts, no game art or Star Wars logos
+- [x] Restyled to follow the game's build screen: Rajdhani (open-licence) font, panel headings with rules, translucent rows, italic text with gold keywords, icon-led stat rows, Max Energy dots, `INSTALLED PARTS n/4`, red fault boxes, vehicle arrows, S/C/R key hints
+- [ ] Better original icons: today they are simple line icons, and parts and abilities share one generic glyph each. The game uses a unique icon per part and ability
+- [ ] Closer matches still missing: Aurebesh headings, the vehicle blueprint drawing, the blurred paper backdrop (all game art, so we skip them by choice)
 - [ ] Accessibility pass (keyboard on the tuning boxes and pickers) and a Playwright smoke test
 
 ## v1.x: content and growth

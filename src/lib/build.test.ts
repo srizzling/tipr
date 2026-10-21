@@ -6,6 +6,7 @@ import {
   decodeBuild,
   emptyTuning,
   fitToBudget,
+  maxEnergy,
   encodeBuild,
   newBuild,
   setTuning,
@@ -46,6 +47,11 @@ describe('tuning', () => {
     expect(tuningCost(totalBoxes(fit))).toBeLessThanOrEqual(10);
     expect(totalBoxes(fit)).toBe(3);
     expect(fit.afterburner).toBe(3);
+  });
+
+  it('estimates max energy from the battery boxes', () => {
+    expect(maxEnergy(emptyTuning())).toBe(3);
+    expect(maxEnergy(setTuning(emptyTuning(), 'battery', 7))).toBe(10);
   });
 
   it('adds 4 km/h per box, 7 for podracers', () => {

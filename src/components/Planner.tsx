@@ -1,7 +1,6 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 import {
   CURRENT_BUILD_KEY,
-  MAX_BOXES_PER_STAT,
   MAX_PARTS,
   MAX_TUNING_BOXES,
   decodeBuild,
@@ -12,15 +11,15 @@ import {
   placeAbility,
   setAbilitySlot,
   setTuning,
-  topSpeed,
   totalBoxes,
   tuningCost,
   vehicleLevel,
   type Build,
 } from '../lib/build';
-import { STAT_IDS, type Ability, type Part } from '../data/types';
+import type { Ability, Part } from '../data/types';
 import { gameData } from '../data';
-import { STAT_LABEL, highlight, useKeywordRe } from './highlight';
+import { highlight, useKeywordRe } from './highlight';
+import { Key, PanelHeading, PartRow, StatRows, TipLogo } from './ui';
 import { FAULT_GROUPS, faultGroup } from '../lib/faults';
 import AbilityBoard from './AbilityBoard';
 
@@ -71,6 +70,31 @@ export default function Planner() {
     setTimeout(() => setCopied(false), 1500);
   };
 
+  const cycleClass = (dir: 1 | -1) => {
+    const i = data.vehicleClasses.findIndex((c) => c.id === build.classId);
+    const next = data.vehicleClasses[(i + dir + data.vehicleClasses.length) % data.vehicleClasses.length];
+    update({ classId: next.id });
+  };
+  const goCompare = () => {
+    location.href = `/compare?a=${encodeBuild(build)}`;
+  };
+
+  // S / C / R shortcuts, like the key hints on the game's screen. Never while typing or with a dialog open.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null;
+      if (e.metaKey || e.ctrlKey || e.altKey || picker || t?.closest('input, textarea, select, [contenteditable]')) return;
+      const k = e.key.toLowerCase();
+      if (k === 's') void share();
+      else if (k === 'c') goCompare();
+      else if (k === 'r') update({ tuning: emptyTuning() });
+      else return;
+      e.preventDefault();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  });
+
   const partAvailable = (p: Part) => mode === 'all' || p.unlockEvents === null || p.unlockEvents <= events;
 
   return (
@@ -78,6 +102,7 @@ export default function Planner() {
       <header className="planner-head">
         <h1>
           <span className="slash">/</span>BUILD
+          <TipLogo />
         </h1>
         <div className="head-tools">
           <div className="seg" role="group" aria-label="Unlock mode">
@@ -125,62 +150,41 @@ export default function Planner() {
       <main className="cols">
         {/* ---- Vehicle stats ---- */}
         <section className="panel">
-          <h2>Vehicle stats</h2>
-          <select
-            className="field"
-            value={build.classId}
-            onChange={(e) => update({ classId: e.target.value })}
-            aria-label="Vehicle class"
-          >
-            {data.vehicleClasses.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-          <div className="speed">
-            <span>Speed</span>
-            <b>{topSpeed(cls.baseSpeed, build.tuning, cls.id === 'podracer')}</b>
+          <PanelHeading title="Vehicle stats" />
+          <div className="class-row">
+            <button className="nav" aria-label="Previous vehicle" onClick={() => cycleClass(-1)}>
+              ‹
+            </button>
+            <select
+              className="field"
+              value={build.classId}
+              onChange={(e) => update({ classId: e.target.value })}
+              aria-label="Vehicle class"
+            >
+              {data.vehicleClasses.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+            <button className="nav" aria-label="Next vehicle" onClick={() => cycleClass(1)}>
+              ›
+            </button>
           </div>
-          {STAT_IDS.map((stat) => (
-            <div className="stat" key={stat}>
-              <span className="stat-name">{stat === 'maneuvering' ? cls.maneuveringName : STAT_LABEL[stat]}</span>
-              <div className="boxes" role="group" aria-label={`${stat} boxes`}>
-                {Array.from({ length: MAX_BOXES_PER_STAT }, (_, i) => (
-                  <button
-                    key={i}
-                    className={i < build.tuning[stat] ? 'box on' : 'box'}
-                    aria-label={`Set ${stat} to ${i + 1}`}
-                    onClick={() =>
-                      update({
-                        tuning: setTuning(
-                          build.tuning,
-                          stat,
-                          build.tuning[stat] === i + 1 ? i : i + 1,
-                          budget,
-                        ),
-                      })
-                    }
-                  />
-                ))}
-                {[0, 1, 2].map((i) => (
-                  <span key={i} className="box big" title="Filled by in-tour +1 upgrades" />
-                ))}
-              </div>
-            </div>
-          ))}
+          <StatRows
+            cls={cls}
+            tuning={build.tuning}
+            onSet={(stat, boxes) => update({ tuning: setTuning(build.tuning, stat, boxes, budget) })}
+          />
           <p className="hint">
-            Level {vehicleLevel(build.tuning)} / {MAX_TUNING_BOXES + 1} · {spent} points spent
+            Level {vehicleLevel(build.tuning)} / {MAX_TUNING_BOXES + 1} · {spent} point{spent === 1 ? '' : 's'} spent
           </p>
-          <button className="link" onClick={() => update({ tuning: emptyTuning() })}>
-            Respec
-          </button>
         </section>
 
         {/* ---- Racer style + abilities ---- */}
         <div className="stack">
           <section className="panel">
-            <h2>Racer style</h2>
+            <PanelHeading title="Racer style" />
             <select
               className="field"
               value={build.styleId ?? ''}
@@ -225,7 +229,7 @@ export default function Planner() {
           </section>
 
           <section className="panel">
-            <h2>Abilities</h2>
+            <PanelHeading title="Abilities" />
             <AbilityBoard
               build={build}
               abilities={data.abilities}
@@ -237,51 +241,47 @@ export default function Planner() {
 
         {/* ---- Installed parts ---- */}
         <section className="panel">
-          <h2>Installed</h2>
+          <PanelHeading title="Installed parts" aside={`${build.parts.length}/${MAX_PARTS}`} />
           <ul className="parts">
             {build.parts.map(({ id, fault }) => {
               const p = partById.get(id);
               if (!p) return null;
-              const f = fault ? partById.get(fault) : undefined;
               return (
-                <li key={id} className={`part ${p.rarity}`}>
-                  <button
-                    className="x"
-                    aria-label={`Remove ${p.name}`}
-                    onClick={() => update({ parts: build.parts.filter((x) => x.id !== id) })}
-                  >
-                    ×
-                  </button>
-                  <h3>{p.name}</h3>
-                  <p>{highlight(p.text, keywordRe)}</p>
-                  {f ? (
-                    <button
-                      className="downside"
-                      title={`${f.name} (click to remove)`}
-                      onClick={() =>
-                        update({ parts: build.parts.map((x) => (x.id === id ? { ...x, fault: null } : x)) })
-                      }
-                    >
-                      {highlight(f.text, keywordRe)}
-                    </button>
-                  ) : (
-                    <button className="link" onClick={() => setPicker({ kind: 'fault', partId: id })}>
-                      + Add a fault (optional)
-                    </button>
-                  )}
-                </li>
+                <PartRow
+                  key={id}
+                  part={p}
+                  fault={fault ? partById.get(fault) : undefined}
+                  keywordRe={keywordRe}
+                  onRemove={() => update({ parts: build.parts.filter((x) => x.id !== id) })}
+                  onFault={() => setPicker({ kind: 'fault', partId: id })}
+                  onClearFault={() =>
+                    update({ parts: build.parts.map((x) => (x.id === id ? { ...x, fault: null } : x)) })
+                  }
+                />
               );
             })}
             {build.parts.length < MAX_PARTS && (
               <li>
                 <button className="add" onClick={() => setPicker({ kind: 'part' })}>
-                  + Add part ({build.parts.length}/{MAX_PARTS})
+                  + Add part
                 </button>
               </li>
             )}
           </ul>
         </section>
       </main>
+
+      <div className="keys">
+        <Key k="S" onClick={share}>
+          {copied ? 'Link copied' : 'Share link'}
+        </Key>
+        <Key k="C" onClick={goCompare}>
+          Compare
+        </Key>
+        <Key k="R" onClick={() => update({ tuning: emptyTuning() })}>
+          Respec
+        </Key>
+      </div>
 
       <div className="ad-slot" aria-hidden>
         Ad slot

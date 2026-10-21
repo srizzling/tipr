@@ -1,6 +1,7 @@
 import { totalBoxes, tuningCost, vehicleLevel, type Build } from '../lib/build';
 import type { GameData } from '../data/types';
 import BuildPanels from './BuildPanels';
+import { TipLogo } from './ui';
 
 /** The read-only build page. Pure markup, so the Pages Function can render it on the server too. */
 export function SharedBuild({
@@ -23,6 +24,7 @@ export function SharedBuild({
       <header className="planner-head">
         <h1>
           <span className="slash">/</span>BUILD
+          <TipLogo />
         </h1>
         <div className="head-tools">
           <div className="pill">

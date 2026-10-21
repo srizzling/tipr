@@ -21,6 +21,7 @@ import {
   type Build,
 } from '../lib/build';
 import type { Ability } from '../data/types';
+import { Icon } from './ui';
 
 interface Props {
   build: Build;
@@ -134,7 +135,7 @@ function Slot({
       onClick={onOpen}
       aria-label={ability ? `${label}: ${ability.name}. Choose another ability` : `${label}: empty. Choose an ability`}
     >
-      <span className="orb" />
+      <span className="orb">{ability && <Icon name="ability" size={22} />}</span>
       <span>
         <b>{ability?.name ?? ''}</b>
         <small>{label}</small>

@@ -8,6 +8,9 @@ export const MAX_PARTS = 4;
 export const ABILITY_SLOTS = 4;
 export const KM_H_PER_BOX = 4;
 export const PODRACER_KM_H_PER_BOX = 7;
+/** Max Energy is 3 at the start plus about 1 per Battery box (community-measured, so treat as an estimate). */
+export const BASE_ENERGY = 3;
+export const MAX_ENERGY_SCALE = 16;
 /** localStorage key holding the planner's current build code, so Compare can offer "my build". */
 export const CURRENT_BUILD_KEY = 'tipr:current';
 
@@ -77,6 +80,10 @@ export function fitToBudget(tuning: Record<StatId, number>, budget: number): Rec
     while (t[stat] > 0 && tuningCost(totalBoxes(t)) > budget) t[stat]--;
   }
   return t;
+}
+
+export function maxEnergy(tuning: Record<StatId, number>): number {
+  return BASE_ENERGY + tuning.battery;
 }
 
 export function topSpeed(baseSpeed: number, tuning: Record<StatId, number>, podracer = false): number {
