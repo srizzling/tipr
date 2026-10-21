@@ -1,0 +1,52 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+import { kwLinks, termUsage } from '../../lib/ref';
+
+export function getStaticPaths() {
+  return d.glossary.map((term) => ({ params: { id: term.id }, props: { term } }));
+}
+const { term } = Astro.props;
+const used = termUsage(term, d);
+const total = used.abilities.length + used.parts.length + used.faults.length + used.traits.length;
+const description = `${term.name} in Star Wars: Galactic Racer: ${term.text.replace(/\s+/g, ' ')}${total ? ` Appears in ${total} abilities, parts, faults and racer style traits.` : ''}`;
+---
+
+<Ref
+  title={`${term.name} meaning`}
+  description={description}
+  heading={term.name}
+  kicker="Glossary"
+  crumbs={[{ href: '/glossary/', label: 'Glossary' }]}
+>
+  <section class="panel">
+    <h2 class="panel-title"><span>Meaning</span></h2>
+    <p class="big-text" set:html={kwLinks(term.text, d.glossary)} />
+  </section>
+  {used.traits.length > 0 && (
+    <section class="panel">
+      <h2 class="panel-title"><span>Racer style traits</span><span class="aside">{used.traits.length}</span></h2>
+      <div class="list">
+        {used.traits.map(({ style, trait }) => <a class="card" href={`/styles/${style.id}/`}><span><b>{trait.name}</b><small>{style.name}</small></span></a>)}
+      </div>
+    </section>
+  )}
+  {used.abilities.length > 0 && (
+    <section class="panel">
+      <h2 class="panel-title"><span>Abilities</span><span class="aside">{used.abilities.length}</span></h2>
+      <div class="tiers">{used.abilities.map((a) => <a href={`/abilities/${a.id}/`}>{a.name}</a>)}</div>
+    </section>
+  )}
+  {used.parts.length > 0 && (
+    <section class="panel">
+      <h2 class="panel-title"><span>Parts</span><span class="aside">{used.parts.length}</span></h2>
+      <div class="tiers">{used.parts.map((p) => <a href={`/parts/${p.id}/`}>{p.name}</a>)}</div>
+    </section>
+  )}
+  {used.faults.length > 0 && (
+    <section class="panel">
+      <h2 class="panel-title"><span>Faults</span><span class="aside">{used.faults.length}</span></h2>
+      <div class="tiers">{used.faults.map((f) => <a href={`/faults/${f.id}/`}>{f.name}</a>)}</div>
+    </section>
+  )}
+</Ref>

@@ -37,7 +37,7 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 
 ## v1.x: content and growth
 
-- [ ] **Static reference pages:** one page per racer style, ability, part and status term, generated from the data. These are the search traffic.
+- [x] **Reference pages:** 446 static pages: a page per racer style (20), ability (45), part (259), fault (59) and keyword (55), with index pages, a site nav, cross-links from every keyword, "add to a build" buttons that open the planner pre-filled, `sitemap.xml` and `robots.txt`. A link checker (`pnpm check:links`) runs in CI
 - [x] `/b/<code>` is rendered on the server by a Cloudflare Pages Function (`functions/b/[code].ts`): real page title, Open Graph text previews, build content in the HTML, 404 for invalid codes, `noindex`
 - [x] Link-preview images: 85 cards (one per vehicle class and racer style, plus a default) rendered at build time with resvg, served statically. The Function points each shared build at the matching card, so there is no runtime image cost
 - [x] **Build screen image:** a replica of the build screen with the real stats, parts and faults. *Copy image* and *Save image* draw it in the browser (free, works today); the same renderer feeds an optional per-build link preview

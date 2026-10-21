@@ -1,0 +1,38 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+import { faultGroup } from '../../lib/faults';
+import { kwLinks } from '../../lib/ref';
+
+export function getStaticPaths() {
+  return d.parts.filter((p) => p.fault).map((fault) => ({ params: { id: fault.id }, props: { fault } }));
+}
+const { fault } = Astro.props;
+const group = faultGroup(fault);
+const same = d.parts.filter((p) => p.fault && p.id !== fault.id && faultGroup(p) === group);
+const description = `${fault.name} fault in Star Wars: Galactic Racer: ${fault.text.replace(/\s+/g, ' ')}`;
+---
+
+<Ref
+  title={`${fault.name} fault`}
+  description={description}
+  heading={fault.name}
+  kicker={`Fault · ${group}`}
+  crumbs={[{ href: '/faults/', label: 'Faults' }]}
+>
+  <section class="panel">
+    <h2 class="panel-title"><span>What it does</span></h2>
+    <p class="big-text" set:html={kwLinks(fault.text, d.glossary)} />
+    <p class="hint gap-top">
+      Faults appear when a part malfunctions during a run, and cost {fault.price ?? 250} credits to repair. In the
+      planner you can add one to any installed part to describe a particular run.
+    </p>
+    <a class="cta" href="/">Open the planner</a>
+  </section>
+  {same.length > 0 && (
+    <section class="panel">
+      <h2 class="panel-title"><span>More {group} faults</span></h2>
+      <div class="tiers">{same.map((f) => <a href={`/faults/${f.id}/`}>{f.name}</a>)}</div>
+    </section>
+  )}
+</Ref>

@@ -1,0 +1,77 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+import { abilityArtUrl } from '../../lib/game-art';
+import { kwLinks, plannerLink } from '../../lib/ref';
+
+export function getStaticPaths() {
+  return d.racerStyles.map((style) => ({ params: { id: style.id }, props: { style } }));
+}
+const { style } = Astro.props;
+const start = d.abilities.find((a) => a.id === style.startingAbilityId);
+const startArt = start && abilityArtUrl(start);
+const traits = style.ranks.length ? style.ranks.flatMap((r) => r.traits) : style.multiplayer;
+const others = d.racerStyles.filter((s) => s.id !== style.id && s.multiplayerOnly === style.multiplayerOnly);
+const description = `${style.name} racer style in Star Wars: Galactic Racer: ${traits.map((t) => t.name).join(', ')}.${style.ranks[1] ? ` Rank up: ${style.ranks[1].unlock}` : ''}`;
+---
+
+<Ref
+  title={`${style.name} racer style`}
+  description={description}
+  heading={style.name}
+  kicker={style.multiplayerOnly ? 'Multiplayer podracer style' : 'Racer style'}
+  crumbs={[{ href: '/styles/', label: 'Racer styles' }]}
+  image={`/og/landspeeder-${style.id}.png`}
+>
+  <div slot="meta">
+    <p class="lede">{description}</p>
+  </div>
+
+  <div class="ref-body two bare">
+    <div class="col">
+      {style.ranks.map((r) => (
+        <section class="panel">
+          <h2 class="panel-title"><span>Rank {r.rank}</span></h2>
+          <p class="hint tight">{r.rank === 1 ? 'Unlock' : 'Rank up'}: {r.unlock}</p>
+          {r.traits.map((t) => (
+            <div class="trait"><h3>{t.name}</h3><p set:html={kwLinks(t.text, d.glossary)} /></div>
+          ))}
+        </section>
+      ))}
+      {style.multiplayer.length > 0 && (
+        <section class="panel">
+          <h2 class="panel-title"><span>Multiplayer loadout</span></h2>
+          {style.multiplayer.map((t) => (
+            <div class="trait"><h3>{t.name}</h3><p set:html={kwLinks(t.text, d.glossary)} /></div>
+          ))}
+        </section>
+      )}
+    </div>
+
+    <div class="col">
+      <section class="panel">
+        <h2 class="panel-title"><span>Use it</span></h2>
+        {!style.multiplayerOnly && (
+          <>
+            <a class="cta" href={plannerLink({ styleId: style.id, styleRank: 3 })}>Plan a {style.name} build</a>
+            <a class="cta alt" href={plannerLink({ styleId: style.id, styleRank: 3, abilities: [start?.id ?? null, null, null, null] }, 'skim-speeder')}>On a skim speeder</a>
+          </>
+        )}
+        {style.multiplayerOnly && <p class="hint">Multiplayer podracer styles come with the podracer you pick, so they are not part of the campaign planner.</p>}
+      </section>
+      {start && (
+        <section class="panel">
+          <h2 class="panel-title"><span>Starting ability</span></h2>
+          <a class="card" href={`/abilities/${start.id}/`}>
+            <span class="round">{startArt && <img class="glyph" src={startArt} width="26" height="26" alt="" loading="lazy" />}</span>
+            <span><b>{start.name}</b><small>Tier {start.tier} · {start.cost} credits</small></span>
+          </a>
+        </section>
+      )}
+      <section class="panel">
+        <h2 class="panel-title"><span>Other styles</span></h2>
+        <div class="tiers">{others.map((s) => <a href={`/styles/${s.id}/`}>{s.name}</a>)}</div>
+      </section>
+    </div>
+  </div>
+</Ref>

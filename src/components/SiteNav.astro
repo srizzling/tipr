@@ -1,0 +1,18 @@
+---
+const links = [
+  { href: '/', label: 'Planner' },
+  { href: '/compare/', label: 'Compare' },
+  { href: '/styles/', label: 'Racer styles' },
+  { href: '/abilities/', label: 'Abilities' },
+  { href: '/parts/', label: 'Parts' },
+  { href: '/faults/', label: 'Faults' },
+  { href: '/glossary/', label: 'Glossary' },
+];
+const path = Astro.url.pathname;
+const current = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<nav class="site-nav" aria-label="Main">
+  <a class="brand" href="/">tipr</a>
+  {links.map((l) => <a href={l.href} aria-current={current(l.href) ? 'page' : undefined}>{l.label}</a>)}
+</nav>

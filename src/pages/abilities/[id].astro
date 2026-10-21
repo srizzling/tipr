@@ -1,0 +1,73 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+import { abilityArtUrl } from '../../lib/game-art';
+import { abilityFamilies, kwLinks, plannerLink, stylesStartingWith } from '../../lib/ref';
+
+export function getStaticPaths() {
+  return d.abilities.map((ability) => ({ params: { id: ability.id }, props: { ability } }));
+}
+const { ability } = Astro.props;
+const src = abilityArtUrl(ability);
+const family = abilityFamilies(d.abilities).find((f) => f.family === ability.family)!;
+const from = d.abilities.find((a) => a.id === ability.upgradesFromId);
+const into = d.abilities.filter((a) => a.upgradesFromId === ability.id);
+const styles = stylesStartingWith(ability, d.racerStyles);
+const description = `${ability.name}: ${ability.text.replace(/\s+/g, ' ')} Tier ${ability.tier}${ability.crash ? ' crash ability' : ' ability'}, ${ability.cost} credits to install.`;
+const patch = ability.crash ? { crashAbility: ability.id } : { abilities: [ability.id, null, null, null] };
+---
+
+<Ref
+  title={`${ability.name} ability`}
+  description={description}
+  heading={ability.name}
+  kicker={ability.crash ? 'Crash ability' : 'Ability'}
+  crumbs={[{ href: '/abilities/', label: 'Abilities' }]}
+>
+  <p slot="meta" class="lede">Tier {ability.tier} · {ability.cost} credits to install</p>
+
+  <div class="ref-body two bare">
+    <div class="col">
+      <section class="panel">
+        <h2 class="panel-title"><span>What it does</span></h2>
+        <div class="media">
+          <span class="round big">
+            {src && <img class="glyph" src={src} width="38" height="38" alt="" />}
+          </span>
+          <p class="big-text" set:html={kwLinks(ability.text, d.glossary)} />
+        </div>
+        <div class="facts gap-top">
+          <span class="fact">Tier <b>{ability.tier}</b></span>
+          <span class="fact">Install <b>{ability.cost}</b> credits</span>
+          {ability.crash && <span class="fact"><b>Crash ability</b>: uses no Energy</span>}
+        </div>
+      </section>
+      <section class="panel">
+        <h2 class="panel-title"><span>{family.root.name} family</span></h2>
+        <div class="tiers">
+          {family.list.map((a) => a.id === ability.id
+            ? <span class="here">T{a.tier} {a.name}</span>
+            : <a href={`/abilities/${a.id}/`}>T{a.tier} {a.name}</a>)}
+        </div>
+        {(from || into.length > 0) && (
+          <p class="hint gap-top">
+            {from && <>Upgrades from <a href={`/abilities/${from.id}/`}>{from.name}</a>. </>}
+            {into.length > 0 && <>Upgrades into {into.map((a, i) => <><a href={`/abilities/${a.id}/`}>{a.name}</a>{i < into.length - 1 ? ', ' : ''}</>)}.</>}
+          </p>
+        )}
+      </section>
+    </div>
+    <div class="col">
+      <section class="panel">
+        <h2 class="panel-title"><span>Use it</span></h2>
+        <a class="cta" href={plannerLink(patch)}>Add to a build</a>
+      </section>
+      {styles.length > 0 && (
+        <section class="panel">
+          <h2 class="panel-title"><span>Racer styles that start with it</span></h2>
+          <div class="tiers">{styles.map((s) => <a href={`/styles/${s.id}/`}>{s.name}</a>)}</div>
+        </section>
+      )}
+    </div>
+  </div>
+</Ref>

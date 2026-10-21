@@ -1,0 +1,31 @@
+---
+import Base from './Base.astro';
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  /** Small line above the heading, e.g. the section name */
+  kicker?: string;
+  crumbs?: { href: string; label: string }[];
+  image?: string;
+}
+const { title, description, heading, kicker, crumbs = [], image } = Astro.props;
+---
+
+<Base title={`${title} · This Is Pod Racing`} description={description} image={image}>
+  <div class="ref">
+    <header class="ref-head">
+      {crumbs.length > 0 && (
+        <nav class="crumbs" aria-label="Breadcrumb">
+          {crumbs.map((c, i) => <><a href={c.href}>{c.label}</a>{i < crumbs.length - 1 ? ' / ' : ''}</>)}
+        </nav>
+      )}
+      {kicker && <p class="kicker">{kicker}</p>}
+      <h1>{heading}</h1>
+      <slot name="meta" />
+    </header>
+    <main class="ref-body">
+      <slot />
+    </main>
+  </div>
+</Base>
