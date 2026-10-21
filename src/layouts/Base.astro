@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'This Is Pod Racing — Galactic Racer build planner',
+  description = 'Plan Star Wars: Galactic Racer builds. Pick a vehicle, racer style, abilities, parts and tuning, then share the link.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <slot />
+    <footer class="site-foot">
+      <p>
+        <b>tipr</b> · This Is Pod Racing is an unofficial fan project. Not affiliated with or endorsed by Lucasfilm,
+        Disney or the publisher of Star Wars: Galactic Racer. Game text and data belong to their owners.
+      </p>
+    </footer>
+  </body>
+</html>

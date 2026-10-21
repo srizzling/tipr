@@ -1,0 +1,441 @@
+import { useEffect, useMemo, useState } from 'react';
+import {
+  ABILITY_SLOTS,
+  MAX_BOXES_PER_STAT,
+  MAX_PARTS,
+  MAX_TUNING_BOXES,
+  decodeBuild,
+  emptyTuning,
+  encodeBuild,
+  fitToBudget,
+  newBuild,
+  setTuning,
+  topSpeed,
+  totalBoxes,
+  tuningCost,
+  vehicleLevel,
+  type Build,
+} from '../lib/build';
+import { STAT_IDS, type Ability, type GameData, type Part } from '../data/types';
+import { STAT_LABEL, highlight, useKeywordRe } from './highlight';
+
+type Mode = 'all' | 'mine';
+type PickerState =
+  | { kind: 'ability'; slot: number | 'crash' }
+  | { kind: 'part' }
+  | { kind: 'fault'; partId: string }
+  | null;
+
+interface Props {
+  data: GameData;
+}
+
+export default function Planner({ data }: Props) {
+  const [build, setBuild] = useState<Build>(() => newBuild(data.vehicleClasses[1]?.id ?? data.vehicleClasses[0].id));
+  const [mode, setMode] = useState<Mode>('all');
+  const [events, setEvents] = useState(120);
+  const [earned, setEarned] = useState(163);
+  const [picker, setPicker] = useState<PickerState>(null);
+  const [copied, setCopied] = useState(false);
+
+  // hydrate from share link, then keep the URL in sync
+  useEffect(() => {
+    const raw = new URLSearchParams(location.search).get('b');
+    const decoded = raw && decodeBuild(raw);
+    if (decoded) setBuild(decoded);
+  }, []);
+  useEffect(() => {
+    const url = new URL(location.href);
+    url.searchParams.set('b', encodeBuild(build));
+    history.replaceState(null, '', url);
+  }, [build]);
+
+  const budget = mode === 'all' ? Infinity : earned;
+  const cls = data.vehicleClasses.find((c) => c.id === build.classId) ?? data.vehicleClasses[0];
+  const style = data.racerStyles.find((s) => s.id === build.styleId);
+  const abilityById = useMemo(() => new Map(data.abilities.map((a) => [a.id, a])), [data.abilities]);
+  const partById = useMemo(() => new Map(data.parts.map((p) => [p.id, p])), [data.parts]);
+
+  const keywordRe = useKeywordRe(data.glossary);
+
+  const spent = tuningCost(totalBoxes(build.tuning));
+  const campaignStyles = data.racerStyles.filter((s) => !s.multiplayerOnly);
+  const traits = style ? style.ranks.filter((r) => r.rank <= build.styleRank).flatMap((r) => r.traits) : [];
+
+  const update = (patch: Partial<Build>) => setBuild((b) => ({ ...b, ...patch }));
+  const share = async () => {
+    await navigator.clipboard.writeText(`${location.origin}/b/${encodeBuild(build)}`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  const partAvailable = (p: Part) => mode === 'all' || p.unlockEvents === null || p.unlockEvents <= events;
+
+  return (
+    <div className="planner">
+      <header className="planner-head">
+        <h1>
+          <span className="slash">/</span>BUILD
+        </h1>
+        <div className="head-tools">
+          <div className="seg" role="group" aria-label="Unlock mode">
+            <button className={mode === 'all' ? 'on' : ''} onClick={() => setMode('all')}>
+              All unlocked
+            </button>
+            <button className={mode === 'mine' ? 'on' : ''} onClick={() => setMode('mine')}>
+              My unlocks
+            </button>
+          </div>
+          <div className="pill">
+            Tuning Points{' '}
+            <b>
+              {spent}
+              {mode === 'mine' ? ` / ${earned}` : ''}
+            </b>
+          </div>
+          <button className="pill action" onClick={share}>
+            {copied ? 'Link copied' : 'Share build'}
+          </button>
+        </div>
+      </header>
+
+      {mode === 'mine' && (
+        <div className="mine-bar">
+          <label>
+            Events completed <b>{events}</b>
+            <input type="range" min={0} max={120} value={events} onChange={(e) => setEvents(+e.target.value)} />
+          </label>
+          <label>
+            Tuning Points earned <b>{earned}</b>
+            <input type="range" min={0} max={163} value={earned} onChange={(e) => {
+                const v = +e.target.value;
+                setEarned(v);
+                setBuild((b) => ({ ...b, tuning: fitToBudget(b.tuning, v) }));
+              }} />
+          </label>
+          <p className="hint">Save-file import will fill these in automatically.</p>
+        </div>
+      )}
+
+      <main className="cols">
+        {/* ---- Vehicle stats ---- */}
+        <section className="panel">
+          <h2>Vehicle stats</h2>
+          <select
+            className="field"
+            value={build.classId}
+            onChange={(e) => update({ classId: e.target.value })}
+            aria-label="Vehicle class"
+          >
+            {data.vehicleClasses.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+          <div className="speed">
+            <span>Speed</span>
+            <b>{topSpeed(cls.baseSpeed, build.tuning, cls.id === 'podracer')}</b>
+          </div>
+          {STAT_IDS.map((stat) => (
+            <div className="stat" key={stat}>
+              <span className="stat-name">{stat === 'maneuvering' ? cls.maneuveringName : STAT_LABEL[stat]}</span>
+              <div className="boxes" role="group" aria-label={`${stat} boxes`}>
+                {Array.from({ length: MAX_BOXES_PER_STAT }, (_, i) => (
+                  <button
+                    key={i}
+                    className={i < build.tuning[stat] ? 'box on' : 'box'}
+                    aria-label={`Set ${stat} to ${i + 1}`}
+                    onClick={() =>
+                      update({
+                        tuning: setTuning(
+                          build.tuning,
+                          stat,
+                          build.tuning[stat] === i + 1 ? i : i + 1,
+                          budget,
+                        ),
+                      })
+                    }
+                  />
+                ))}
+                {[0, 1, 2].map((i) => (
+                  <span key={i} className="box big" title="Filled by in-tour +1 upgrades" />
+                ))}
+              </div>
+            </div>
+          ))}
+          <p className="hint">
+            Level {vehicleLevel(build.tuning)} / {MAX_TUNING_BOXES + 1} · {spent} points spent
+          </p>
+          <button className="link" onClick={() => update({ tuning: emptyTuning() })}>
+            Respec
+          </button>
+        </section>
+
+        {/* ---- Racer style + abilities ---- */}
+        <div className="stack">
+          <section className="panel">
+            <h2>Racer style</h2>
+            <select
+              className="field"
+              value={build.styleId ?? ''}
+              onChange={(e) => update({ styleId: e.target.value || null, styleRank: 3 })}
+              aria-label="Racer style"
+            >
+              <option value="">None</option>
+              {campaignStyles.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+            {style && (
+              <>
+                <div className="seg small" role="group" aria-label="Style rank">
+                  {[1, 2, 3].map((r) => (
+                    <button
+                      key={r}
+                      className={build.styleRank === r ? 'on' : ''}
+                      onClick={() => update({ styleRank: r as 1 | 2 | 3 })}
+                    >
+                      Rank {r}
+                    </button>
+                  ))}
+                </div>
+                {mode === 'mine' && (
+                  <p className="hint">
+                    Rank {build.styleRank}: {style.ranks.find((r) => r.rank === build.styleRank)?.unlock}
+                  </p>
+                )}
+                <ul className="traits">
+                  {traits.map((t) => (
+                    <li key={t.name}>
+                      <h3>{t.name}</h3>
+                      <p>{highlight(t.text, keywordRe)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </section>
+
+          <section className="panel">
+            <h2>Abilities</h2>
+            <div className="abilities">
+              {Array.from({ length: ABILITY_SLOTS }, (_, i) => (
+                <AbilitySlot
+                  key={i}
+                  label={`Ability ${i + 1}`}
+                  ability={abilityById.get(build.abilities[i] ?? '')}
+                  onOpen={() => setPicker({ kind: 'ability', slot: i })}
+                />
+              ))}
+              <AbilitySlot
+                label="Crash Ability"
+                ability={abilityById.get(build.crashAbility ?? '')}
+                onOpen={() => setPicker({ kind: 'ability', slot: 'crash' })}
+                wide
+              />
+            </div>
+          </section>
+        </div>
+
+        {/* ---- Installed parts ---- */}
+        <section className="panel">
+          <h2>Installed</h2>
+          <ul className="parts">
+            {build.parts.map(({ id, fault }) => {
+              const p = partById.get(id);
+              if (!p) return null;
+              const f = fault ? partById.get(fault) : undefined;
+              return (
+                <li key={id} className={`part ${p.rarity}`}>
+                  <button
+                    className="x"
+                    aria-label={`Remove ${p.name}`}
+                    onClick={() => update({ parts: build.parts.filter((x) => x.id !== id) })}
+                  >
+                    ×
+                  </button>
+                  <h3>{p.name}</h3>
+                  <p>{highlight(p.text, keywordRe)}</p>
+                  {f ? (
+                    <button
+                      className="downside"
+                      title={`${f.name} (click to remove)`}
+                      onClick={() =>
+                        update({ parts: build.parts.map((x) => (x.id === id ? { ...x, fault: null } : x)) })
+                      }
+                    >
+                      {highlight(f.text, keywordRe)}
+                    </button>
+                  ) : (
+                    <button className="link" onClick={() => setPicker({ kind: 'fault', partId: id })}>
+                      + Add fault
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+            {build.parts.length < MAX_PARTS && (
+              <li>
+                <button className="add" onClick={() => setPicker({ kind: 'part' })}>
+                  + Add part ({build.parts.length}/{MAX_PARTS})
+                </button>
+              </li>
+            )}
+          </ul>
+        </section>
+      </main>
+
+      <div className="ad-slot" aria-hidden>
+        Ad slot
+      </div>
+
+      {picker?.kind === 'ability' && (
+        <Picker<Ability>
+          title={picker.slot === 'crash' ? 'Crash ability' : `Ability ${(picker.slot as number) + 1}`}
+          items={data.abilities.filter((a) => a.crash === (picker.slot === 'crash'))}
+          selectedIds={[...build.abilities, build.crashAbility].filter(Boolean) as string[]}
+          render={(a) => ({
+            name: a.name,
+            meta: `Tier ${a.tier} · ${a.cost} cr`,
+            text: a.text,
+          })}
+          onClose={() => setPicker(null)}
+          onPick={(a) => {
+            if (picker.slot === 'crash') update({ crashAbility: a?.id ?? null });
+            else {
+              const abilities = [...build.abilities];
+              abilities[picker.slot as number] = a?.id ?? null;
+              update({ abilities });
+            }
+            setPicker(null);
+          }}
+          clearable
+          keywordRe={keywordRe}
+        />
+      )}
+      {picker?.kind === 'part' && (
+        <Picker<Part>
+          title="Add part"
+          items={data.parts.filter((p) => !p.fault && !build.parts.some((x) => x.id === p.id))}
+          disabled={(p) => !partAvailable(p)}
+          render={(p) => ({
+            name: p.name,
+            meta: `${p.rarity}${p.price ? ` · ${p.price} cr` : ''}${p.unlockEvents ? ` · ${p.unlockEvents} events` : ''}`,
+            text: p.downside ? `${p.text} — ${p.downside}` : p.text,
+          })}
+          onClose={() => setPicker(null)}
+          onPick={(p) => {
+            if (p) update({ parts: [...build.parts, { id: p.id, fault: null }] });
+            setPicker(null);
+          }}
+          keywordRe={keywordRe}
+        />
+      )}
+      {picker?.kind === 'fault' && (
+        <Picker<Part>
+          title="Add fault"
+          items={data.parts.filter((p) => p.fault)}
+          render={(p) => ({ name: p.name, meta: 'fault', text: p.text })}
+          onClose={() => setPicker(null)}
+          onPick={(f) => {
+            if (f)
+              update({
+                parts: build.parts.map((x) => (x.id === picker.partId ? { ...x, fault: f.id } : x)),
+              });
+            setPicker(null);
+          }}
+          keywordRe={keywordRe}
+        />
+      )}
+    </div>
+  );
+}
+
+function AbilitySlot({
+  label,
+  ability,
+  onOpen,
+  wide,
+}: {
+  label: string;
+  ability?: Ability;
+  onOpen: () => void;
+  wide?: boolean;
+}) {
+  return (
+    <button className={`ability ${wide ? 'wide' : ''} ${ability ? 'filled' : ''}`} onClick={onOpen}>
+      <span className="orb" />
+      <span>
+        <b>{ability?.name ?? ''}</b>
+        <small>{label}</small>
+      </span>
+    </button>
+  );
+}
+
+interface PickerProps<T extends { id: string }> {
+  title: string;
+  items: T[];
+  selectedIds?: string[];
+  disabled?: (item: T) => boolean;
+  render: (item: T) => { name: string; meta: string; text: string };
+  onPick: (item: T | null) => void;
+  onClose: () => void;
+  clearable?: boolean;
+  keywordRe: RegExp | null;
+}
+
+function Picker<T extends { id: string }>({
+  title,
+  items,
+  selectedIds = [],
+  disabled,
+  render,
+  onPick,
+  onClose,
+  clearable,
+  keywordRe,
+}: PickerProps<T>) {
+  const [q, setQ] = useState('');
+  const shown = items
+    .map((i) => ({ i, r: render(i) }))
+    .filter(({ r }) => `${r.name} ${r.text}`.toLowerCase().includes(q.toLowerCase()));
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="sheet" role="dialog" aria-label={title} onClick={(e) => e.stopPropagation()}>
+        <div className="sheet-head">
+          <h2>{title}</h2>
+          <button className="x" aria-label="Close" onClick={onClose}>
+            ×
+          </button>
+        </div>
+        <input
+          className="field"
+          autoFocus
+          placeholder="Search…"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+        />
+        {clearable && (
+          <button className="link" onClick={() => onPick(null)}>
+            Clear slot
+          </button>
+        )}
+        <ul className="pick-list">
+          {shown.map(({ i, r }) => (
+            <li key={i.id}>
+              <button disabled={disabled?.(i)} onClick={() => onPick(i)} className={selectedIds.includes(i.id) ? 'used' : ''}>
+                <b>{r.name}</b> <small>{r.meta}</small>
+                <p>{highlight(r.text, keywordRe)}</p>
+              </button>
+            </li>
+          ))}
+          {shown.length === 0 && <li className="hint">Nothing matches.</li>}
+        </ul>
+      </div>
+    </div>
+  );
+}

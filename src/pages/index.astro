@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import Planner from '../components/Planner';
+import { gameData } from '../data';
+---
+
+<Base>
+  <Planner client:load data={gameData} />
+</Base>

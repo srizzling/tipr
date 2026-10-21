@@ -1,5 +1,9 @@
-<img src="assets/icon.svg" width="64" height="64" alt="">
+# This Is Pod Racing (tipr)
 
-# racergalaticbuilds.gg
+Build planner for Star Wars: Galactic Racer. Unofficial fan project, not affiliated with Lucasfilm, Disney or the game's publisher.
 
-Created in [T3 Code](https://t3.codes).
+```
+devenv shell   # or direnv allow
+pnpm install
+pnpm dev
+```
