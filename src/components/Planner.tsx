@@ -19,6 +19,7 @@ import {
 } from '../lib/build';
 import { STAT_IDS, type Ability, type GameData, type Part } from '../data/types';
 import { STAT_LABEL, highlight, useKeywordRe } from './highlight';
+import { FAULT_GROUPS, faultGroup } from '../lib/faults';
 
 type Mode = 'all' | 'mine';
 type PickerState =
@@ -276,7 +277,7 @@ export default function Planner({ data }: Props) {
                     </button>
                   ) : (
                     <button className="link" onClick={() => setPicker({ kind: 'fault', partId: id })}>
-                      + Add fault
+                      + Add a fault (optional)
                     </button>
                   )}
                 </li>
@@ -341,9 +342,12 @@ export default function Planner({ data }: Props) {
       )}
       {picker?.kind === 'fault' && (
         <Picker<Part>
-          title="Add fault"
+          title="Add a fault"
+          intro="Faults appear when a part malfunctions during a run. You only need one here to describe a specific run."
           items={data.parts.filter((p) => p.fault)}
-          render={(p) => ({ name: p.name, meta: 'fault', text: p.text })}
+          group={faultGroup}
+          groupOrder={FAULT_GROUPS}
+          render={(p) => ({ name: p.name, meta: '', text: p.text })}
           onClose={() => setPicker(null)}
           onPick={(f) => {
             if (f)
@@ -391,6 +395,11 @@ interface PickerProps<T extends { id: string }> {
   onClose: () => void;
   clearable?: boolean;
   keywordRe: RegExp | null;
+  /** Short explanation shown above the list. */
+  intro?: string;
+  /** Group items under headings, with a chip per group to filter by. */
+  group?: (item: T) => string;
+  groupOrder?: readonly string[];
 }
 
 function Picker<T extends { id: string }>({
@@ -403,11 +412,21 @@ function Picker<T extends { id: string }>({
   onClose,
   clearable,
   keywordRe,
+  intro,
+  group,
+  groupOrder = [],
 }: PickerProps<T>) {
   const [q, setQ] = useState('');
-  const shown = items
-    .map((i) => ({ i, r: render(i) }))
+  const [only, setOnly] = useState<string | null>(null);
+  const rank = (g: string) => (groupOrder.includes(g) ? groupOrder.indexOf(g) : groupOrder.length);
+  const matches = items
+    .map((i) => ({ i, r: render(i), g: group?.(i) ?? '' }))
     .filter(({ r }) => `${r.name} ${r.text}`.toLowerCase().includes(q.toLowerCase()));
+  const counts = new Map<string, number>();
+  for (const m of matches) counts.set(m.g, (counts.get(m.g) ?? 0) + 1);
+  const shown = matches
+    .filter((m) => !only || m.g === only)
+    .sort((a, b) => (group ? rank(a.g) - rank(b.g) : 0));
   return (
     <div className="overlay" onClick={onClose}>
       <div className="sheet" role="dialog" aria-label={title} onClick={(e) => e.stopPropagation()}>
@@ -424,14 +443,30 @@ function Picker<T extends { id: string }>({
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />
+        {intro && <p className="hint">{intro}</p>}
+        {group && (
+          <div className="chips" role="group" aria-label="Filter by type">
+            <button className={only === null ? 'on' : ''} onClick={() => setOnly(null)}>
+              All {matches.length}
+            </button>
+            {[...counts.entries()]
+              .sort(([a], [b]) => rank(a) - rank(b))
+              .map(([g, n]) => (
+                <button key={g} className={only === g ? 'on' : ''} onClick={() => setOnly(only === g ? null : g)}>
+                  {g} {n}
+                </button>
+              ))}
+          </div>
+        )}
         {clearable && (
           <button className="link" onClick={() => onPick(null)}>
             Clear slot
           </button>
         )}
         <ul className="pick-list">
-          {shown.map(({ i, r }) => (
+          {shown.map(({ i, r, g }, idx) => (
             <li key={i.id}>
+              {group && (idx === 0 || shown[idx - 1].g !== g) && <h3 className="group-head">{g}</h3>}
               <button disabled={disabled?.(i)} onClick={() => onPick(i)} className={selectedIds.includes(i.id) ? 'used' : ''}>
                 <b>{r.name}</b> <small>{r.meta}</small>
                 <p>{highlight(r.text, keywordRe)}</p>
