@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/srizzling/tipr/compare/v0.1.0...v0.1.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* **release:** put the version in release PRs ([#11](https://github.com/srizzling/tipr/issues/11)) ([23a8bf9](https://github.com/srizzling/tipr/commit/23a8bf9006754be0af53fa2b9c57b13c2fb2d9df))
+
 ## [0.1.0](https://github.com/srizzling/tipr/compare/v0.0.1...v0.1.0) (2026-10-21)
 
 
