@@ -57,6 +57,7 @@ jobs:
       - run: pnpm test
       - run: pnpm build
       - run: pnpm check:links
+      - run: pnpm check:budget
 
   infra:
     runs-on: ubuntu-latest

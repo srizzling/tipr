@@ -22,7 +22,7 @@ import type { Ability, Part } from '../data/types';
 import { gameData } from '../data';
 import { highlight, useKeywordRe } from './highlight';
 import { AbilityGlyph, Key, PanelHeading, PartArt, PartRow, StatRows, TipLogo, VerdictStrip } from './ui';
-import { partArtUrl } from '../lib/game-art';
+import { partThumbUrl } from '../lib/game-art';
 import { buildVerdict } from '../lib/verdict';
 import { isSaved, loadGarage, saveBuild, type SavedBuild } from '../lib/garage';
 import { FAULT_GROUPS, faultGroup } from '../lib/faults';
@@ -377,7 +377,7 @@ export default function Planner() {
             name: p.name,
             meta: `${p.rarity}${p.price ? ` · ${p.price} cr` : ''}${p.unlockEvents ? ` · ${p.unlockEvents} events` : ''}`,
             text: p.downside ? `${p.text} — ${p.downside}` : p.text,
-            art: partArtUrl(p) ? <span className="pick-art-wrap"><PartArt part={p} /></span> : undefined,
+            art: partThumbUrl(p) ? <span className="pick-art-wrap"><PartArt part={p} /></span> : undefined,
           })}
           onClose={() => setPicker(null)}
           onPick={(p) => {

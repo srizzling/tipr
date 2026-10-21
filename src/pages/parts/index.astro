@@ -1,7 +1,7 @@
 ---
 import Ref from '../../layouts/Ref.astro';
 import { gameData as d } from '../../data';
-import { partArtUrl } from '../../lib/game-art';
+import { partThumbUrl } from '../../lib/game-art';
 import { RARITY_ORDER, money } from '../../lib/ref';
 
 const parts = d.parts.filter((p) => !p.fault);
@@ -26,10 +26,10 @@ const groups = RARITY_ORDER.map((rarity) => ({ rarity, list: parts.filter((p) =>
       <h2 class="panel-title"><span>{rarity}</span><span class="aside">{list.length}</span></h2>
       <div class="list">
         {list.map((p) => {
-          const src = partArtUrl(p);
+          const src = partThumbUrl(p);
           return (
             <a class="card" href={`/parts/${p.id}/`} data-name={`${p.name} ${p.text}`.toLowerCase()}>
-              {src && <img class="thumb" src={src} width="76" height="40" alt="" loading="lazy" decoding="async" />}
+              {src && <img class="thumb" data-src={src} width="76" height="40" alt="" decoding="async" />}
               <span><b>{p.name}</b><small>{money(p.price)}{p.unlockEvents ? ` · ${p.unlockEvents} events` : ''}</small></span>
             </a>
           );
@@ -40,6 +40,21 @@ const groups = RARITY_ORDER.map((rarity) => ({ rarity, list: parts.filter((p) =>
 </Ref>
 
 <script>
+  // Browsers start lazy images far before they scroll into view, which on this 259-card page means ~190 downloads.
+  // Load a thumbnail only when it is within about 400px of the screen. (Thumbnails are decorative, so without JS they are simply absent.)
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const img = entry.target as HTMLImageElement;
+        img.src = img.dataset.src!;
+        observer.unobserve(img);
+      }
+    },
+    { rootMargin: '400px 0px' },
+  );
+  document.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((img) => observer.observe(img));
+
   const input = document.querySelector<HTMLInputElement>('#part-filter');
   const cards = [...document.querySelectorAll<HTMLElement>('[data-name]')];
   const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')];

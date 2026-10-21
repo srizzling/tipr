@@ -1,5 +1,4 @@
 @font-face { font-family: 'Rajdhani'; font-weight: 500; font-style: normal; font-display: swap; src: url('/fonts/Rajdhani-Medium.woff2') format('woff2'); }
-@font-face { font-family: 'Rajdhani'; font-weight: 600; font-style: normal; font-display: swap; src: url('/fonts/Rajdhani-SemiBold.woff2') format('woff2'); }
 @font-face { font-family: 'Rajdhani'; font-weight: 700; font-style: normal; font-display: swap; src: url('/fonts/Rajdhani-Bold.woff2') format('woff2'); }
 
 :root {
@@ -315,3 +314,4 @@ button.pill:disabled { opacity: 0.4; cursor: not-allowed; }
 .garage-rename { display: flex; gap: 8px; }
 .garage-rename input { flex: 1; }
 .garage-pick { margin-top: 8px; text-transform: none; font-weight: 600; }
+

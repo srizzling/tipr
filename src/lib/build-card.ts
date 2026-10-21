@@ -14,7 +14,7 @@ import {
 import { ICON_PATHS, type IconName } from './icons';
 import { CARD_HEIGHT, CARD_WIDTH, escapeXml, fit } from './og-card';
 import { buildVerdict, type Verdict } from './verdict';
-import { abilityArtUrl, partArtUrl, statArtUrl, type StatArt } from './game-art';
+import { abilityArtUrl, partThumbUrl, statArtUrl, type StatArt } from './game-art';
 
 /**
  * A faithful replica of the build screen (stats, style, abilities, parts) as a 1200x630 SVG, filled with a real
@@ -231,7 +231,7 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
   list.forEach(({ part, fault }, i) => {
     const y = 166 + i * 106;
     push(rect(RX + 12, y, 320, 100, 8, C.row));
-    const card = img(partArtUrl(part));
+    const card = img(partThumbUrl(part));
     if (card) {
       push(`<clipPath id="pc${i}"><rect x="${RX + 22}" y="${y + 10}" width="76" height="40" rx="8"/></clipPath>`);
       push(`<image href="${card}" x="${RX + 22}" y="${y + 10}" width="76" height="40" preserveAspectRatio="xMidYMid slice" clip-path="url(#pc${i})"/>`);

@@ -12,7 +12,10 @@ export type StatArt = StatId | 'speed';
 
 export const statArtUrl = (stat: StatArt): string | null => (USE_GAME_ART ? `/game/stats/${stat}.png` : null);
 export const abilityArtUrl = (a: Pick<Ability, 'icon'>): string | null => (USE_GAME_ART && a.icon ? `/game/abilities/${a.icon}.png` : null);
+/** Full part card (192x96), used on a part's own page. */
 export const partArtUrl = (p: Pick<Part, 'icon'>): string | null => (USE_GAME_ART && p.icon ? `/game/parts/${p.icon}.jpg` : null);
+/** Small part card (152x80) for lists, rows and the share image, which show it at 76x40. */
+export const partThumbUrl = (p: Pick<Part, 'icon'>): string | null => (USE_GAME_ART && p.icon ? `/game/part-thumbs/${p.icon}.jpg` : null);
 
 /** Every image a build's share image needs, so they can be fetched and embedded before drawing. */
 export function artUrlsFor(build: Build, data: GameData): string[] {
@@ -28,7 +31,7 @@ export function artUrlsFor(build: Build, data: GameData): string[] {
   }
   for (const p of build.parts) {
     const part = data.parts.find((x) => x.id === p.id);
-    const u = part && partArtUrl(part);
+    const u = part && partThumbUrl(part);
     if (u) urls.add(u);
   }
   return [...urls];
