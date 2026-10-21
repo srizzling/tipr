@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { MAX_BOXES_PER_STAT, MAX_ENERGY_SCALE, maxEnergy, topSpeed, type InstalledPart } from '../lib/build';
 import { STAT_IDS, type Ability, type Part, type StatId, type VehicleClass } from '../data/types';
-import { abilityArtUrl, partArtUrl, statArtUrl, type StatArt } from '../lib/game-art';
+import { abilityArtUrl, partThumbUrl, statArtUrl, type StatArt } from '../lib/game-art';
 import { STAT_LABEL, highlight } from './highlight';
 import { ICON_PATHS, type IconName } from '../lib/icons';
 
@@ -44,7 +44,7 @@ export function AbilityGlyph({ ability, size = 22 }: { ability: Pick<Ability, 'i
 
 /** A part's card art as a small thumbnail, or our generic hexagon. */
 export function PartArt({ part, w = 76, h = 40 }: { part: Pick<Part, 'icon'>; w?: number; h?: number }) {
-  const src = partArtUrl(part);
+  const src = partThumbUrl(part);
   if (src) return <img className="part-art" src={src} width={w} height={h} alt="" loading="lazy" decoding="async" />;
   return <Icon name="part" size={26} />;
 }
@@ -171,7 +171,7 @@ export function PartRow({
 }) {
   return (
     <li className={`part ${part.rarity}`}>
-      <div className={`part-icon ${partArtUrl(part) ? 'has-art' : ''}`}>
+      <div className={`part-icon ${partThumbUrl(part) ? 'has-art' : ''}`}>
         <PartArt part={part} />
         {fault && (
           <span className="part-warn">

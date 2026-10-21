@@ -275,8 +275,7 @@ function buildParts() {
     if (family) o.family = family;
     if (tier) o.tier = tier;
     if (pg.icon) o.icon = pg.icon;
-    o.source = url;
-    return o;
+    return o; // the page URL is `${BASE}/vehicle-parts/${id}`, so it is not stored
   }).sort((a, b) => a.id.localeCompare(b.id));
 }
 

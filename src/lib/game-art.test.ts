@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { gameData } from '../data';
 import { newBuild, type Build } from './build';
 import { buildCardSvg } from './build-card';
-import { USE_GAME_ART, abilityArtUrl, artUrlsFor, partArtUrl, statArtUrl } from './game-art';
+import { USE_GAME_ART, abilityArtUrl, artUrlsFor, partArtUrl, partThumbUrl, statArtUrl } from './game-art';
 import { renderSvgPng } from './og-render';
 import { readFileSync } from 'node:fs';
 
@@ -15,7 +15,10 @@ describe('game art', () => {
     expect(USE_GAME_ART).toBe(true);
     const missing: string[] = [];
     for (const a of gameData.abilities) if (!abilityArtUrl(a) || !onDisk(abilityArtUrl(a)!)) missing.push(`ability ${a.id}`);
-    for (const p of gameData.parts) if (!partArtUrl(p) || !onDisk(partArtUrl(p)!)) missing.push(`part ${p.id}`);
+    for (const p of gameData.parts) {
+      if (!partArtUrl(p) || !onDisk(partArtUrl(p)!)) missing.push(`part ${p.id}`);
+      if (!partThumbUrl(p) || !onDisk(partThumbUrl(p)!)) missing.push(`part thumb ${p.id}`);
+    }
     for (const s of ['speed', 'afterburner', 'ramjet', 'cornering', 'resilience', 'battery', 'maneuvering'] as const) {
       if (!onDisk(statArtUrl(s)!)) missing.push(`stat ${s}`);
     }
@@ -30,7 +33,7 @@ describe('game art', () => {
     const urls = artUrlsFor(b, gameData);
     expect(urls.filter((u) => u.startsWith('/game/stats/'))).toHaveLength(7);
     expect(urls.filter((u) => u.startsWith('/game/abilities/'))).toHaveLength(2); // Corrosive and Flame Vent share a glyph
-    expect(urls.filter((u) => u.startsWith('/game/parts/'))).toHaveLength(1);
+    expect(urls.filter((u) => u.startsWith('/game/part-thumbs/'))).toHaveLength(1);
   });
 });
 

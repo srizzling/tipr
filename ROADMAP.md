@@ -35,6 +35,16 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [ ] Closer matches still missing: Aurebesh headings, the vehicle blueprint drawing, the blurred paper backdrop (we have not sourced these)
 - [ ] Accessibility pass (keyboard on the tuning boxes and pickers) and a Playwright smoke test
 
+## Performance (measured on the production build, local network)
+
+| Page | First paint | Transfer | Notes |
+|---|---|---|---|
+| Planner `/` | 44 ms | 162 KB over 30 requests (was 210 KB) | about 118 KB JavaScript, no long tasks, layout shift 0.003 |
+| Parts list `/parts/` | 36 ms | 168 KB over 46 requests (was 487 KB over 114) | thumbnails load only when near the screen |
+| A reference page | 36 ms | about 4 KB over 6 requests | pure HTML and CSS |
+
+`pnpm check:budget` fails CI if the planner's JavaScript passes 130 KB gzipped, a stylesheet passes 12 KB, or a page's HTML passes 20 KB.
+
 ## v1.x: content and growth
 
 - [x] **Reference pages:** 446 static pages: a page per racer style (20), ability (45), part (259), fault (59) and keyword (55), with index pages, a site nav, cross-links from every keyword, "add to a build" buttons that open the planner pre-filled, `sitemap.xml` and `robots.txt`. A link checker (`pnpm check:links`) runs in CI

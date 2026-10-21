@@ -72,7 +72,6 @@ export interface Part {
   /** Shared by tiered parts e.g. 'ramjet-power' for Ramjet Power I-IV */
   family?: string;
   tier?: number;
-  source: string; // URL
   /** Card art id (file name stem), see scripts/fetch-icons.mjs and src/lib/game-art.ts */
   icon?: string;
 }

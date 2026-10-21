@@ -39,7 +39,10 @@ for (const icon of new Set(read('abilities.json').map((a) => a.icon).filter(Bool
 }
 for (const icon of new Set(read('parts.json').map((p) => p.icon).filter(Boolean))) {
   // Cards are 472x244 with a rounded cream border; crop the border off, then shrink.
-  jobs.push({ kind: 'parts', urls: [`${BASE}/Affixes/LargeAffixIcons/${icon}.webp`, `${BASE}/Affixes/${icon}.webp`], out: `parts/${icon}.jpg`, args: ['-crop', '456x228+8+8', '+repage', '-resize', '192x', '-quality', '72'] });
+  const urls = [`${BASE}/Affixes/LargeAffixIcons/${icon}.webp`, `${BASE}/Affixes/${icon}.webp`];
+  jobs.push({ kind: 'parts', urls, out: `parts/${icon}.jpg`, args: ['-crop', '456x228+8+8', '+repage', '-resize', '192x', '-quality', '72'] });
+  // Lists and rows show cards at 76x40, so a 152x80 copy (2x for sharp screens) is a lot lighter.
+  jobs.push({ kind: 'parts', urls, out: `part-thumbs/${icon}.jpg`, args: ['-crop', '456x228+8+8', '+repage', '-resize', '152x', '-quality', '64'], cacheName: icon });
 }
 for (const [name, rel] of Object.entries(STATS)) {
   jobs.push({ kind: 'stats', urls: [`${BASE}/${rel}.webp`], out: `stats/${name}.png`, args: ['-background', 'none', '-resize', '64x64'] });
@@ -76,7 +79,7 @@ const failed = [];
 async function doJob(j) {
   const target = path.join(OUT, j.out);
   if (!force && fs.existsSync(target)) return;
-  const src = path.join(CACHE, `${j.kind}__${path.basename(j.out, path.extname(j.out))}.webp`);
+  const src = path.join(CACHE, `${j.kind}__${j.cacheName ?? path.basename(j.out, path.extname(j.out))}.webp`);
   if (!fs.existsSync(src) || force) {
     if (!(await fetchTo(j.urls, src))) return void failed.push(j.out);
     await new Promise((r) => setTimeout(r, 150));
@@ -90,7 +93,7 @@ fs.mkdirSync(CACHE, { recursive: true });
 let i = 0;
 await Promise.all(Array.from({ length: 4 }, async () => { while (i < jobs.length) await doJob(jobs[i++]); }));
 const size = (dir) => fs.readdirSync(dir).reduce((n, f) => n + fs.statSync(path.join(dir, f)).size, 0);
-for (const k of ['abilities', 'parts', 'stats']) {
+for (const k of ['abilities', 'parts', 'part-thumbs', 'stats']) {
   const dir = path.join(OUT, k);
   if (fs.existsSync(dir)) console.log(k, fs.readdirSync(dir).length, 'files', Math.round(size(dir) / 1024), 'KB');
 }
