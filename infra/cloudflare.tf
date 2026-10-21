@@ -6,6 +6,9 @@ resource "cloudflare_pages_project" "site" {
   account_id        = var.cloudflare_account_id
   name              = var.pages_project_name
   production_branch = var.production_branch
+
+  # Provider quirk (cloudflare v5.28): `tofu plan` always lists "+ build_image_auto_upgrade = (known after apply)" here,
+  # a computed field it cannot ignore. It is harmless; anything beyond that one line is a real change.
 }
 
 resource "cloudflare_pages_domain" "site" {
