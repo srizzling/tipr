@@ -14,9 +14,11 @@ import { fileURLToPath } from 'node:url';
 
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const BASE = 'https://galacticracer.gameslantern.com/storage/sites/galacticracer/Icons';
+const HOST = 'galacticracer.gameslantern.com';
+const BASE = `https://${HOST}/storage/sites/galacticracer/Icons`;
+const MAX_BYTES = 2 * 1024 * 1024;
 const force = process.argv.includes('--force');
-const CACHE = path.resolve(process.argv.slice(2).find((a) => !a.startsWith('--')) ?? '/tmp/gr-icons-cache');
+const CACHE = path.resolve(process.argv.slice(2).find((a) => !a.startsWith('--')) ?? path.join(root, '.cache', 'icons'));
 const OUT = path.join(root, 'public/game');
 const read = (f) => JSON.parse(fs.readFileSync(path.join(root, 'src/data', f), 'utf8'));
 
@@ -47,10 +49,18 @@ async function fetchTo(urls, file) {
   for (const url of urls) {
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
+        if (new URL(url).hostname !== HOST) throw new Error('refusing to fetch from another host');
         const res = await fetch(url);
         if (res.status === 404) break;
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        fs.writeFileSync(file, Buffer.from(await res.arrayBuffer()));
+        const bytes = Buffer.from(await res.arrayBuffer());
+        // Only keep what is really a small WebP image (RIFF....WEBP), whatever the server sent.
+        if (bytes.length > MAX_BYTES || bytes.toString('ascii', 0, 4) !== 'RIFF' || bytes.toString('ascii', 8, 12) !== 'WEBP') {
+          throw new Error('not a WebP image');
+        }
+        const tmp = `${file}.part`;
+        fs.writeFileSync(tmp, bytes);
+        fs.renameSync(tmp, file);
         return url;
       } catch (e) {
         if (attempt === 3) console.error('failed', url, e.message);

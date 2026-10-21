@@ -15,11 +15,11 @@
 // Safety: `build` validates everything in memory first (counts, non-empty names/text, costs, null allow-lists,
 // <=5% id loss vs the files currently on disk) and only then writes, via temp files + rename. On any failure it exits
 // non-zero and src/data is left untouched.
-// data-meta.json: scrapedAt is the newest cached file's mtime (not now()), so rebuilding from the same cache is byte-identical.
+// data-meta.json: scrapedAt comes from the cache's .scraped-at stamp (written by fetch, not now()), so rebuilding from the same cache is byte-identical.
 //
 // Requirements: the `firecrawl` CLI (authenticated), because the site is behind Cloudflare and
 // plain curl gets a 403. The page list comes from /sitemap.xml (scraped through firecrawl).
-// The cache dir defaults to /tmp/gr-cache2. Pages are fetched with modest concurrency (3).
+// The cache dir defaults to .cache/scrape in the repo (gitignored). Pages are fetched with modest concurrency (3).
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import crypto from 'node:crypto';
@@ -28,7 +28,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const run = promisify(execFile);
-const BASE = 'https://galacticracer.gameslantern.com';
+const HOST = 'galacticracer.gameslantern.com';
+const BASE = `https://${HOST}`;
+const escapeRe = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** True only for URLs whose parsed hostname is exactly the data site (a string prefix check can be fooled by evil-host tricks). */
+const isOurs = (x) => { try { return new URL(x).hostname === HOST; } catch { return false; } };
+const pathOf = (x) => new URL(x).pathname;
 const here = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(here, '../src/data');
 const argv = process.argv.slice(2);
@@ -45,11 +50,13 @@ if (!['fetch', 'build', 'all'].includes(mode)) { console.error(`unknown mode ${m
 if (CHECK && mode !== 'build') { console.error('--check only works with build'); process.exit(2); }
 if (REFRESH && mode === 'build') { console.error('--refresh only works with fetch/all'); process.exit(2); }
 const BASE_SPEEDS = { 'speeder-bike': 298, landspeeder: 298, 'skim-speeder': 306, podracer: 451 }; // km/h, not on the pages (given)
-const CACHE = path.resolve(positional[1] ?? '/tmp/gr-cache2');
+const CACHE = path.resolve(positional[1] ?? path.join(here, '..', '.cache', 'scrape'));
 const CONCURRENCY = 3;
+const STAMP = path.join(CACHE, '.scraped-at');
 
 const fileFor = (url) => path.join(CACHE, url.replace(BASE, '').replace(/^\//, '').replace(/\//g, '__') + '.md');
-const goodFile = (f) => fs.existsSync(f) && fs.statSync(f).size > 200;
+const readOrNull = (f) => { try { return fs.readFileSync(f, 'utf8'); } catch { return null; } };
+const goodFile = (f) => { try { return fs.statSync(f).size > 200; } catch { return false; } };
 
 async function scrape(url, file) {
   if (!REFRESH && goodFile(file)) return;
@@ -80,19 +87,25 @@ async function fetchAll() {
   await scrape(`${BASE}/sitemap.xml`, sm);
   // the sitemap comes back as one run-together string of URLs
   const txt = fs.readFileSync(sm, 'utf8').replace(/\d{4}-\d\d-\d\dT[\d:+]+/g, '\n').replace(/https:\/\//g, '\nhttps://');
-  const urls = [...new Set(txt.split('\n').map((s) => s.trim()).filter((s) => s.startsWith(BASE)))];
-  const wanted = urls.filter((u) => /\/(vehicle-parts|abilities|racer-styles|glossary|vehicle-classes)(\/|$)/.test(u.replace(BASE, '')))
+  const urls = [...new Set(txt.split('\n').map((s) => s.trim()).filter((s) => isOurs(s)))];
+  const wanted = urls.filter((u) => /\/(vehicle-parts|abilities|racer-styles|glossary|vehicle-classes)(\/|$)/.test(pathOf(u)))
     .concat([`${BASE}/traits`, `${BASE}/unlocks`]);
   console.log('pages to fetch', wanted.length, REFRESH ? '(refresh: ignoring cache)' : '');
   let done = 0;
   await pool(wanted, async (u) => { await scrape(u, fileFor(u)); if (++done % 25 === 0) console.log(done); }, CONCURRENCY);
+  // Record when this cache was last (re)downloaded; data-meta.json reports it, so copying the folder cannot change it.
+  if (REFRESH || !fs.existsSync(STAMP)) fs.writeFileSync(STAMP, new Date().toISOString() + '\n');
 }
 
 // ---------------------------------------------------------------- parsing helpers
 const read = (url) => {
-  const f = fileFor(url);
-  if (!fs.existsSync(f)) throw new Error(`page not in cache: ${url} (run fetch)`);
-  const md = fs.readFileSync(f, 'utf8');
+  let md;
+  try {
+    md = fs.readFileSync(fileFor(url), 'utf8');
+  } catch (e) {
+    if (e.code === 'ENOENT') throw new Error(`page not in cache: ${url} (run fetch)`);
+    throw e;
+  }
   if (!/^# .+/m.test(md)) throw new Error(`cached page has no title heading (blank or truncated?): ${url}`);
   return md;
 };
@@ -132,7 +145,7 @@ function parsePage(md) {
   return { title, header, intro, sections, icon };
 }
 const paras = (body) => body.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
-const links = (md, kind) => [...md.matchAll(new RegExp(`\\]\\((?:${BASE.replace(/\./g, '\\.')})?/${kind}/([a-z0-9-]+)\\)`, 'g'))].map((m) => m[1]);
+const links = (md, kind) => [...md.matchAll(new RegExp(`\\]\\((?:${escapeRe(BASE)})?/${kind}/([a-z0-9-]+)\\)`, 'g'))].map((m) => m[1]);
 
 // ---------------------------------------------------------------- builders
 function buildClasses() {
@@ -154,7 +167,7 @@ function buildClasses() {
 
 function listSlugs(kind) {
   const sm = fs.readFileSync(path.join(CACHE, 'sitemap.xml'), 'utf8').replace(/\d{4}-\d\d-\d\dT[\d:+]+/g, '\n').replace(/https:\/\//g, '\nhttps://');
-  return [...new Set(sm.split('\n').map((x) => x.trim()).filter((x) => x.startsWith(`${BASE}/${kind}/`)).map(slugOf))];
+  return [...new Set(sm.split('\n').map((x) => x.trim()).filter((x) => isOurs(x) && pathOf(x).startsWith(`/${kind}/`)).map(slugOf))];
 }
 
 function buildAbilities() {
@@ -355,17 +368,23 @@ function validate(d, prev) {
 
 // ---------------------------------------------------------------- meta
 function buildMeta(d) {
+  const stampedAt = readOrNull(STAMP)?.trim() || null;
   const pages = {};
   let newest = 0;
   for (const name of fs.readdirSync(CACHE).filter((n) => n.endsWith('.md') || n === 'sitemap.xml')) {
-    const f = path.join(CACHE, name);
-    newest = Math.max(newest, fs.statSync(f).mtimeMs);
-    const key = name === 'sitemap.xml' ? '/sitemap.xml' : '/' + name.slice(0, -3).replace(/__/g, '/');
-    pages[key] = crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+    // Open once and read through the descriptor, so the size/time and the bytes always come from the same file.
+    const fd = fs.openSync(path.join(CACHE, name), 'r');
+    try {
+      newest = Math.max(newest, fs.fstatSync(fd).mtimeMs);
+      const key = name === 'sitemap.xml' ? '/sitemap.xml' : '/' + name.slice(0, -3).replace(/__/g, '/');
+      pages[key] = crypto.createHash('sha256').update(fs.readFileSync(fd)).digest('hex');
+    } finally {
+      fs.closeSync(fd);
+    }
   }
   const sorted = Object.fromEntries(Object.entries(pages).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
   return {
-    scrapedAt: new Date(newest).toISOString(), // newest cached file's mtime, never now(): same cache -> same bytes
+    scrapedAt: stampedAt ?? new Date(newest).toISOString(), // the fetch step's stamp (falls back to the newest file time); never now()
     source: BASE,
     counts: { classes: d.classes.length, styles: d.styles.length, abilities: d.abilities.length, parts: d.parts.length, faults: d.parts.filter((p) => p.fault).length, glossary: d.glossary.length },
     pages: sorted,
@@ -388,7 +407,7 @@ function build() {
   outputs['data-meta.json'] = JSON.stringify(buildMeta(d), null, 2) + '\n';
 
   if (CHECK) {
-    const differ = Object.entries(outputs).filter(([f, text]) => !fs.existsSync(path.join(OUT, f)) || fs.readFileSync(path.join(OUT, f), 'utf8') !== text).map(([f]) => f);
+    const differ = Object.entries(outputs).filter(([f, text]) => readOrNull(path.join(OUT, f)) !== text).map(([f]) => f);
     if (differ.length) {
       console.error(`CHECK FAILED: ${differ.length} file(s) out of date: ${differ.join(', ')}. Run: node scripts/scrape-data.mjs build`);
       process.exit(1);
