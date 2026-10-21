@@ -301,3 +301,17 @@ button.pill:disabled { opacity: 0.4; cursor: not-allowed; }
 .ref .big-thumb { width: 192px; height: 96px; border-radius: 12px; object-fit: cover; flex: none; }
 .ref [hidden] { display: none !important; }
 .site-foot a { color: var(--gold); }
+
+.part .locked { color: #f2b3aa; font-style: normal; font-weight: 600; font-size: 0.9rem; margin-top: 4px; }
+.garage-empty { padding: 8px 4px; }
+.garage-list { display: grid; gap: 10px; }
+.garage-item { background: var(--row); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; }
+.garage-item h3 { font-size: 1.15rem; letter-spacing: 0.04em; text-transform: uppercase; color: #f1f6f4; }
+.garage-item .sub { color: var(--muted); }
+.garage-item .verdict-mini { font-style: italic; }
+.garage-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; }
+.garage-actions a, .garage-actions button { background: none; border: 0; color: var(--gold); text-decoration: underline; padding: 0; font-weight: 600; }
+.garage-actions .danger { color: #f2b3aa; }
+.garage-rename { display: flex; gap: 8px; }
+.garage-rename input { flex: 1; }
+.garage-pick { margin-top: 8px; text-transform: none; font-weight: 600; }

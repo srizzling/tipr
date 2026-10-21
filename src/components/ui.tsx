@@ -158,6 +158,7 @@ export function PartRow({
   onRemove,
   onFault,
   onClearFault,
+  lockedAt,
 }: {
   part: Part;
   fault?: Part;
@@ -165,6 +166,8 @@ export function PartRow({
   onRemove?: () => void;
   onFault?: () => void;
   onClearFault?: () => void;
+  /** Events needed to unlock this part when the player has fewer (My unlocks mode). */
+  lockedAt?: number;
 }) {
   return (
     <li className={`part ${part.rarity}`}>
@@ -179,6 +182,7 @@ export function PartRow({
       <div className="part-main">
         <h3>{part.name}</h3>
         <p>{highlight(part.text, keywordRe)}</p>
+        {lockedAt !== undefined && <p className="locked">Locked: needs {lockedAt} events completed</p>}
         {fault &&
           (onClearFault ? (
             <button className="downside" title={`${fault.name} (click to remove)`} onClick={onClearFault}>

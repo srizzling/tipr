@@ -7,6 +7,8 @@ import {
   emptyTuning,
   fitToBudget,
   maxEnergy,
+  nextBoxCost,
+  pointsToMax,
   encodeBuild,
   newBuild,
   setTuning,
@@ -47,6 +49,18 @@ describe('tuning', () => {
     expect(tuningCost(totalBoxes(fit))).toBeLessThanOrEqual(10);
     expect(totalBoxes(fit)).toBe(3);
     expect(fit.afterburner).toBe(3);
+  });
+
+  it('knows what the next box costs and how far from maxed', () => {
+    expect(nextBoxCost(emptyTuning())).toBe(1);
+    expect(pointsToMax(emptyTuning())).toBe(163);
+    const three = setTuning(emptyTuning(), 'ramjet', 3);
+    expect(nextBoxCost(three)).toBe(6);
+    expect(pointsToMax(three)).toBe(163 - 8);
+    let full = setTuning(emptyTuning(), 'ramjet', 7);
+    full = setTuning(full, 'afterburner', 7);
+    expect(nextBoxCost(full)).toBeNull();
+    expect(pointsToMax(full)).toBe(0);
   });
 
   it('estimates max energy from the battery boxes', () => {

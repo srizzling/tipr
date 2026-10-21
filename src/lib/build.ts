@@ -55,6 +55,16 @@ export function tuningCost(boxes: number): number {
   return TUNING_STEP_COSTS.slice(0, boxes).reduce((a, b) => a + b, 0);
 }
 
+/** Tuning Points the next box costs, or null once all 14 boxes are filled. */
+export function nextBoxCost(tuning: Record<StatId, number>): number | null {
+  return TUNING_STEP_COSTS[totalBoxes(tuning)] ?? null;
+}
+
+/** Tuning Points still needed to fill every box. */
+export function pointsToMax(tuning: Record<StatId, number>): number {
+  return tuningCost(MAX_TUNING_BOXES) - tuningCost(totalBoxes(tuning));
+}
+
 export function vehicleLevel(tuning: Record<StatId, number>): number {
   return 1 + totalBoxes(tuning);
 }

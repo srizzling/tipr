@@ -45,8 +45,9 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [x] **Build verdicts:** a funny title and roast for every build, written from what is in it (stat spread, faults, class, style, abilities), with a reroll button. Shown on the planner, shared pages, the share image and link-preview text. 17 rules, about 60 original jokes
 - [ ] More jokes and community in-jokes: add rules as the community's running gags appear, and let people submit verdicts (needs a backend)
 - [ ] Donations link: set `DONATE_URL` in `src/site.ts` (and add `.github/FUNDING.yml`) once a platform is chosen
-- [ ] Saved builds and a "garage" in localStorage
-- [ ] "What should I buy next?" view showing the next Tuning Point box and its cost
+- [x] **Garage:** save builds in this browser, rename, delete, open, compare and copy links on `/garage/`; the compare page can pick from it
+- [x] Tuning hint under the stats: what the next box costs, points to max, and points left in My unlocks mode
+- [x] Parts that need more events than you have completed are flagged in My unlocks mode
 - [ ] Respec planner (2-point respec, spend plan for a given number of points)
 - [ ] Privacy-friendly analytics (Cloudflare Web Analytics)
 - [ ] Custom domain (OpenTofu already has the variables)
