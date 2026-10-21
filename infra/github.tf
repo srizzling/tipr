@@ -75,6 +75,15 @@ resource "github_repository_ruleset" "main" {
   target      = "branch"
   enforcement = "active"
 
+  # Release Please opens its release PR with the workflow token, and GitHub does not run checks for PRs opened
+  # that way, so the required checks can never pass on it. Repo admins may therefore merge a PR (not push directly)
+  # past the checks. Replace this with a GitHub App token for Release Please when the app exists.
+  bypass_actors {
+    actor_id    = 5 # the repository admin role
+    actor_type  = "RepositoryRole"
+    bypass_mode = "pull_request"
+  }
+
   conditions {
     ref_name {
       include = ["~DEFAULT_BRANCH"]

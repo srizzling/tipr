@@ -33,6 +33,6 @@ variable "cloudflare_zone_id" {
 
 variable "enable_rulesets" {
   type        = bool
-  description = "Apply the branch and tag rulesets. Leave false for the very first push and merge (they require checks that have not run yet), then set true."
-  default     = false
+  description = "Apply the branch and tag rulesets. They need the CI checks to have run once, so the very first push and merge was done with this set to false."
+  default     = true
 }

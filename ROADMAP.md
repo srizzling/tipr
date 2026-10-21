@@ -23,7 +23,9 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [x] **Compare view:** two builds side by side (from two links), with stat, ability and part diffs. This is the only "ranking" in v1.
 - [ ] **Save-file import (PC):** client-side GVAS `.sav` parser that fills in events completed, unlocked styles and ranks, and Tuning Points earned. Needs sample saves (early and late) to find the property names. The file never leaves the browser.
 - [ ] **Remote OpenTofu state** (R2 bucket) and first `tofu apply`
-- [ ] Create the GitHub repo and enable Renovate, secret scanning and push protection
+- [x] GitHub repo created (public) with secret scanning, push protection, Dependabot security updates, squash-merge only, and branch and tag rulesets, all through OpenTofu
+- [ ] Install the Renovate GitHub App on the repo (GitHub only allows this in the browser: https://github.com/apps/renovate)
+- [ ] Replace the admin PR bypass with a GitHub App token for Release Please, so its release PRs run the required checks
 - [ ] Cloudflare API token and account id added as Actions secrets, first deploy to `*.pages.dev`
 - [ ] Read the Games Lantern terms of use, then add data credit to the footer
 - [ ] Verify unconfirmed data against the game (see "Data to verify")
