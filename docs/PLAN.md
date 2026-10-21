@@ -101,7 +101,7 @@ Risks: the `~DEFAULT_BRANCH` ruleset can block the first push. If so, push befor
 ## Milestone 4: growth (v1.x)
 
 1. **Reference pages** generated from the data: one page per racer style, ability, part and status term. Each links to a prefilled planner. This is the search traffic, so write real titles, descriptions and internal links.
-2. **Link-preview image:** the Pages Function already sets the title and text preview. Remaining work is rendering an image card from the build (satori and resvg, or a pre-made template).
+2. **Link-preview image:** done with 85 pre-rendered cards (class by style). A per-build image would need more CPU than Cloudflare's free tier allows, so it waits for a paid plan or an external renderer.
 3. **Saved builds:** a garage in localStorage with names and notes.
 4. **What to buy next:** the next Tuning Point box and its cost, and a respec planner.
 5. **Ads:** apply to AdSense once there is traffic. Add a consent banner for EU and UK visitors first. Place ads outside the build screen.

@@ -4,6 +4,7 @@ import { decodeBuild } from '../../src/lib/build';
 import { SECURITY_HEADERS } from '../../src/lib/security-headers';
 import { buildSummary } from '../../src/lib/summary';
 import { gameData } from '../../src/data';
+import { cardId } from '../../src/lib/og-cards';
 import { SharedBuild } from '../../src/components/SharedBuild';
 
 interface Env {
@@ -34,12 +35,17 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, params, env })
   const { title, description } = buildSummary(build, gameData);
   const url = new URL(`/b/${code}`, request.url).toString();
   const markup = renderToStaticMarkup(createElement(SharedBuild, { build, code, data: gameData }));
+  // Cards are pre-rendered per class and style at build time (see src/pages/og), so no image work happens here.
+  const hasStyle = build.styleId !== null && gameData.racerStyles.some((x) => x.id === build.styleId);
+  const image = new URL(`/og/${cardId(build.classId, hasStyle ? build.styleId : null)}.png`, request.url).toString();
   const t = escapeHtml(title);
   const d = escapeHtml(description);
 
   const response = new HTMLRewriter()
     .on('title', { element: (el) => void el.setInnerContent(title) })
     .on('meta[name="description"]', { element: (el) => void el.setAttribute('content', description) })
+    // The shell carries generic tags from the layout; drop them so crawlers only see the build-specific ones.
+    .on('meta[property^="og:"], meta[name^="twitter:"], link[rel="canonical"]', { element: (el) => void el.remove() })
     .on('head', {
       element: (el) =>
         void el.append(
@@ -49,7 +55,11 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, params, env })
             `<meta property="og:title" content="${t}">`,
             `<meta property="og:description" content="${d}">`,
             `<meta property="og:url" content="${escapeHtml(url)}">`,
-            `<meta name="twitter:card" content="summary">`,
+            `<meta property="og:image" content="${escapeHtml(image)}">`,
+            `<meta property="og:image:width" content="1200">`,
+            `<meta property="og:image:height" content="630">`,
+            `<meta name="twitter:card" content="summary_large_image">`,
+            `<meta name="twitter:image" content="${escapeHtml(image)}">`,
             `<meta name="twitter:title" content="${t}">`,
             `<meta name="twitter:description" content="${d}">`,
             // Shared builds are user-made, so keep them out of search results.

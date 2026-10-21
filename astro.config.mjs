@@ -21,6 +21,8 @@ const sharedBuildRewrite = {
 
 // https://astro.build/config
 export default defineConfig({
+  // Absolute URL used for canonical links and Open Graph images. Set SITE_URL when a real domain exists.
+  site: process.env.SITE_URL ?? 'https://tipr.pages.dev',
   integrations: [react(), sharedBuildRewrite],
   // Astro hashes its own inline scripts and styles and emits a Content-Security-Policy <meta> tag.
   security: { csp: true },

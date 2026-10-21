@@ -179,3 +179,6 @@ button.pill:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .mt { margin-top: 12px; }
 .mt-s { margin-top: 10px; }
+
+.site-foot a.donate { color: var(--gold); font-weight: 700; text-decoration: none; }
+.site-foot a.donate:hover { text-decoration: underline; }
