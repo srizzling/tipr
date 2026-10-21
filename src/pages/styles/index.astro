@@ -1,0 +1,45 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+import { abilityArtUrl } from '../../lib/game-art';
+
+const campaign = d.racerStyles.filter((s) => !s.multiplayerOnly);
+const multiplayer = d.racerStyles.filter((s) => s.multiplayerOnly);
+const ability = (id?: string) => d.abilities.find((a) => a.id === id);
+const traitNames = (s: (typeof d.racerStyles)[number]) => (s.ranks.length ? s.ranks.flatMap((r) => r.traits) : s.multiplayer).map((t) => t.name).join(', ');
+---
+
+<Ref
+  title="Star Wars Galactic Racer racer styles"
+  description={`All ${campaign.length} campaign racer styles and ${multiplayer.length} multiplayer podracer styles in Star Wars: Galactic Racer, with their traits, rank unlocks and starting abilities.`}
+  heading="Racer styles"
+  kicker="Reference"
+>
+  <p slot="meta" class="lede">
+    Your racer style decides your traits and starting ability. Each campaign style has three ranks. Pick one to see what it
+    does, how to rank it up, and open it in the planner.
+  </p>
+  <section class="panel">
+    <h2 class="panel-title"><span>Campaign styles</span><span class="aside">{campaign.length}</span></h2>
+    <div class="list">
+      {campaign.map((s) => {
+        const a = ability(s.startingAbilityId);
+        const src = a && abilityArtUrl(a);
+        return (
+          <a class="card" href={`/styles/${s.id}/`}>
+            <span class="round">{src && <img class="glyph" src={src} width="26" height="26" alt="" loading="lazy" />}</span>
+            <span><b>{s.name}</b><small>{traitNames(s)}</small></span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+  <section class="panel">
+    <h2 class="panel-title"><span>Multiplayer podracer styles</span><span class="aside">{multiplayer.length}</span></h2>
+    <div class="list">
+      {multiplayer.map((s) => (
+        <a class="card" href={`/styles/${s.id}/`}><span><b>{s.name}</b><small>{traitNames(s)}</small></span></a>
+      ))}
+    </div>
+  </section>
+</Ref>

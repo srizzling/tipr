@@ -1,0 +1,51 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+import { partArtUrl } from '../../lib/game-art';
+import { RARITY_ORDER, money } from '../../lib/ref';
+
+const parts = d.parts.filter((p) => !p.fault);
+const groups = RARITY_ORDER.map((rarity) => ({ rarity, list: parts.filter((p) => p.rarity === rarity).sort((a, b) => a.name.localeCompare(b.name)) })).filter((g) => g.list.length);
+---
+
+<Ref
+  title="Star Wars Galactic Racer parts"
+  description={`All ${parts.length} vehicle parts in Star Wars: Galactic Racer by rarity, with effects, prices and the number of events needed to unlock each one.`}
+  heading="Parts"
+  kicker="Reference"
+>
+  <div slot="meta">
+    <p class="lede">
+      Parts are bought with credits during a tour and last until it ends. Each one has a price and unlocks after you finish a
+      number of events. Faults are covered on their own page.
+    </p>
+    <p><input class="field filter" id="part-filter" type="search" placeholder="Filter parts…" aria-label="Filter parts" /></p>
+  </div>
+  {groups.map(({ rarity, list }) => (
+    <section class="panel" data-group>
+      <h2 class="panel-title"><span>{rarity}</span><span class="aside">{list.length}</span></h2>
+      <div class="list">
+        {list.map((p) => {
+          const src = partArtUrl(p);
+          return (
+            <a class="card" href={`/parts/${p.id}/`} data-name={`${p.name} ${p.text}`.toLowerCase()}>
+              {src && <img class="thumb" src={src} width="76" height="40" alt="" loading="lazy" decoding="async" />}
+              <span><b>{p.name}</b><small>{money(p.price)}{p.unlockEvents ? ` · ${p.unlockEvents} events` : ''}</small></span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  ))}
+</Ref>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('#part-filter');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-name]')];
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')];
+  input?.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    for (const c of cards) c.hidden = q !== '' && !c.dataset.name!.includes(q);
+    for (const g of groups) g.hidden = ![...g.querySelectorAll<HTMLElement>('[data-name]')].some((c) => !c.hidden);
+  });
+</script>

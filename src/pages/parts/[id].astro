@@ -1,0 +1,60 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+import { partArtUrl } from '../../lib/game-art';
+import { kwLinks, money, partFamily, plannerLink } from '../../lib/ref';
+
+export function getStaticPaths() {
+  return d.parts.filter((p) => !p.fault).map((part) => ({ params: { id: part.id }, props: { part } }));
+}
+const { part } = Astro.props;
+const src = partArtUrl(part);
+const family = partFamily(part, d.parts);
+const unlock = part.unlockEvents === null ? 'Unlocked another way' : part.unlockEvents === 0 ? 'Available from the start' : `Complete ${part.unlockEvents} events`;
+const description = `${part.name} (${part.rarity} part) in Star Wars: Galactic Racer: ${part.text.replace(/\s+/g, ' ')} ${money(part.price)}. ${unlock}.`;
+---
+
+<Ref
+  title={`${part.name} part`}
+  description={description}
+  heading={part.name}
+  kicker={`${part.rarity} part`}
+  crumbs={[{ href: '/parts/', label: 'Parts' }]}
+>
+  <p slot="meta" class="lede">{money(part.price)} · {unlock}</p>
+
+  <div class="ref-body two bare">
+    <div class="col">
+      <section class="panel">
+        <h2 class="panel-title"><span>What it does</span></h2>
+        <div class="media">
+          {src && <img class="thumb big-thumb" src={src} width="192" height="96" alt="" />}
+          <p class="big-text" set:html={kwLinks(part.text, d.glossary)} />
+        </div>
+        <div class="facts gap-top">
+          <span class="fact">Rarity <b>{part.rarity}</b></span>
+          <span class="fact">Price <b>{money(part.price)}</b></span>
+          <span class="fact">Unlock <b>{unlock}</b></span>
+          {part.tier && <span class="fact">Tier <b>{part.tier}</b></span>}
+        </div>
+      </section>
+      {family.length > 1 && (
+        <section class="panel">
+          <h2 class="panel-title"><span>All tiers</span></h2>
+          <div class="tiers">
+            {family.map((p) => p.id === part.id
+              ? <span class="here">Tier {p.tier} · {money(p.price)}</span>
+              : <a href={`/parts/${p.id}/`}>Tier {p.tier} · {money(p.price)}</a>)}
+          </div>
+        </section>
+      )}
+    </div>
+    <div class="col">
+      <section class="panel">
+        <h2 class="panel-title"><span>Use it</span></h2>
+        <a class="cta" href={plannerLink({ parts: [{ id: part.id, fault: null }] })}>Add to a build</a>
+        <p class="hint gap-top">Parts can pick up a fault during a run. See <a href="/faults/">all faults</a>.</p>
+      </section>
+    </div>
+  </div>
+</Ref>

@@ -225,6 +225,7 @@
   {
     "id": "firebug",
     "name": "Firebug",
+    "startingAbilityId": "flame-vent",
     "ranks": [
       {
         "rank": 1,

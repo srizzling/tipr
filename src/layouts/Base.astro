@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { DONATE_URL } from '../site';
+import SiteNav from '../components/SiteNav.astro';
 interface Props {
   title?: string;
   description?: string;
@@ -40,6 +41,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="twitter:image" content={imageUrl} />
   </head>
   <body>
+    <SiteNav />
     <slot />
     <footer class="site-foot">
       <p>
@@ -54,7 +56,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
       </p>
       <p class="credit">
         Ability, stat and part artwork is from the game and belongs to its owners (Lucasfilm, Disney, Fuse Games and the
-        publisher). It is shown only to identify items. Game data courtesy of
+        publisher). It is shown only to identify items. Game data courtesy of{' '}
         <a href="https://galacticracer.gameslantern.com" rel="noopener noreferrer" target="_blank">Games Lantern</a>.
         Rights holders can ask for removal by opening an issue on the project's GitHub page.
       </p>

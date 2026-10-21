@@ -1,0 +1,20 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+
+const terms = [...d.glossary].sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<Ref
+  title="Star Wars Galactic Racer glossary"
+  description={`What ${terms.length} status effects, boosts and terms mean in Star Wars: Galactic Racer, such as Burning, Overcharged, Slipstreaming and Takedown.`}
+  heading="Glossary"
+  kicker="Reference"
+>
+  <p slot="meta" class="lede">Every keyword you see in gold in the planner, with what it means and where it shows up.</p>
+  <section class="panel">
+    <div class="list">
+      {terms.map((t) => <a class="card" href={`/glossary/${t.id}/`}><span><b>{t.name}</b><small>{t.text.slice(0, 80)}{t.text.length > 80 ? '…' : ''}</small></span></a>)}
+    </div>
+  </section>
+</Ref>

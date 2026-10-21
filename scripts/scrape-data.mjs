@@ -215,7 +215,8 @@ function parseStyleBlock(body) {
   return { lead: lead.map(clean), abilityIds, traits };
 }
 
-function buildStyles() {
+/** `abilities` lets us resolve 'Start with X Ability installed' trait text when a style page has no ability link. */
+function buildStyles(abilities = []) {
   return listSlugs('racer-styles').map((slug) => {
     const pg = parsePage(read(`${BASE}/racer-styles/${slug}`));
     const multiplayerOnly = !/Campaign/.test(pg.header);
@@ -234,6 +235,13 @@ function buildStyles() {
     }
     const mp = pg.sections['Multiplayer'] ? parseStyleBlock(pg.sections['Multiplayer']) : { traits: [], abilityIds: [] };
     if (!startingAbilityId && multiplayerOnly && mp.abilityIds[0]) startingAbilityId = mp.abilityIds[0];
+    if (!startingAbilityId && !multiplayerOnly) {
+      for (const t of ranks.flatMap((r) => r.traits)) {
+        const m = t.text.match(/^Start with (.+?) Ability installed/);
+        const hit = m && abilities.find((a) => a.name === m[1]);
+        if (hit) { startingAbilityId = hit.id; break; }
+      }
+    }
     const o = { id: slug, name: pg.title };
     if (startingAbilityId) o.startingAbilityId = startingAbilityId;
     o.ranks = ranks; o.multiplayer = mp.traits; o.multiplayerOnly = multiplayerOnly;
@@ -393,7 +401,8 @@ function buildMeta(d) {
 
 // ---------------------------------------------------------------- build
 function build() {
-  const d = { classes: buildClasses(), styles: buildStyles(), abilities: buildAbilities(), parts: buildParts(), glossary: buildGlossary() };
+  const abilities = buildAbilities();
+  const d = { classes: buildClasses(), styles: buildStyles(abilities), abilities, parts: buildParts(), glossary: buildGlossary() };
   const problems = validate(d, readExisting());
   const c = buildMeta(d).counts;
   console.log(`classes ${c.classes}, styles ${c.styles}, abilities ${c.abilities}, parts ${c.parts} (faults ${c.faults}), glossary ${c.glossary}`);

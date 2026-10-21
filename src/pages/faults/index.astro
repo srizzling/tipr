@@ -1,0 +1,31 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+import { FAULT_GROUPS, faultGroup } from '../../lib/faults';
+import { kwLinks } from '../../lib/ref';
+
+const faults = d.parts.filter((p) => p.fault);
+const groups = FAULT_GROUPS.map((group) => ({ group, list: faults.filter((f) => faultGroup(f) === group).sort((a, b) => a.name.localeCompare(b.name)) })).filter((g) => g.list.length);
+---
+
+<Ref
+  title="Star Wars Galactic Racer faults"
+  description={`All ${faults.length} faults in Star Wars: Galactic Racer, grouped by the part of the vehicle they affect.`}
+  heading="Faults"
+  kicker="Reference"
+>
+  <p slot="meta" class="lede">
+    A fault is a malfunction a part picks up during a run, and it stays until you pay to repair it. The groups below are
+    ours: they sort faults by the system they affect.
+  </p>
+  {groups.map(({ group, list }) => (
+    <section class="panel">
+      <h2 class="panel-title"><span>{group}</span><span class="aside">{list.length}</span></h2>
+      <div class="list">
+        {list.map((f) => (
+          <a class="card" href={`/faults/${f.id}/`}><span><b>{f.name}</b><small set:html={kwLinks(f.text, d.glossary).replace(/<a [^>]*>|<\/a>/g, '')} /></span></a>
+        ))}
+      </div>
+    </section>
+  ))}
+</Ref>

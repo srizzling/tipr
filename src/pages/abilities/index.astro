@@ -1,0 +1,39 @@
+---
+import Ref from '../../layouts/Ref.astro';
+import { gameData as d } from '../../data';
+import { abilityArtUrl } from '../../lib/game-art';
+import { abilityFamilies } from '../../lib/ref';
+
+const families = abilityFamilies(d.abilities);
+---
+
+<Ref
+  title="Star Wars Galactic Racer abilities"
+  description={`All ${d.abilities.length} abilities in Star Wars: Galactic Racer, grouped by family with their tiers, costs and effects.`}
+  heading="Abilities"
+  kicker="Reference"
+>
+  <p slot="meta" class="lede">
+    Abilities come in families of up to three tiers. A tier 1 ability can be upgraded, so each family below shows its whole
+    upgrade tree. Crash abilities fire when you crash and use no Energy.
+  </p>
+  {families.map(({ root, list }) => {
+    const src = abilityArtUrl(root);
+    return (
+      <section class="panel">
+        <h2 class="panel-title">
+          <span>{root.name}{root.crash ? ' (crash)' : ''}</span>
+          <span class="aside">{list.length} abilities</span>
+        </h2>
+        <div class="list">
+          {list.map((a) => (
+            <a class="card" href={`/abilities/${a.id}/`}>
+              <span class="round">{src && <img class="glyph" src={src} width="26" height="26" alt="" loading="lazy" />}</span>
+              <span><b>{a.name}</b><small>Tier {a.tier} · {a.cost} credits</small></span>
+            </a>
+          ))}
+        </div>
+      </section>
+    );
+  })}
+</Ref>

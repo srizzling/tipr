@@ -12,12 +12,14 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check && tsc -p functions/tsconfig.json",
+    "check:links": "node scripts/check-links.mjs",
     "data:check": "node scripts/scrape-data.mjs build --check",
     "data:refresh": "node scripts/scrape-data.mjs all --refresh",
     "test": "vitest run"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.1",
+    "@astrojs/sitemap": "^3.7.4",
     "@dnd-kit/core": "^6.3.1",
     "@resvg/resvg-wasm": "^2.6.2",
     "astro": "^7.4.2",
