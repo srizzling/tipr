@@ -1,0 +1,73 @@
+[
+  {
+    "id": "speeder-bike",
+    "name": "Speeder Bike",
+    "maneuveringName": "Kinetic Burst",
+    "baseSpeed": 298,
+    "traits": [
+      {
+        "name": "Furious Agility",
+        "text": "Compact with rapid acceleration."
+      },
+      {
+        "name": "Vectored Thrust",
+        "text": "Modulate accelerate and brake to control cornering."
+      },
+      {
+        "name": "Kinetic Burst",
+        "text": "Use Improved Steering for tight cornering, release for a burst of speed."
+      }
+    ],
+    "purchasable": true
+  },
+  {
+    "id": "landspeeder",
+    "name": "Landspeeder",
+    "maneuveringName": "Drift",
+    "baseSpeed": 298,
+    "traits": [
+      {
+        "name": "Sweeping Forms",
+        "text": "Turns smoothly with forgiving handling."
+      },
+      {
+        "name": "Strong Structure",
+        "text": "Remains stable during collisions."
+      },
+      {
+        "name": "Drift",
+        "text": "Use Improved Steering to drift sharply while maintaining speed."
+      }
+    ],
+    "purchasable": true
+  },
+  {
+    "id": "skim-speeder",
+    "name": "Skim Speeder",
+    "maneuveringName": "Knife Edge",
+    "baseSpeed": 306,
+    "traits": [
+      {
+        "name": "Streamlined Intakes",
+        "text": "Maintain a high top speed via smooth, wide racing lines."
+      },
+      {
+        "name": "Sweeping Airfoils",
+        "text": "Graceful banked cornering."
+      },
+      {
+        "name": "Knife Edge",
+        "text": "Use Improved Steering to roll onto a Knife Edge for tighter cornering."
+      }
+    ],
+    "purchasable": true
+  },
+  {
+    "id": "podracer",
+    "name": "Podracer",
+    "maneuveringName": "Air Brake",
+    "baseSpeed": 451,
+    "traits": [],
+    "purchasable": false
+  }
+]
