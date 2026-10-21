@@ -1,0 +1,16 @@
+---
+import Ref from '../layouts/Ref.astro';
+import Garage from '../components/Garage';
+---
+
+<Ref
+  title="Your saved builds"
+  description="Your saved Star Wars: Galactic Racer builds. They are stored in your browser, so they stay private."
+  heading="Garage"
+  kicker="Saved builds"
+>
+  <p slot="meta" class="lede">Builds you saved in the planner, kept in this browser only.</p>
+  <Garage client:only="react">
+    <section class="panel" slot="fallback"><p class="hint">Loading your garage…</p></section>
+  </Garage>
+</Ref>

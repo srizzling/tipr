@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { CURRENT_BUILD_KEY, encodeBuild, type Build } from '../lib/build';
 import { diffBuilds, parseBuildInput, type Numeric } from '../lib/compare';
 import { gameData } from '../data';
+import { loadGarage, type SavedBuild } from '../lib/garage';
 import BuildPanels from './BuildPanels';
 import { STAT_LABEL } from './highlight';
 
@@ -13,11 +14,13 @@ export default function Compare() {
   const [codes, setCodes] = useState<Record<Side, string>>({ a: '', b: '' });
   const [drafts, setDrafts] = useState<Record<Side, string>>({ a: '', b: '' });
   const [ready, setReady] = useState(false);
+  const [garage, setGarage] = useState<SavedBuild[]>([]);
 
   useEffect(() => {
     const q = new URLSearchParams(location.search);
     const init = { a: q.get('a') ?? '', b: q.get('b') ?? '' };
     setCodes(init);
+    setGarage(loadGarage(localStorage));
     setReady(true);
   }, []);
   useEffect(() => {
@@ -90,6 +93,24 @@ export default function Compare() {
               </p>
             )}
             {drafts[side] && !parseBuildInput(drafts[side]) && <p className="hint">That isn't a valid build link.</p>}
+            {garage.length > 0 && (
+              <select
+                className="field garage-pick"
+                aria-label={`Pick build ${side.toUpperCase()} from your garage`}
+                value=""
+                onChange={(e) => {
+                  const hit = garage.find((g) => g.id === e.target.value);
+                  if (hit) load(side, hit.code);
+                }}
+              >
+                <option value="">Pick from your garage…</option>
+                {garage.map((g) => (
+                  <option key={g.id} value={g.id}>
+                    {g.name}
+                  </option>
+                ))}
+              </select>
+            )}
             <div className="row">
               {hasMine && (
                 <button className="link" onClick={() => useMine(side)}>

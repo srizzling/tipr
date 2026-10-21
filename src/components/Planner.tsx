@@ -8,6 +8,8 @@ import {
   encodeBuild,
   fitToBudget,
   newBuild,
+  nextBoxCost,
+  pointsToMax,
   placeAbility,
   setAbilitySlot,
   setTuning,
@@ -22,6 +24,7 @@ import { highlight, useKeywordRe } from './highlight';
 import { AbilityGlyph, Key, PanelHeading, PartArt, PartRow, StatRows, TipLogo, VerdictStrip } from './ui';
 import { partArtUrl } from '../lib/game-art';
 import { buildVerdict } from '../lib/verdict';
+import { isSaved, loadGarage, saveBuild, type SavedBuild } from '../lib/garage';
 import { FAULT_GROUPS, faultGroup } from '../lib/faults';
 import AbilityBoard from './AbilityBoard';
 
@@ -41,6 +44,8 @@ export default function Planner() {
   const [picker, setPicker] = useState<PickerState>(null);
   const [copied, setCopied] = useState(false);
   const [verdictSeed, setVerdictSeed] = useState(0);
+  const [garage, setGarage] = useState<SavedBuild[]>([]);
+  const [justSaved, setJustSaved] = useState(false);
   const [imageState, setImageState] = useState<'idle' | 'working' | 'copied' | 'failed'>('idle');
 
   // hydrate from share link, then keep the URL in sync
@@ -48,6 +53,7 @@ export default function Planner() {
     const raw = new URLSearchParams(location.search).get('b');
     const decoded = decodeBuild(raw ?? localStorage.getItem(CURRENT_BUILD_KEY) ?? '');
     if (decoded) setBuild(decoded);
+    setGarage(loadGarage(localStorage));
   }, []);
   useEffect(() => {
     const url = new URL(location.href);
@@ -88,6 +94,12 @@ export default function Planner() {
     }
     setTimeout(() => setImageState('idle'), 2000);
   };
+  const saveToGarage = () => {
+    setGarage(saveBuild(localStorage, verdict.title, encodeBuild(build)));
+    setJustSaved(true);
+    setTimeout(() => setJustSaved(false), 2000);
+  };
+  const alreadySaved = isSaved(garage, build, encodeBuild);
   const cycleClass = (dir: 1 | -1) => {
     const i = data.vehicleClasses.findIndex((c) => c.id === build.classId);
     const next = data.vehicleClasses[(i + dir + data.vehicleClasses.length) % data.vehicleClasses.length];
@@ -140,6 +152,12 @@ export default function Planner() {
               {mode === 'mine' ? ` / ${earned}` : ''}
             </b>
           </div>
+          <button className="pill action" onClick={saveToGarage} title="Saved in this browser only">
+            {justSaved ? 'Saved to garage' : alreadySaved ? 'Saved' : 'Save build'}
+          </button>
+          <a className="pill action" href="/garage/">
+            Garage{garage.length ? ` (${garage.length})` : ''}
+          </a>
           <a className="pill action" href={`/compare?a=${encodeBuild(build)}`}>
             Compare
           </a>
@@ -200,6 +218,12 @@ export default function Planner() {
           />
           <p className="hint">
             Level {vehicleLevel(build.tuning)} / {MAX_TUNING_BOXES + 1} · {spent} point{spent === 1 ? '' : 's'} spent
+          </p>
+          <p className="hint">
+            {nextBoxCost(build.tuning) === null
+              ? 'Every box filled.'
+              : `Next box costs ${nextBoxCost(build.tuning)} · ${pointsToMax(build.tuning)} more to max`}
+            {mode === 'mine' && ` · ${Math.max(0, earned - spent)} points left to spend`}
           </p>
         </section>
 
@@ -274,6 +298,7 @@ export default function Planner() {
                   part={p}
                   fault={fault ? partById.get(fault) : undefined}
                   keywordRe={keywordRe}
+                  lockedAt={mode === 'mine' && p.unlockEvents !== null && p.unlockEvents > events ? p.unlockEvents : undefined}
                   onRemove={() => update({ parts: build.parts.filter((x) => x.id !== id) })}
                   onFault={() => setPicker({ kind: 'fault', partId: id })}
                   onClearFault={() =>
