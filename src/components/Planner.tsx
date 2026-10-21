@@ -18,7 +18,8 @@ import {
   vehicleLevel,
   type Build,
 } from '../lib/build';
-import { STAT_IDS, type Ability, type GameData, type Part } from '../data/types';
+import { STAT_IDS, type Ability, type Part } from '../data/types';
+import { gameData } from '../data';
 import { STAT_LABEL, highlight, useKeywordRe } from './highlight';
 import { FAULT_GROUPS, faultGroup } from '../lib/faults';
 import AbilityBoard from './AbilityBoard';
@@ -30,11 +31,8 @@ type PickerState =
   | { kind: 'fault'; partId: string }
   | null;
 
-interface Props {
-  data: GameData;
-}
-
-export default function Planner({ data }: Props) {
+export default function Planner() {
+  const data = gameData;
   const [build, setBuild] = useState<Build>(() => newBuild(data.vehicleClasses[1]?.id ?? data.vehicleClasses[0].id));
   const [mode, setMode] = useState<Mode>('all');
   const [events, setEvents] = useState(120);

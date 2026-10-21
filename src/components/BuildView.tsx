@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { decodeBuild, totalBoxes, tuningCost, vehicleLevel, type Build } from '../lib/build';
-import type { GameData } from '../data/types';
+import { gameData } from '../data';
 import BuildPanels from './BuildPanels';
 
 /** Read-only page for a shared build: /b/<code>. */
-export default function BuildView({ data }: { data: GameData }) {
+export default function BuildView() {
+  const data = gameData;
   const [code, setCode] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   useEffect(() => setCode(location.pathname.replace(/^\/b\//, '').replace(/\/$/, '')), []);

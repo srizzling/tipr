@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { CURRENT_BUILD_KEY, encodeBuild, type Build } from '../lib/build';
 import { diffBuilds, parseBuildInput, type Numeric } from '../lib/compare';
-import type { GameData } from '../data/types';
+import { gameData } from '../data';
 import BuildPanels from './BuildPanels';
 import { STAT_LABEL } from './highlight';
 
 type Side = 'a' | 'b';
 
 /** Compare two builds side by side: /compare?a=<code>&b=<code>. */
-export default function Compare({ data }: { data: GameData }) {
+export default function Compare() {
+  const data = gameData;
   const [codes, setCodes] = useState<Record<Side, string>>({ a: '', b: '' });
   const [drafts, setDrafts] = useState<Record<Side, string>>({ a: '', b: '' });
   const [ready, setReady] = useState(false);
