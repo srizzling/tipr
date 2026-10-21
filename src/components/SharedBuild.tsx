@@ -54,7 +54,7 @@ export function BuildNotFound() {
       <section className="panel">
         <h2>Build not found</h2>
         <p>This link isn't a valid build. It may have been cut off when it was copied.</p>
-        <p style={{ marginTop: 12 }}>
+        <p className="mt">
           <a className="pill action" href="/">
             Start a new build
           </a>

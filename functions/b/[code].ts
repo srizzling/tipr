@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createElement } from 'react';
 import { decodeBuild } from '../../src/lib/build';
+import { SECURITY_HEADERS } from '../../src/lib/security-headers';
 import { buildSummary } from '../../src/lib/summary';
 import { gameData } from '../../src/data';
 import { SharedBuild } from '../../src/components/SharedBuild';
@@ -24,7 +25,10 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, params, env })
 
   if (!build || !gameData.vehicleClasses.some((c) => c.id === build.classId)) {
     // Let the client show "Build not found", but tell crawlers and caches the truth.
-    return new Response(shell.body, { status: 404, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
+    return new Response(shell.body, {
+      status: 404,
+      headers: { ...SECURITY_HEADERS, 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' },
+    });
   }
 
   const { title, description } = buildSummary(build, gameData);
@@ -58,6 +62,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, params, env })
     .transform(new Response(shell.body, shell));
 
   const headers = new Headers(response.headers);
+  for (const [name, value] of Object.entries(SECURITY_HEADERS)) headers.set(name, value);
   headers.set('cache-control', 'public, max-age=300');
   headers.set('x-robots-tag', 'noindex');
   return new Response(response.body, { status: 200, headers });

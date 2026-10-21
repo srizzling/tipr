@@ -176,3 +176,6 @@ button.pill:disabled { opacity: 0.4; cursor: not-allowed; }
 .sk-ability { height: 64px; margin: 0; }
 @keyframes sk-pulse { 50% { opacity: 0.55; } }
 @media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
+
+.mt { margin-top: 12px; }
+.mt-s { margin-top: 10px; }

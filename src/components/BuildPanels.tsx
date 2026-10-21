@@ -46,7 +46,7 @@ export default function BuildPanels({ build, data, compact }: { build: Build; da
             <div className="field static">
               {style ? `${style.name} · Rank ${build.styleRank}` : 'No style'}
             </div>
-            <ul className="traits" style={{ marginTop: 10 }}>
+            <ul className="traits mt-s">
               {traits.map((t) => (
                 <li key={t.name}>
                   <h3>{t.name}</h3>

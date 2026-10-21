@@ -22,4 +22,6 @@ const sharedBuildRewrite = {
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), sharedBuildRewrite],
+  // Astro hashes its own inline scripts and styles and emits a Content-Security-Policy <meta> tag.
+  security: { csp: true },
 });
