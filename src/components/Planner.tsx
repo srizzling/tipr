@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 import {
   CURRENT_BUILD_KEY,
   MAX_BOXES_PER_STAT,
@@ -386,10 +386,20 @@ function Picker<T extends { id: string }>({
 }: PickerProps<T>) {
   const [q, setQ] = useState('');
   const [only, setOnly] = useState<string | null>(null);
+  const query = useDeferredValue(q).toLowerCase();
   const rank = (g: string) => (groupOrder.includes(g) ? groupOrder.indexOf(g) : groupOrder.length);
-  const matches = items
-    .map((i) => ({ i, r: render(i), g: group?.(i) ?? '' }))
-    .filter(({ r }) => `${r.name} ${r.text}`.toLowerCase().includes(q.toLowerCase()));
+
+  // Rendering and keyword-highlighting 250+ rows is the expensive part, so do it once per open, not per keystroke.
+  const rows = useMemo(
+    () =>
+      items.map((i) => {
+        const r = render(i);
+        return { i, r, g: group?.(i) ?? '', haystack: `${r.name} ${r.text}`.toLowerCase(), text: highlight(r.text, keywordRe) };
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [items, keywordRe],
+  );
+  const matches = useMemo(() => rows.filter((row) => row.haystack.includes(query)), [rows, query]);
   const counts = new Map<string, number>();
   for (const m of matches) counts.set(m.g, (counts.get(m.g) ?? 0) + 1);
   const shown = matches
@@ -432,12 +442,12 @@ function Picker<T extends { id: string }>({
           </button>
         )}
         <ul className="pick-list">
-          {shown.map(({ i, r, g }, idx) => (
+          {shown.map(({ i, r, g, text }, idx) => (
             <li key={i.id}>
               {group && (idx === 0 || shown[idx - 1].g !== g) && <h3 className="group-head">{g}</h3>}
               <button disabled={disabled?.(i)} onClick={() => onPick(i)} className={selectedIds.includes(i.id) ? 'used' : ''}>
                 <b>{r.name}</b> <small>{r.meta}</small>
-                <p>{highlight(r.text, keywordRe)}</p>
+                <p>{text}</p>
               </button>
             </li>
           ))}
