@@ -1,0 +1,29 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)",
+    ":enableVulnerabilityAlerts",
+    "schedule:weekly"
+  ],
+  "timezone": "Australia/Sydney",
+  "lockFileMaintenance": { "enabled": true },
+  "packageRules": [
+    {
+      "description": "Security fixes are not delayed by the weekly schedule",
+      "matchCategories": ["security"],
+      "schedule": ["at any time"]
+    },
+    {
+      "description": "Group GitHub Actions bumps into one PR",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    },
+    {
+      "description": "Group OpenTofu provider bumps",
+      "matchManagers": ["terraform"],
+      "groupName": "opentofu providers"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import Compare from '../components/Compare';
+import BuildSkeleton from '../components/BuildSkeleton.astro';
+---
+
+<Base title="Compare builds · This Is Pod Racing" description="Compare two Star Wars: Galactic Racer builds side by side.">
+  <Compare client:only="react">
+    <BuildSkeleton slot="fallback" title="COMPARE" />
+  </Compare>
+</Base>

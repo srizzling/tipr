@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import BuildView from '../../components/BuildView';
+import BuildSkeleton from '../../components/BuildSkeleton.astro';
+
+// One static shell for every shared build. The host rewrites /b/<code> to this page (public/_redirects,
+// and a dev-server middleware in astro.config.mjs); the component reads the code from the URL.
+export function getStaticPaths() {
+  return [{ params: { code: '_' } }];
+}
+---
+
+<Base title="Shared build · This Is Pod Racing">
+  <BuildView client:only="react">
+    <BuildSkeleton slot="fallback" title="BUILD" />
+  </BuildView>
+</Base>

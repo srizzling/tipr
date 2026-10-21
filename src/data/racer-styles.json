@@ -1,0 +1,866 @@
+[
+  {
+    "id": "afterburner",
+    "name": "Afterburner",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Afterburner Racer Style",
+        "traits": [
+          {
+            "name": "Afterburner Superiority",
+            "text": "Afterburner is more powerful."
+          },
+          {
+            "name": "Afterburner Fuel Tank",
+            "text": "Afterburner lasts longer."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Win 8 tour events.",
+        "traits": [
+          {
+            "name": "Burn Bright",
+            "text": "Each overtake refills Afterburner tank by 10%."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Win 16 tour events.",
+        "traits": [
+          {
+            "name": "Afterburnout",
+            "text": "Maneuvering and airtime slowly refill Afterburner tank."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Afterburner Superiority",
+        "text": "Afterburner is more powerful."
+      },
+      {
+        "name": "Afterburner Fuel Tank",
+        "text": "Afterburner lasts longer."
+      },
+      {
+        "name": "Burn Bright",
+        "text": "Each overtake refills Afterburner tank by 10%."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "brawler",
+    "name": "Brawler",
+    "startingAbilityId": "ion-bolt",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Brawler Racer Style",
+        "traits": [
+          {
+            "name": "Prepared",
+            "text": "Start with Ion Bolt Ability installed."
+          },
+          {
+            "name": "Energy Hunter",
+            "text": "Takedowns recover 1 Energy."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Achieve 24 Takedowns.",
+        "traits": [
+          {
+            "name": "Combat Adrenaline",
+            "text": "Takedowns grant Surging for 10s."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Achieve 48 Takedowns.",
+        "traits": [
+          {
+            "name": "Combat Adrenaline II",
+            "text": "Takedowns grant Surging for an additional 10s."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Firestarter",
+        "text": "Start with Flame Vent Ability installed."
+      },
+      {
+        "name": "Energy Hunter",
+        "text": "Takedowns recover 1 Energy."
+      },
+      {
+        "name": "Combat Adrenaline",
+        "text": "Takedowns grant Surging for 10s."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "clean-racer",
+    "name": "Clean Racer",
+    "startingAbilityId": "overtaking-surge",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Clean Racer Racer Style",
+        "traits": [
+          {
+            "name": "Overtaker",
+            "text": "Start with Overtaking Surge Ability installed."
+          },
+          {
+            "name": "Victory Charge",
+            "text": "Every 5 overtakes, recover 1 Energy."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Win 8 tour events.",
+        "traits": [
+          {
+            "name": "In the Zone",
+            "text": "Upon Surging for 10s, top speed is increased. Lost on System Malfunction or when Surging ends."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Win 16 tour events.",
+        "traits": [
+          {
+            "name": "Feel, Don’t Think",
+            "text": "While In the Zone trait is active, top speed gradually increases."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Overtaker",
+        "text": "Start with Overtaking Surge Ability installed."
+      },
+      {
+        "name": "Victory Charge",
+        "text": "Every 5 overtakes, recover 1 Energy."
+      },
+      {
+        "name": "In the Zone",
+        "text": "Upon Surging for 10s, top speed is increased. Lost on System Malfunction or when Surging ends."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "engineer",
+    "name": "Engineer",
+    "startingAbilityId": "status-scrubber",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Engineer Racer Style",
+        "traits": [
+          {
+            "name": "Careful",
+            "text": "Start with Status Scrubber Ability installed."
+          },
+          {
+            "name": "What Doesn’t Kill You",
+            "text": "When System Malfunction clears, gain Surging for 10s."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Activate Abilities 20 times.",
+        "traits": [
+          {
+            "name": "Accelerated Recovery",
+            "text": "Recover more quickly from System Malfunction. Critical Malfunction is easier to clear."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Activate Abilities 40 times.",
+        "traits": [
+          {
+            "name": "Good As New",
+            "text": "When System Malfunction clears, reset Ramjet heat, fully refill Afterburner tank, and clear all negative status effects."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Careful",
+        "text": "Start with Status Scrubber Ability installed."
+      },
+      {
+        "name": "What Doesn’t Kill You",
+        "text": "When System Malfunction clears, gain Surging for 10s."
+      },
+      {
+        "name": "Accelerated Recovery",
+        "text": "Recover more quickly from System Malfunction. Critical Malfunction is easier to clear."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "firebug",
+    "name": "Firebug",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Firebug Racer Style",
+        "traits": [
+          {
+            "name": "Heat Recycler",
+            "text": "While Burning, Afterburner and Ramjet are significantly more powerful."
+          },
+          {
+            "name": "Afterfire",
+            "text": "Upon engaging Ramjet, gain Burning for 5s."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Achieve 24 Takedowns.",
+        "traits": [
+          {
+            "name": "Firestarter",
+            "text": "Start with Flame Vent Ability installed."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Achieve 48 Takedowns.",
+        "traits": [
+          {
+            "name": "Unlimited Power",
+            "text": "While Burning, Afterburner does not consume fuel and Ramjet does not gain heat."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Firestarter",
+        "text": "Start with Flame Vent Ability installed."
+      },
+      {
+        "name": "Heat Recycler",
+        "text": "While Burning, Afterburner and Ramjet are significantly more powerful."
+      },
+      {
+        "name": "Afterfire",
+        "text": "Upon engaging Ramjet, gain Burning for 5s."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "ice-cold",
+    "name": "Ice Cold",
+    "startingAbilityId": "supercooled-vent",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Activated 160 Abilities.",
+        "traits": [
+          {
+            "name": "Supercooled",
+            "text": "Start with Supercooled Vent Ability installed."
+          },
+          {
+            "name": "Absolute Zero",
+            "text": "While Frozen, Ramjet does not gain heat."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Activate Abilities 20 times.",
+        "traits": [
+          {
+            "name": "Null Heat Signature",
+            "text": "Upon becoming Frozen, gain Shielded for 10s."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Activate Abilities 40 times.",
+        "traits": [
+          {
+            "name": "Permafrost",
+            "text": "Frozen is retained twice as long."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "ramjet-rider",
+    "name": "Ramjet Rider",
+    "startingAbilityId": "vent",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Ramjet Rider Racer Style",
+        "traits": [
+          {
+            "name": "Exhaust",
+            "text": "Start with Vent Ability installed."
+          },
+          {
+            "name": "Optimal Heatsinks",
+            "text": "Cooled is more potent."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Use Ramjet for 460s.",
+        "traits": [
+          {
+            "name": "Clean Air",
+            "text": "Upon taking first position, gain Cooled for 10s."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Use Ramjet for 920s.",
+        "traits": [
+          {
+            "name": "Clean Air II",
+            "text": "Upon taking first, second, or third position, gain Cooled for 10s."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Exhaust",
+        "text": "Start with Vent Ability installed."
+      },
+      {
+        "name": "Optimal Heatsinks",
+        "text": "Cooled is more potent."
+      },
+      {
+        "name": "Clean Air",
+        "text": "Upon taking first position, gain Cooled for 10s."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "redliner",
+    "name": "Redliner",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Redliner Racer Style",
+        "traits": [
+          {
+            "name": "Critical Ramjet Power",
+            "text": "While Redlining, Ramjet is more powerful."
+          },
+          {
+            "name": "Early Warning",
+            "text": "Redlining zone increased by 100%."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Use Ramjet for 460s.",
+        "traits": [
+          {
+            "name": "Early Warning II",
+            "text": "Redlining zone increased by an additional 100%."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Use Ramjet for 920s.",
+        "traits": [
+          {
+            "name": "Safety Bypass",
+            "text": "Upon disengaging Ramjet, it can be re-engaged within a brief window."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Extra Fuel",
+        "text": "Start with Surge Ability installed."
+      },
+      {
+        "name": "Critical Ramjet Power",
+        "text": "While Redlining, Ramjet is more powerful."
+      },
+      {
+        "name": "Early Warning",
+        "text": "Redlining zone increased by 100%."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "slipstreamer",
+    "name": "Slipstreamer",
+    "startingAbilityId": "surge",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Slipstreamer Racer Style",
+        "traits": [
+          {
+            "name": "Extra Fuel",
+            "text": "Start with Surge Ability installed."
+          },
+          {
+            "name": "Stronger Slipstreaming",
+            "text": "Slipstreaming is more potent."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Win 8 tour events.",
+        "traits": [
+          {
+            "name": "Airflow Alignment",
+            "text": "Retain Slipstreaming for an increased duration upon leaving an opponent's slipstream."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Win 16 tour events.",
+        "traits": [
+          {
+            "name": "Optimized Profile",
+            "text": "Nearby vehicles create larger Slipstreaming zones."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Extra Fuel",
+        "text": "Start with Surge Ability installed."
+      },
+      {
+        "name": "Stronger Slipstreaming",
+        "text": "Slipstreaming is more potent."
+      },
+      {
+        "name": "Airflow Alignment",
+        "text": "Retain Slipstreaming for an increased duration upon leaving an opponent's slipstream."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "stunt-runner",
+    "name": "Stunt Runner",
+    "startingAbilityId": "vectored-shockwave",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Stunt Runner Racer Style",
+        "traits": [
+          {
+            "name": "Center of Attention",
+            "text": "Start with Vectored Shockwave Ability installed."
+          },
+          {
+            "name": "Repulsor Fuel Link",
+            "text": "Perfect Landings fully refill Afterburner tank and increase the power of its next use by 100%."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Spend 25s airborne.",
+        "traits": [
+          {
+            "name": "Potential Energy",
+            "text": "Each second spent airborne increases Repulsor Fuel Link trait bonus by +10%."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Spend 50s airborne.",
+        "traits": [
+          {
+            "name": "Repulsor Alignment",
+            "text": "All landings are Perfect Landings."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Center of Attention",
+        "text": "Start with Vectored Shockwave Ability installed."
+      },
+      {
+        "name": "Repulsor Fuel Link",
+        "text": "Perfect Landings fully refill Afterburner tank and increase the power of its next use by 100%."
+      },
+      {
+        "name": "Potential Energy",
+        "text": "Each second spent airborne increases Repulsor Fuel Link trait bonus by +10%."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "survivor",
+    "name": "Survivor",
+    "startingAbilityId": "shield",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Start the Campaign.",
+        "traits": [
+          {
+            "name": "Protected",
+            "text": "Start with Shield Ability installed."
+          },
+          {
+            "name": "Mint Condition",
+            "text": "Considerably increases Speed. Lost on Crash."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Spend 180s Shielded.",
+        "traits": [
+          {
+            "name": "Mint Condition II",
+            "text": "Considerably increases Speed. Lost after 2 Crashes instead of 1."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Spend 360s Shielded.",
+        "traits": [
+          {
+            "name": "Power to Thrusters",
+            "text": "When Shielded is lost, gain Surging for 10s."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Protected",
+        "text": "Start with Shield Ability installed."
+      },
+      {
+        "name": "Mint Condition",
+        "text": "Considerably increases Speed. Lost on Crash."
+      },
+      {
+        "name": "Power to Thrusters",
+        "text": "When Shielded is lost, gain Surging for 10s."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "tech-expert",
+    "name": "Tech Expert",
+    "startingAbilityId": "concussion-mine",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Tech Expert Racer Style",
+        "traits": [
+          {
+            "name": "Trapper",
+            "text": "Start with Concussion Mine Ability installed."
+          },
+          {
+            "name": "Careful",
+            "text": "Start with Status Scrubber Ability installed."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Activate Abilities 20 times.",
+        "traits": [
+          {
+            "name": "Optimized Reserves",
+            "text": "Whenever Energy is fully depleted, gain Overcharged for 30s."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Activate Abilities 40 times.",
+        "traits": [
+          {
+            "name": "Adaptive Systems",
+            "text": "Activating Abilities reduces Ability reload time."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Trapper",
+        "text": "Start with Concussion Mine Ability installed."
+      },
+      {
+        "name": "Careful",
+        "text": "Start with Status Scrubber Ability installed."
+      },
+      {
+        "name": "Optimized Reserves",
+        "text": "Whenever Energy is fully depleted, gain Overcharged for 30s."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "tenacious",
+    "name": "Tenacious",
+    "startingAbilityId": "autopilot",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Tenacious Racer Style",
+        "traits": [
+          {
+            "name": "Calculated",
+            "text": "Start with Autopilot Ability installed."
+          },
+          {
+            "name": "One More Chance",
+            "text": "Allowed 1 extra Crash."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Complete 8 tour events.",
+        "traits": [
+          {
+            "name": "Bounce Back",
+            "text": "Upon resetting from a Crash, gain Surging for 15s."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Complete 16 tour events.",
+        "traits": [
+          {
+            "name": "Keep Your Cool",
+            "text": "While in ninth position or lower, gain Cooled."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Calculated",
+        "text": "Start with Autopilot Ability installed."
+      },
+      {
+        "name": "Keep Your Cool",
+        "text": "While in ninth position or lower, gain Cooled."
+      },
+      {
+        "name": "Bounce Back",
+        "text": "Upon resetting from a Crash, gain Surging for 15s."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "weaponized",
+    "name": "Weaponized",
+    "startingAbilityId": "ion-bolt",
+    "ranks": [
+      {
+        "rank": 1,
+        "unlock": "Unlock the Weaponized Racer Style",
+        "traits": [
+          {
+            "name": "Prepared",
+            "text": "Start with Ion Bolt Ability installed."
+          },
+          {
+            "name": "Energy Leech",
+            "text": "Hitting 2 opponents with Abilities recovers 1 Energy."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "unlock": "Achieve 24 Takedowns.",
+        "traits": [
+          {
+            "name": "Tooled Up",
+            "text": "Start with Shockwave and Concussion Mine Abilities installed."
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "unlock": "Achieve 48 Takedowns.",
+        "traits": [
+          {
+            "name": "Firestarter",
+            "text": "Start with Flame Vent Ability installed."
+          }
+        ]
+      }
+    ],
+    "multiplayer": [
+      {
+        "name": "Prepared",
+        "text": "Start with Ion Bolt Ability installed."
+      },
+      {
+        "name": "Energy Leech",
+        "text": "Hitting 2 opponents with Abilities recovers 1 Energy."
+      },
+      {
+        "name": "Tooled Up",
+        "text": "Start with Shockwave and Concussion Mine Abilities installed."
+      }
+    ],
+    "multiplayerOnly": false
+  },
+  {
+    "id": "bt310-quadra",
+    "name": "BT310 Quadra",
+    "ranks": [],
+    "multiplayer": [
+      {
+        "name": "Double Control Surfaces",
+        "text": "Vehicle drag is reduced, improving Cornering."
+      },
+      {
+        "name": "Complex Interlocks",
+        "text": "Vehicle collisions result in higher received damage."
+      }
+    ],
+    "multiplayerOnly": true
+  },
+  {
+    "id": "custom-ord-pedrovia",
+    "name": "Custom Ord Pedrovia",
+    "ranks": [],
+    "multiplayer": [
+      {
+        "name": "Energy Surplus",
+        "text": "Afterburner power and tank refill rate are increased."
+      },
+      {
+        "name": "Large Cross-Section",
+        "text": "Vehicle drag is increased, reducing top speed."
+      }
+    ],
+    "multiplayerOnly": true
+  },
+  {
+    "id": "exelbrok-xl-5115",
+    "name": "Exelbrok XL 5115",
+    "ranks": [],
+    "multiplayer": [
+      {
+        "name": "Overbuilt Engines",
+        "text": "Maximum top speed is increased."
+      },
+      {
+        "name": "Massive Momentum",
+        "text": "Cornering maneuverability is reduced."
+      }
+    ],
+    "multiplayerOnly": true
+  },
+  {
+    "id": "ipg-x1131-longtail",
+    "name": "IPG-X1131 LongTail",
+    "ranks": [],
+    "multiplayer": [
+      {
+        "name": "Bleeding-Edge Tech",
+        "text": "Afterburner power is increased and Cornering maneuverability improved."
+      },
+      {
+        "name": "Small Thrusters",
+        "text": "Maximum top speed is reduced."
+      }
+    ],
+    "multiplayerOnly": true
+  },
+  {
+    "id": "plug-f-mammoth",
+    "name": "Plug-F Mammoth",
+    "ranks": [],
+    "multiplayer": [
+      {
+        "name": "Built for Battle",
+        "text": "Vehicle collisions result in lower received damage and higher given damage."
+      },
+      {
+        "name": "Old Dog, Old Tricks",
+        "text": "Afterburner tank refills at a reduced rate."
+      }
+    ],
+    "multiplayerOnly": true
+  },
+  {
+    "id": "vulptereen-327",
+    "name": "Vulptereen 327",
+    "ranks": [],
+    "multiplayer": [
+      {
+        "name": "Optimized Nozzles",
+        "text": "While on straights, Afterburner power and top speed are increased."
+      },
+      {
+        "name": "Draggy Control Surfaces",
+        "text": "While Cornering, top speed is reduced."
+      }
+    ],
+    "multiplayerOnly": true
+  }
+]

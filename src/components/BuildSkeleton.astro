@@ -1,0 +1,38 @@
+---
+/** Server-rendered placeholder for pages whose content depends on the URL (shared builds, compare). */
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<div class="planner skeleton" aria-busy="true" aria-label="Loading build">
+  <header class="planner-head">
+    <h1><span class="slash">/</span>{title}</h1>
+  </header>
+  <main class="cols">
+    <section class="panel">
+      <h2>Vehicle stats</h2>
+      <div class="sk sk-field"></div>
+      <div class="sk sk-speed"></div>
+      {Array.from({ length: 6 }, () => <div class="sk sk-stat"></div>)}
+    </section>
+    <div class="stack">
+      <section class="panel">
+        <h2>Racer style</h2>
+        <div class="sk sk-field"></div>
+        {Array.from({ length: 3 }, () => <div class="sk sk-trait"></div>)}
+      </section>
+      <section class="panel">
+        <h2>Abilities</h2>
+        <div class="abilities">
+          {Array.from({ length: 4 }, () => <div class="sk sk-ability"></div>)}
+        </div>
+      </section>
+    </div>
+    <section class="panel">
+      <h2>Installed</h2>
+      {Array.from({ length: 3 }, () => <div class="sk sk-trait"></div>)}
+    </section>
+  </main>
+</div>

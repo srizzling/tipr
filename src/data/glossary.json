@@ -1,0 +1,277 @@
+[
+  {
+    "id": "ability",
+    "name": "Ability",
+    "text": "Equippable tech that provides offensive, defensive, or utility capabilites. Consume Energy to activate."
+  },
+  {
+    "id": "ability-pack",
+    "name": "Ability Pack",
+    "text": "A pack of 3 random Abilities. Select 1 to install."
+  },
+  {
+    "id": "afterburner",
+    "name": "Afterburner",
+    "text": "How quickly the vehicle accelerates, decelerates, and how much boost is received from Afterburner."
+  },
+  {
+    "id": "afterburner-2",
+    "name": "Afterburner",
+    "text": "A safe and efficient boost. The tank gradually refills while racing."
+  },
+  {
+    "id": "air-brake",
+    "name": "Air Brake",
+    "text": "How tightly the vehicle can turn while Air Braking."
+  },
+  {
+    "id": "autopilot",
+    "name": "Autopilot",
+    "text": "Vehicle flies automatically for 10s. Ramjet heating reduced while active."
+  },
+  {
+    "id": "battery",
+    "name": "Battery",
+    "text": "The maximum amount of Energy available to activate Abilities."
+  },
+  {
+    "id": "braking",
+    "name": "Braking",
+    "text": "Decelerates vehicle."
+  },
+  {
+    "id": "burning",
+    "name": "Burning",
+    "text": "Causes Ramjet to rapidly gain heat."
+  },
+  {
+    "id": "chilled",
+    "name": "Chilled",
+    "text": "Become Cooled, but gradually causes Frozen."
+  },
+  {
+    "id": "choked",
+    "name": "Choked",
+    "text": "Disables Ramjet."
+  },
+  {
+    "id": "concussed",
+    "name": "Concussed",
+    "text": "Causes impaired steering."
+  },
+  {
+    "id": "concussion-mine",
+    "name": "Concussion Mine",
+    "text": "Drop a charge that explodes on proximity and applies Concussed and System Malfunction to nearby opponents."
+  },
+  {
+    "id": "cooled",
+    "name": "Cooled",
+    "text": "Ramjet recharges more quickly and gains heat more slowly."
+  },
+  {
+    "id": "cornering",
+    "name": "Cornering",
+    "text": "How quickly and tightly the vehicle can take corners."
+  },
+  {
+    "id": "corroded",
+    "name": "Corroded",
+    "text": "Chokes Ramjet, causing it to disable. Continued exposure quickly leads to Crash."
+  },
+  {
+    "id": "crash",
+    "name": "Crash",
+    "text": "Catastrophic vehicle failure due to collision, impact, or explosion. Limited Crashes allowed per event."
+  },
+  {
+    "id": "crash-ability",
+    "name": "Crash Ability",
+    "text": "Activated during a Crash. Does not cost Energy."
+  },
+  {
+    "id": "critical-malfunction",
+    "name": "Critical Malfunction",
+    "text": "Causes high susceptibility to collision damage. Afterburner, Ramjet, and Abilities are disabled."
+  },
+  {
+    "id": "disrupted",
+    "name": "Disrupted",
+    "text": "Blocks Abilities and Overcharged while applying Choked, System Malfunction, and reducing speed."
+  },
+  {
+    "id": "drift",
+    "name": "Drift",
+    "text": "How sharply the landspeeder turns and how much speed is maintained while using Drift."
+  },
+  {
+    "id": "energy",
+    "name": "Energy",
+    "text": "Spent to activate Abilities. Increased by Battery."
+  },
+  {
+    "id": "fault",
+    "name": "Fault",
+    "text": "A malfunctioning Part that cannot be replaced until repaired. Faults can be repaired at the Scrap Dealer."
+  },
+  {
+    "id": "flame-vent",
+    "name": "Flame Vent",
+    "text": "Gain Cooled and reduce Ramjet heat. Applies Burning and System Malfunction to nearby opponents."
+  },
+  {
+    "id": "frozen",
+    "name": "Frozen",
+    "text": "Significantly impairs steering, as well as cools Ramjet."
+  },
+  {
+    "id": "ion-bolt",
+    "name": "Ion Bolt",
+    "text": "Lock on to the closest nearby opponent and apply Disrupted to target."
+  },
+  {
+    "id": "kinetic-burst",
+    "name": "Kinetic Burst",
+    "text": "How powerful the speeder bike's Kinetic Burst braking is and how much speed is restored upon release."
+  },
+  {
+    "id": "knife-edge",
+    "name": "Knife Edge",
+    "text": "How tightly the skim speeder turns and how much speed is maintained while using Knife Edge."
+  },
+  {
+    "id": "maneuvering",
+    "name": "Maneuvering",
+    "text": "Use Improved Steering to Drift, Kinetic Burst, or Knife Edge."
+  },
+  {
+    "id": "overcharged",
+    "name": "Overcharged",
+    "text": "Gain temporary Energy and reduce Ability reload times."
+  },
+  {
+    "id": "overtaking-surge",
+    "name": "Overtaking Surge",
+    "text": "Gain Surging for 10s, lost on impact. Overtakes extend the duration and increase its potency."
+  },
+  {
+    "id": "part",
+    "name": "Part",
+    "text": "Installed to a vehicle to provide passive effects. The higher the rarity, the stronger the effect."
+  },
+  {
+    "id": "part-pack",
+    "name": "Part Pack",
+    "text": "A pack of 3 random Parts. Select 1 to install."
+  },
+  {
+    "id": "perfect-landing",
+    "name": "Perfect Landing",
+    "text": "Landing a jump with vehicle pitch parallel to the ground results in a temporary boost."
+  },
+  {
+    "id": "perfect-start",
+    "name": "Perfect Start",
+    "text": "Temporary boost gained from Perfect acceleration check upon race start."
+  },
+  {
+    "id": "pre-race-checks",
+    "name": "Pre-Race Checks",
+    "text": "Checks at race start which, when completed successfully, give additional benefits."
+  },
+  {
+    "id": "ramjet",
+    "name": "Ramjet",
+    "text": "A powerful but dangerous boost. Managing the heat it generates will prevent exploding."
+  },
+  {
+    "id": "ramjet-2",
+    "name": "Ramjet",
+    "text": "How much boost is provided by the Ramjet."
+  },
+  {
+    "id": "redlining",
+    "name": "Redlining",
+    "text": "Racing within the red zone prior to the Ramjet overheating and exploding, indicated by an alarm."
+  },
+  {
+    "id": "resilience",
+    "name": "Resilience",
+    "text": "How well the vehicle can handle damage, avoid Malfunctions, and resist negative status effects."
+  },
+  {
+    "id": "shield",
+    "name": "Shield",
+    "text": "Gain Shielded for 10s."
+  },
+  {
+    "id": "shielded",
+    "name": "Shielded",
+    "text": "Increases protection from collisions and impacts as well as blocks externally-applied status effects."
+  },
+  {
+    "id": "shockwave",
+    "name": "Shockwave",
+    "text": "Blast nearby opponents away and apply System Malfunction to affected opponents."
+  },
+  {
+    "id": "slipstreaming",
+    "name": "Slipstreaming",
+    "text": "A speed bonus gained while flying closely behind an opponent."
+  },
+  {
+    "id": "speed",
+    "name": "Speed",
+    "text": "The unboosted top speed of your vehicle."
+  },
+  {
+    "id": "status-scrubber",
+    "name": "Status Scrubber",
+    "text": "Clear negative status effects. If any are cleared, recover 1 Energy."
+  },
+  {
+    "id": "supercooled-vent",
+    "name": "Supercooled Vent",
+    "text": "Gain Cooled and reduce Ramjet heat while gradually gaining Frozen. Upon fully Frozen, Vent disengages."
+  },
+  {
+    "id": "surge",
+    "name": "Surge",
+    "text": "Gain Surging for 10s, lost on impact. Overtakes extend the duration."
+  },
+  {
+    "id": "surging",
+    "name": "Surging",
+    "text": "Increases acceleration and speed."
+  },
+  {
+    "id": "system-malfunction",
+    "name": "System Malfunction",
+    "text": "Causes high susceptibility to collision damage."
+  },
+  {
+    "id": "takedown",
+    "name": "Takedown",
+    "text": "Any action directly causing an opponent to Crash. Fully refills Afterburner tank."
+  },
+  {
+    "id": "upgrade",
+    "name": "Upgrade",
+    "text": "Upgrades the vehicle’s top speed and one of its stats: Afterburner, Battery, Cornering, Maneuvering, Ramjet, or Resilience."
+  },
+  {
+    "id": "upgrade-pack",
+    "name": "Upgrade Pack",
+    "text": "A pack of 3 random +1 Upgrades. Select 1 to install."
+  },
+  {
+    "id": "vectored-shockwave",
+    "name": "Vectored Shockwave",
+    "text": "Blast nearby opponents away, propelling you forward and applying System Malfunction to affected opponents."
+  },
+  {
+    "id": "vent",
+    "name": "Vent",
+    "text": "Gain Cooled and reduce Ramjet heat."
+  }
+]
