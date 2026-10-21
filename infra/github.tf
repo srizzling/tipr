@@ -34,6 +34,13 @@ resource "github_repository_vulnerability_alerts" "repo" {
   enabled    = true
 }
 
+# Release Please opens its release PR with the workflow token, which GitHub only allows when this is on.
+resource "github_workflow_repository_permissions" "repo" {
+  repository                       = github_repository.repo.name
+  default_workflow_permissions     = "read"
+  can_approve_pull_request_reviews = true
+}
+
 resource "github_repository_dependabot_security_updates" "repo" {
   repository = github_repository.repo.name
   enabled    = true
@@ -41,6 +48,7 @@ resource "github_repository_dependabot_security_updates" "repo" {
 
 # Release tags (v1.2.3) are what production deploys from, so nobody may move or delete them.
 resource "github_repository_ruleset" "release_tags" {
+  count       = var.enable_rulesets ? 1 : 0
   name        = "release-tags"
   repository  = github_repository.repo.name
   target      = "tag"
@@ -61,6 +69,7 @@ resource "github_repository_ruleset" "release_tags" {
 }
 
 resource "github_repository_ruleset" "main" {
+  count       = var.enable_rulesets ? 1 : 0
   name        = "main"
   repository  = github_repository.repo.name
   target      = "branch"

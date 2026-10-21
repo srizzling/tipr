@@ -30,3 +30,9 @@ variable "cloudflare_zone_id" {
   description = "Zone id for var.domain. Required when domain is set."
   default     = ""
 }
+
+variable "enable_rulesets" {
+  type        = bool
+  description = "Apply the branch and tag rulesets. Leave false for the very first push and merge (they require checks that have not run yet), then set true."
+  default     = false
+}
