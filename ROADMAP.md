@@ -28,7 +28,7 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [ ] Replace the admin PR bypass with a GitHub App token for Release Please, so its release PRs run the required checks
 - [x] **First deploy: https://thisispodracing.pages.dev** (done by hand with `wrangler pages deploy`, using the wrangler login on the dev machine). `tipr.pages.dev` belongs to someone else, hence the project name.
 - [x] **Deploys are infrastructure-as-code now.** `scripts/cloudflare-bootstrap.mjs` (run with a broad setup token that is never stored) created the R2 state bucket, bucket-scoped keys and a Pages-only API token. OpenTofu state is in R2, the Pages project is imported into OpenTofu, and `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are secrets of the GitHub `production` environment. See `infra/README.md`
-- [ ] Merge the Release Please PR (v0.1.0) so the release workflow publishes from CI
+- [x] **Automatic releases and deploys.** Merge to `main`, Release Please keeps a `chore: release X.Y.Z` PR up to date, and merging that PR (an admin merge, because its checks cannot run) tags the release and deploys it from CI to https://thisispodracing.pages.dev. Verified with v0.1.1. To redeploy or roll back a tag: `gh workflow run release.yml -f ref=v0.1.0`
 - [ ] Read the Games Lantern terms of use, then add data credit to the footer
 - [ ] Verify unconfirmed data against the game (see "Data to verify")
 - [x] Restyled to follow the game's build screen: Rajdhani (open-licence) font, panel headings with rules, translucent rows, italic text with gold keywords, icon-led stat rows, Max Energy dots, `INSTALLED PARTS n/4`, red fault boxes, vehicle arrows, S/C/R key hints
