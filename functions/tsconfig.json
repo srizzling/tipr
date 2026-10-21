@@ -1,0 +1,11 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["@cloudflare/workers-types", "node"],
+    "noEmit": true,
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": ["./**/*.ts", "../src/**/*.ts", "../src/**/*.tsx", "../src/data/*.json"]
+}

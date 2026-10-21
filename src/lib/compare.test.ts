@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { gameData } from '../data';
 import { emptyTuning, newBuild, setTuning, encodeBuild } from './build';
 import { diffBuilds, parseBuildInput } from './compare';
+import { buildSummary } from './summary';
 
 const make = () => {
   const b = newBuild('landspeeder');
@@ -48,5 +49,16 @@ describe('parseBuildInput', () => {
     expect(parseBuildInput(`https://example.com/?b=${code}`)?.classId).toBe('landspeeder');
     expect(parseBuildInput(` ${code} `)?.classId).toBe('landspeeder');
     expect(parseBuildInput('nonsense')).toBeNull();
+  });
+});
+
+describe('buildSummary', () => {
+  it('describes a build for link previews', () => {
+    const { title, description } = buildSummary(make(), gameData);
+    expect(title).toBe('Firebug Landspeeder build · This Is Pod Racing');
+    expect(description).toContain('Landspeeder, level 1, 298 km/h');
+    expect(description).toContain('Firebug rank 3');
+    expect(description).toContain('Abilities: Corrosive Vent');
+    expect(description).toContain('Parts: Thermal Inverter');
   });
 });

@@ -33,7 +33,8 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 ## v1.x: content and growth
 
 - [ ] **Static reference pages:** one page per racer style, ability, part and status term, generated from the data. These are the search traffic.
-- [ ] Link previews for `/b/<code>`: a Cloudflare Pages Function that renders an Open Graph image and title for the build
+- [x] `/b/<code>` is rendered on the server by a Cloudflare Pages Function (`functions/b/[code].ts`): real page title, Open Graph text previews, build content in the HTML, 404 for invalid codes, `noindex`
+- [ ] Link-preview **image** for shared builds (needs an image renderer such as satori; today the preview is text only)
 - [ ] Saved builds and a "garage" in localStorage
 - [ ] "What should I buy next?" view showing the next Tuning Point box and its cost
 - [ ] Respec planner (2-point respec, spend plan for a given number of points)
