@@ -167,3 +167,12 @@ button.pill:disabled { opacity: 0.4; cursor: not-allowed; }
 .chip.used { opacity: 0.45; }
 .chip:hover { border-color: var(--muted); }
 .drag-ghost { cursor: grabbing; background: var(--paper); color: var(--ink); box-shadow: 0 6px 18px rgba(0,0,0,0.5); }
+
+.sk { background: var(--slate-3); border-radius: 6px; margin-bottom: 6px; animation: sk-pulse 1.4s ease-in-out infinite; }
+.sk-field { height: 42px; }
+.sk-speed { height: 52px; margin: 10px 0; }
+.sk-stat { height: 50px; }
+.sk-trait { height: 72px; }
+.sk-ability { height: 64px; margin: 0; }
+@keyframes sk-pulse { 50% { opacity: 0.55; } }
+@media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
