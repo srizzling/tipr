@@ -138,13 +138,22 @@ export function encodeBuild(b: Build): string {
   return btoa(JSON.stringify(compact)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
+/** Share codes are tiny; anything bigger or with other characters is not ours. Keeps hostile input out of JSON.parse and the server. */
+export const MAX_CODE_LENGTH = 2048;
+const CODE_PATTERN = /^[A-Za-z0-9_-]+$/;
+
+/** Game ids are lowercase slugs. Anything else in a share code is dropped. */
+const ID_PATTERN = /^[a-z0-9-]{1,64}$/;
+const idOrNull = (v: unknown): string | null => (typeof v === 'string' && ID_PATTERN.test(v) ? v : null);
+
 export function decodeBuild(s: string): Build | null {
+  if (s.length > MAX_CODE_LENGTH || !CODE_PATTERN.test(s)) return null;
   try {
     const pad = s.replace(/-/g, '+').replace(/_/g, '/');
     const [classId, styleId, styleRank, boxes, abilities, crashAbility, parts] = JSON.parse(
       atob(pad + '='.repeat((4 - (pad.length % 4)) % 4)),
     );
-    if (typeof classId !== 'string' || !Array.isArray(boxes) || !Array.isArray(abilities) || !Array.isArray(parts)) {
+    if (typeof classId !== 'string' || !ID_PATTERN.test(classId) || !Array.isArray(boxes) || !Array.isArray(abilities) || !Array.isArray(parts)) {
       return null;
     }
     let tuning = emptyTuning();
@@ -153,18 +162,18 @@ export function decodeBuild(s: string): Build | null {
     });
     return {
       classId,
-      styleId: styleId ?? null,
+      styleId: idOrNull(styleId),
       styleRank: [1, 2, 3].includes(styleRank) ? styleRank : 1,
       tuning,
-      abilities: Array.from({ length: ABILITY_SLOTS }, (_, i) => abilities[i] ?? null),
-      crashAbility: crashAbility ?? null,
+      abilities: Array.from({ length: ABILITY_SLOTS }, (_, i) => idOrNull(abilities[i])),
+      crashAbility: idOrNull(crashAbility),
       parts: parts
         .slice(0, MAX_PARTS)
         .map((p: unknown): InstalledPart | null =>
-          typeof p === 'string'
+          typeof p === 'string' && ID_PATTERN.test(p)
             ? { id: p, fault: null }
-            : Array.isArray(p) && typeof p[0] === 'string'
-              ? { id: p[0], fault: typeof p[1] === 'string' ? p[1] : null }
+            : Array.isArray(p) && typeof p[0] === 'string' && ID_PATTERN.test(p[0])
+              ? { id: p[0], fault: idOrNull(p[1]) }
               : null,
         )
         .filter((p: InstalledPart | null): p is InstalledPart => p !== null),

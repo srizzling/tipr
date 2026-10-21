@@ -72,6 +72,26 @@ describe('share link', () => {
   it('rejects garbage', () => {
     expect(decodeBuild('not a build')).toBeNull();
   });
+
+  const enc = (v: unknown) => btoa(JSON.stringify(v)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+  it('rejects oversized and non-base64url codes before parsing', () => {
+    expect(decodeBuild('A'.repeat(5000))).toBeNull();
+    expect(decodeBuild('abc"><script>')).toBeNull();
+    expect(decodeBuild('abc def')).toBeNull();
+  });
+
+  it('drops ids that are not plain slugs', () => {
+    const b = decodeBuild(enc(['landspeeder', '<img src=x>', 1, [0, 0, 0, 0, 0, 0], ['ok-id', '"><b>', null, null], 'Bad Id', ['thermal-inverter', ['x"y', 'acidic-fuel'], ['ok', 'a"b']]]));
+    expect(b?.styleId).toBeNull();
+    expect(b?.abilities).toEqual(['ok-id', null, null, null]);
+    expect(b?.crashAbility).toBeNull();
+    expect(b?.parts).toEqual([{ id: 'thermal-inverter', fault: null }, { id: 'ok', fault: null }]);
+  });
+
+  it('rejects a class id that is not a slug', () => {
+    expect(decodeBuild(enc(['Landspeeder<', null, 1, [0, 0, 0, 0, 0, 0], [], null, []]))).toBeNull();
+  });
 });
 
 describe('ability placement', () => {
