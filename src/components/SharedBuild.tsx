@@ -1,7 +1,8 @@
 import { totalBoxes, tuningCost, vehicleLevel, type Build } from '../lib/build';
 import type { GameData } from '../data/types';
 import BuildPanels from './BuildPanels';
-import { TipLogo } from './ui';
+import { TipLogo, VerdictStrip } from './ui';
+import { buildVerdict } from '../lib/verdict';
 
 /** The read-only build page. Pure markup, so the Pages Function can render it on the server too. */
 export function SharedBuild({
@@ -51,6 +52,8 @@ export function SharedBuild({
           </button>
         </div>
       </header>
+
+      <VerdictStrip verdict={buildVerdict(build, data)} />
 
       <BuildPanels build={build} data={data} />
     </div>

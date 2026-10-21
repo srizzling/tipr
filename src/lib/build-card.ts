@@ -13,6 +13,7 @@ import {
 } from './build';
 import { ICON_PATHS, type IconName } from './icons';
 import { CARD_HEIGHT, CARD_WIDTH, escapeXml, fit } from './og-card';
+import { buildVerdict, type Verdict } from './verdict';
 
 /**
  * A faithful replica of the build screen (stats, style, abilities, parts) as a 1200x630 SVG, filled with a real
@@ -80,6 +81,8 @@ function t(x: number, y: number, size: number, fill: string, content: string, ex
 export interface CardOptions {
   /** CSS @font-face rules to embed (data URLs), needed when the SVG is drawn as an image in a browser. */
   fontCss?: string;
+  /** The joke shown in the header. Defaults to the build's standard verdict (seed 0), which is what shared pages show. */
+  verdict?: Verdict;
 }
 
 export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {}): string {
@@ -114,6 +117,10 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
   push(rect(0, 0, CARD_WIDTH, CARD_HEIGHT, 0, C.paper));
   push(t(34, 88, 68, C.ink, '<tspan font-style="italic">/</tspan>BUILD', 'font-weight="700"'));
   push(rect(238, 54, 62, 26, 4, C.red));
+  const verdict = opts.verdict ?? buildVerdict(build, data);
+  push(t(332, 46, 12, C.red, 'VERDICT', 'font-weight="700" letter-spacing="3"'));
+  push(t(332, 76, 25, C.ink, escapeXml(fit(verdict.title, 30)), 'font-weight="700"'));
+  push(t(332, 96, 14, '#55666a', escapeXml(fit(verdict.line, 62)), ''));
   push(t(269, 73, 15, '#fff', 'TIPR', 'font-weight="700" text-anchor="middle" letter-spacing="3"'));
   const pill = (right: number, label: string, value: string) => {
     const w = Math.round((label.length + value.length) * 8.2 + 44);

@@ -19,7 +19,8 @@ import {
 import type { Ability, Part } from '../data/types';
 import { gameData } from '../data';
 import { highlight, useKeywordRe } from './highlight';
-import { Key, PanelHeading, PartRow, StatRows, TipLogo } from './ui';
+import { Key, PanelHeading, PartRow, StatRows, TipLogo, VerdictStrip } from './ui';
+import { buildVerdict } from '../lib/verdict';
 import { FAULT_GROUPS, faultGroup } from '../lib/faults';
 import AbilityBoard from './AbilityBoard';
 
@@ -38,6 +39,7 @@ export default function Planner() {
   const [earned, setEarned] = useState(163);
   const [picker, setPicker] = useState<PickerState>(null);
   const [copied, setCopied] = useState(false);
+  const [verdictSeed, setVerdictSeed] = useState(0);
   const [imageState, setImageState] = useState<'idle' | 'working' | 'copied' | 'failed'>('idle');
 
   // hydrate from share link, then keep the URL in sync
@@ -60,6 +62,7 @@ export default function Planner() {
 
   const keywordRe = useKeywordRe(data.glossary);
 
+  const verdict = useMemo(() => buildVerdict(build, data, verdictSeed), [build, data, verdictSeed]);
   const spent = tuningCost(totalBoxes(build.tuning));
   const campaignStyles = data.racerStyles.filter((s) => !s.multiplayerOnly);
   const traits = style ? style.ranks.filter((r) => r.rank <= build.styleRank).flatMap((r) => r.traits) : [];
@@ -76,8 +79,8 @@ export default function Planner() {
     setImageState('working');
     try {
       const { copyBuildImage, saveBuildImage } = await import('../lib/share-image');
-      if (mode === 'copy') await copyBuildImage(build);
-      else await saveBuildImage(build);
+      if (mode === 'copy') await copyBuildImage(build, verdict);
+      else await saveBuildImage(build, verdict);
       setImageState('copied');
     } catch {
       setImageState('failed');
@@ -162,6 +165,8 @@ export default function Planner() {
           <p className="hint">Save-file import will fill these in automatically.</p>
         </div>
       )}
+
+      <VerdictStrip verdict={verdict} onReroll={() => setVerdictSeed((n) => n + 1)} />
 
       <main className="cols">
         {/* ---- Vehicle stats ---- */}

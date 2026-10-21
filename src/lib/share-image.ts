@@ -1,5 +1,6 @@
 import { gameData } from '../data';
 import type { Build } from './build';
+import type { Verdict } from './verdict';
 import { buildCardSvg } from './build-card';
 import { CARD_HEIGHT, CARD_WIDTH } from './og-card';
 import bold from '../../public/fonts/Rajdhani-Bold.woff2?inline';
@@ -11,8 +12,8 @@ import medium from '../../public/fonts/Rajdhani-Medium.woff2?inline';
  */
 const fontCss = `@font-face{font-family:Rajdhani;font-weight:500;src:url(${medium}) format('woff2')}@font-face{font-family:Rajdhani;font-weight:700;src:url(${bold}) format('woff2')}`;
 
-export async function buildPng(build: Build, scale = 2): Promise<Blob> {
-  const svg = buildCardSvg(build, gameData, { fontCss });
+export async function buildPng(build: Build, verdict?: Verdict, scale = 2): Promise<Blob> {
+  const svg = buildCardSvg(build, gameData, { fontCss, verdict });
   const img = new Image();
   // A data: URL (not blob:) so the CSP img-src 'self' data: still applies.
   const bytes = new TextEncoder().encode(svg);
@@ -29,8 +30,8 @@ export async function buildPng(build: Build, scale = 2): Promise<Blob> {
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('Could not make the image'))), 'image/png'));
 }
 
-export async function saveBuildImage(build: Build, filename = 'tipr-build.png') {
-  const blob = await buildPng(build);
+export async function saveBuildImage(build: Build, verdict?: Verdict, filename = 'tipr-build.png') {
+  const blob = await buildPng(build, verdict);
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
@@ -40,7 +41,7 @@ export async function saveBuildImage(build: Build, filename = 'tipr-build.png') 
 }
 
 /** Copies the image to the clipboard so it can be pasted straight into Discord or Reddit. */
-export async function copyBuildImage(build: Build) {
-  const blob = await buildPng(build);
+export async function copyBuildImage(build: Build, verdict?: Verdict) {
+  const blob = await buildPng(build, verdict);
   await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
 }

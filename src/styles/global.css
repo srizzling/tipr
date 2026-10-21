@@ -226,3 +226,11 @@ button.pill:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .ability { min-width: 0; }
 .ability > span:last-child { min-width: 0; overflow-wrap: anywhere; }
+
+/* ---- build verdict ---- */
+.verdict { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; background: var(--paper); color: var(--ink); padding: 8px 20px 10px; border-top: 1px solid var(--paper-2); }
+.verdict-label { background: var(--red); color: #fff; font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 700; padding: 1px 8px; border-radius: 3px; text-transform: uppercase; align-self: center; }
+.verdict-title { font-size: 1.35rem; font-weight: 700; letter-spacing: 0.01em; }
+.verdict-line { color: #3d5054; font-style: italic; flex: 1 1 260px; }
+.verdict-reroll { background: none; border: 1px solid #8a9a99; color: var(--ink); border-radius: 999px; padding: 1px 12px; font-weight: 600; }
+.verdict-reroll:hover { background: var(--ink); color: var(--text); }

@@ -1,5 +1,6 @@
 import type { GameData } from '../data/types';
 import { topSpeed, vehicleLevel, type Build } from './build';
+import { buildVerdict } from './verdict';
 
 const nameOf = (list: { id: string; name: string }[], id: string | null) => list.find((x) => x.id === id)?.name;
 
@@ -19,5 +20,6 @@ export function buildSummary(build: Build, data: GameData): { title: string; des
     abilities.length ? `Abilities: ${abilities.join(', ')}` : null,
     parts.length ? `Parts: ${parts.join(', ')}` : null,
   ].filter(Boolean);
-  return { title, description: facts.join('. ') + '.' };
+  const { title: joke } = buildVerdict(build, data);
+  return { title, description: `${joke}. ${facts.join('. ')}.` };
 }

@@ -40,6 +40,22 @@ export function PanelHeading({ title, aside, sub }: { title: string; aside?: Rea
   );
 }
 
+/** The funny one-liner for a build, with an optional reroll. */
+export function VerdictStrip({ verdict, onReroll }: { verdict: { title: string; line: string }; onReroll?: () => void }) {
+  return (
+    <div className="verdict" role="note" aria-label="Build verdict">
+      <span className="verdict-label">Verdict</span>
+      <b className="verdict-title">{verdict.title}</b>
+      <span className="verdict-line">{verdict.line}</span>
+      {onReroll && (
+        <button className="verdict-reroll" onClick={onReroll} aria-label="Another verdict">
+          ↻ Another one
+        </button>
+      )}
+    </div>
+  );
+}
+
 export const TipLogo = () => (
   <span className="logo" aria-hidden>
     TIPR

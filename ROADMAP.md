@@ -39,6 +39,8 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [x] Link-preview images: 85 cards (one per vehicle class and racer style, plus a default) rendered at build time with resvg, served statically. The Function points each shared build at the matching card, so there is no runtime image cost
 - [x] **Build screen image:** a replica of the build screen with the real stats, parts and faults. *Copy image* and *Save image* draw it in the browser (free, works today); the same renderer feeds an optional per-build link preview
 - [ ] Turn on per-build link previews: set `DYNAMIC_OG` to `"1"` in `wrangler.jsonc`. It needs Cloudflare's paid Workers plan, because drawing takes about 40 to 110 ms of CPU and the free plan allows 10 ms. Until then, previews use the static class and style card
+- [x] **Build verdicts:** a funny title and roast for every build, written from what is in it (stat spread, faults, class, style, abilities), with a reroll button. Shown on the planner, shared pages, the share image and link-preview text. 17 rules, about 60 original jokes
+- [ ] More jokes and community in-jokes: add rules as the community's running gags appear, and let people submit verdicts (needs a backend)
 - [ ] Donations link: set `DONATE_URL` in `src/site.ts` (and add `.github/FUNDING.yml`) once a platform is chosen
 - [ ] Saved builds and a "garage" in localStorage
 - [ ] "What should I buy next?" view showing the next Tuning Point box and its cost
