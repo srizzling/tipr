@@ -34,6 +34,32 @@ resource "github_repository_vulnerability_alerts" "repo" {
   enabled    = true
 }
 
+resource "github_repository_dependabot_security_updates" "repo" {
+  repository = github_repository.repo.name
+  enabled    = true
+}
+
+# Release tags (v1.2.3) are what production deploys from, so nobody may move or delete them.
+resource "github_repository_ruleset" "release_tags" {
+  name        = "release-tags"
+  repository  = github_repository.repo.name
+  target      = "tag"
+  enforcement = "active"
+
+  conditions {
+    ref_name {
+      include = ["refs/tags/v*"]
+      exclude = []
+    }
+  }
+
+  rules {
+    deletion         = true
+    non_fast_forward = true
+    update           = true
+  }
+}
+
 resource "github_repository_ruleset" "main" {
   name        = "main"
   repository  = github_repository.repo.name
@@ -67,6 +93,15 @@ resource "github_repository_ruleset" "main" {
       }
       required_check {
         context = "infra"
+      }
+      required_check {
+        context = "audit"
+      }
+      required_check {
+        context = "workflow-lint"
+      }
+      required_check {
+        context = "codeql (javascript-typescript)"
       }
     }
   }

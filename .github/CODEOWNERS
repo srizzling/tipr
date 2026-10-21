@@ -1,0 +1,5 @@
+# Everything needs an owner review for anything that touches the pipeline or infrastructure.
+*                      @srizzling
+/.github/              @srizzling
+/infra/                @srizzling
+/functions/            @srizzling
