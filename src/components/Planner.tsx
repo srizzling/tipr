@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   ABILITY_SLOTS,
+  CURRENT_BUILD_KEY,
   MAX_BOXES_PER_STAT,
   MAX_PARTS,
   MAX_TUNING_BOXES,
@@ -41,13 +42,14 @@ export default function Planner({ data }: Props) {
   // hydrate from share link, then keep the URL in sync
   useEffect(() => {
     const raw = new URLSearchParams(location.search).get('b');
-    const decoded = raw && decodeBuild(raw);
+    const decoded = decodeBuild(raw ?? localStorage.getItem(CURRENT_BUILD_KEY) ?? '');
     if (decoded) setBuild(decoded);
   }, []);
   useEffect(() => {
     const url = new URL(location.href);
     url.searchParams.set('b', encodeBuild(build));
     history.replaceState(null, '', url);
+    localStorage.setItem(CURRENT_BUILD_KEY, encodeBuild(build));
   }, [build]);
 
   const budget = mode === 'all' ? Infinity : earned;
@@ -93,6 +95,9 @@ export default function Planner({ data }: Props) {
               {mode === 'mine' ? ` / ${earned}` : ''}
             </b>
           </div>
+          <a className="pill action" href={`/compare?a=${encodeBuild(build)}`}>
+            Compare
+          </a>
           <button className="pill action" onClick={share}>
             {copied ? 'Link copied' : 'Share build'}
           </button>

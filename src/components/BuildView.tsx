@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { decodeBuild, topSpeed, totalBoxes, tuningCost, vehicleLevel, MAX_BOXES_PER_STAT, type Build } from '../lib/build';
-import { STAT_IDS, type GameData } from '../data/types';
-import { STAT_LABEL, highlight, useKeywordRe } from './highlight';
+import { decodeBuild, totalBoxes, tuningCost, vehicleLevel, type Build } from '../lib/build';
+import type { GameData } from '../data/types';
+import BuildPanels from './BuildPanels';
 
 /** Read-only page for a shared build: /b/<code>. */
 export default function BuildView({ data }: { data: GameData }) {
@@ -10,7 +10,6 @@ export default function BuildView({ data }: { data: GameData }) {
   useEffect(() => setCode(location.pathname.replace(/^\/b\//, '').replace(/\/$/, '')), []);
 
   const build: Build | null = useMemo(() => (code ? decodeBuild(code) : null), [code]);
-  const keywordRe = useKeywordRe(data.glossary);
 
   if (code === null) return null;
   const cls = build && data.vehicleClasses.find((c) => c.id === build.classId);
@@ -30,15 +29,6 @@ export default function BuildView({ data }: { data: GameData }) {
     );
   }
 
-  const style = data.racerStyles.find((s) => s.id === build.styleId);
-  const traits = style ? style.ranks.filter((r) => r.rank <= build.styleRank).flatMap((r) => r.traits) : [];
-  const ability = (id: string | null) => data.abilities.find((a) => a.id === id);
-  const find = (id: string | null) => data.parts.find((p) => p.id === id);
-  const parts = build.parts.flatMap(({ id, fault }) => {
-    const part = find(id);
-    return part ? [{ part, fault: find(fault) }] : [];
-  });
-
   return (
     <div className="planner">
       <header className="planner-head">
@@ -55,6 +45,9 @@ export default function BuildView({ data }: { data: GameData }) {
           <a className="pill action" href={`/?b=${code}`}>
             Edit this build
           </a>
+          <a className="pill action" href={`/compare?a=${code}`}>
+            Compare
+          </a>
           <button
             className="pill action"
             onClick={async () => {
@@ -68,81 +61,7 @@ export default function BuildView({ data }: { data: GameData }) {
         </div>
       </header>
 
-      <main className="cols">
-        <section className="panel">
-          <h2>Vehicle stats</h2>
-          <div className="field static">{cls.name}</div>
-          <div className="speed">
-            <span>Speed</span>
-            <b>{topSpeed(cls.baseSpeed, build.tuning, cls.id === 'podracer')}</b>
-          </div>
-          {STAT_IDS.map((stat) => (
-            <div className="stat" key={stat}>
-              <span className="stat-name">{stat === 'maneuvering' ? cls.maneuveringName : STAT_LABEL[stat]}</span>
-              <div className="boxes">
-                {Array.from({ length: MAX_BOXES_PER_STAT }, (_, i) => (
-                  <span key={i} className={i < build.tuning[stat] ? 'box on' : 'box'} />
-                ))}
-                {[0, 1, 2].map((i) => (
-                  <span key={i} className="box big" />
-                ))}
-              </div>
-            </div>
-          ))}
-        </section>
-
-        <div className="stack">
-          <section className="panel">
-            <h2>Racer style</h2>
-            <div className="field static">
-              {style ? `${style.name} · Rank ${build.styleRank}` : 'No style'}
-            </div>
-            <ul className="traits" style={{ marginTop: 10 }}>
-              {traits.map((t) => (
-                <li key={t.name}>
-                  <h3>{t.name}</h3>
-                  <p>{highlight(t.text, keywordRe)}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
-          <section className="panel">
-            <h2>Abilities</h2>
-            <div className="abilities">
-              {build.abilities.map((id, i) => (
-                <div key={i} className={`ability ${ability(id) ? 'filled' : ''}`}>
-                  <span className="orb" />
-                  <span>
-                    <b>{ability(id)?.name ?? ''}</b>
-                    <small>Ability {i + 1}</small>
-                  </span>
-                </div>
-              ))}
-              <div className={`ability wide ${ability(build.crashAbility) ? 'filled' : ''}`}>
-                <span className="orb" />
-                <span>
-                  <b>{ability(build.crashAbility)?.name ?? ''}</b>
-                  <small>Crash Ability</small>
-                </span>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <section className="panel">
-          <h2>Installed</h2>
-          <ul className="parts">
-            {parts.map(({ part, fault }) => (
-              <li key={part.id} className={`part ${part.rarity}`}>
-                <h3>{part.name}</h3>
-                <p>{highlight(part.text, keywordRe)}</p>
-                {fault && <p className="downside">{highlight(fault.text, keywordRe)}</p>}
-              </li>
-            ))}
-            {parts.length === 0 && <li className="hint">No parts installed.</li>}
-          </ul>
-        </section>
-      </main>
+      <BuildPanels build={build} data={data} />
     </div>
   );
 }

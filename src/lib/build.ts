@@ -8,6 +8,8 @@ export const MAX_PARTS = 4;
 export const ABILITY_SLOTS = 4;
 export const KM_H_PER_BOX = 4;
 export const PODRACER_KM_H_PER_BOX = 7;
+/** localStorage key holding the planner's current build code, so Compare can offer "my build". */
+export const CURRENT_BUILD_KEY = 'tipr:current';
 
 /** An installed part, optionally carrying a Fault (the red drawback line under it in the game). */
 export interface InstalledPart {

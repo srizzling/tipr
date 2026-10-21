@@ -39,7 +39,7 @@ Done when: you have seen it and the notes are written down here or in issues.
 
 ## Milestone 1: finish the v1 features
 
-### 1a. Compare view
+### 1a. Compare view (done)
 - New page `/compare?a=<code>&b=<code>`. Either side can be a build link, "my current build" or empty.
 - Side-by-side columns that reuse the read-only build panels.
 - A diff strip: speed, level, Tuning Points spent, boxes per stat, and parts, abilities and traits that appear on one side only.
@@ -48,9 +48,9 @@ Done when: you have seen it and the notes are written down here or in issues.
 
 Done when: two links open side by side on a phone and a desktop, and every difference is highlighted.
 
-### 1b. Scraper hardening
-- Add a `--refresh` flag that ignores the cache.
-- Write `src/data/data-meta.json` with source URL, page hashes and the scrape date. The site shows a data version from it.
+### 1b. Scraper hardening (done, except the weekly Action)
+- `--refresh` flag that ignores the cache (`pnpm data:refresh`), and `--check` for a diff-only run (`pnpm data:check`).
+- `src/data/data-meta.json` with source URL, page hashes and the scrape date. The site shows a data version from it.
 - Fail the build if counts drop (fewer than 300 parts, 20 styles, 45 abilities) or required fields are empty.
 - A weekly GitHub Action runs the scrape and opens a PR with the JSON diff. It needs a Firecrawl key as an Actions secret.
 

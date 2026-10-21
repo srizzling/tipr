@@ -18,7 +18,7 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 
 ## v1 remaining (before public launch)
 
-- [ ] **Compare view:** two builds side by side (from two links), with stat, ability and part diffs. This is the only "ranking" in v1.
+- [x] **Compare view:** two builds side by side (from two links), with stat, ability and part diffs. This is the only "ranking" in v1.
 - [ ] **Save-file import (PC):** client-side GVAS `.sav` parser that fills in events completed, unlocked styles and ranks, and Tuning Points earned. Needs sample saves (early and late) to find the property names. The file never leaves the browser.
 - [ ] **Remote OpenTofu state** (R2 bucket) and first `tofu apply`
 - [ ] Create the GitHub repo and enable Renovate, secret scanning and push protection

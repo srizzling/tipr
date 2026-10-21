@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import Compare from '../components/Compare';
+import { gameData } from '../data';
+---
+
+<Base title="Compare builds · This Is Pod Racing" description="Compare two Star Wars: Galactic Racer builds side by side.">
+  <Compare client:only="react" data={gameData} />
+</Base>
