@@ -26,7 +26,11 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [x] GitHub repo created (public) with secret scanning, push protection, Dependabot security updates, squash-merge only, and branch and tag rulesets, all through OpenTofu
 - [ ] Install the Renovate GitHub App on the repo (GitHub only allows this in the browser: https://github.com/apps/renovate)
 - [ ] Replace the admin PR bypass with a GitHub App token for Release Please, so its release PRs run the required checks
-- [ ] Cloudflare API token and account id added as Actions secrets, first deploy to `*.pages.dev`
+- [x] **First deploy: https://thisispodracing.pages.dev** (done by hand with `wrangler pages deploy`, using the wrangler login on the dev machine). `tipr.pages.dev` belongs to someone else, hence the project name.
+- [ ] **Make deploys automatic and infrastructure-as-code.** Needs a Cloudflare API token (Pages edit) from the Cloudflare dashboard, then:
+  1. `gh secret set CLOUDFLARE_API_TOKEN --env production` and `gh secret set CLOUDFLARE_ACCOUNT_ID --env production` (the account id is `db47ac5c1f1b7a9a4f1196afbb271aff`)
+  2. bring the hand-made project under OpenTofu: `tofu -chdir=infra import -var cloudflare_account_id=db47ac5c1f1b7a9a4f1196afbb271aff cloudflare_pages_project.site db47ac5c1f1b7a9a4f1196afbb271aff/thisispodracing`
+  3. merge the Release Please PR (v0.1.0); its deploy job then publishes from CI
 - [ ] Read the Games Lantern terms of use, then add data credit to the footer
 - [ ] Verify unconfirmed data against the game (see "Data to verify")
 - [x] Restyled to follow the game's build screen: Rajdhani (open-licence) font, panel headings with rules, translucent rows, italic text with gold keywords, icon-led stat rows, Max Energy dots, `INSTALLED PARTS n/4`, red fault boxes, vehicle arrows, S/C/R key hints
