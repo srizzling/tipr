@@ -36,3 +36,9 @@ variable "enable_rulesets" {
   description = "Apply the branch and tag rulesets. They need the CI checks to have run once, so the very first push and merge was done with this set to false."
   default     = true
 }
+
+variable "pages_project_name" {
+  type        = string
+  description = "Cloudflare Pages project name. It becomes <name>.pages.dev, which is global, so it must be unique."
+  default     = "thisispodracing"
+}

@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 
 // Built from the configured site URL so it stays right when the domain changes.
 export const GET: APIRoute = ({ site }) => {
-  const base = site ?? new URL('https://tipr.pages.dev');
+  const base = site ?? new URL('https://thisispodracing.pages.dev');
   return new Response(
     [
       'User-agent: *',

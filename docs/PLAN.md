@@ -24,7 +24,7 @@ How we get from the prototype to a launched site. `ROADMAP.md` lists features by
 | Art | Own icons and fonts. No game art or Star Wars logos |
 | Ads | Reserved slot only until there is content and traffic |
 | Data | Scrape once from Games Lantern, commit the JSON, credit them, check their terms before launch |
-| Infrastructure | OpenTofu for Cloudflare Pages and the GitHub repo. State in R2. `*.pages.dev` until a domain is chosen |
+| Infrastructure | OpenTofu for Cloudflare Pages and the GitHub repo. State in R2. `thisispodracing.pages.dev` until a domain is chosen |
 | Releases | Release Please with conventional commits. PR titles are checked. Deploy runs only when a release is cut |
 
 ## Milestone 0: first commit and a look
@@ -85,7 +85,7 @@ This part needs you, because it creates public things and uses your accounts.
 6. `tofu apply` for the Cloudflare Pages project.
 7. Merge a `feat:` PR. Release Please opens a release PR. Merging it creates `v0.1.0` and deploys.
 
-Done when: the site is live on `*.pages.dev`, `/b/<code>` links open, and a new Renovate PR appears.
+Done when: the site is live on `thisispodracing.pages.dev`, `/b/<code>` links open, and a new Renovate PR appears.
 
 Risks: the `~DEFAULT_BRANCH` ruleset can block the first push. If so, push before applying the ruleset. The Pages rewrite for `/b/*` has only been tested in the dev server, so test it on the real host.
 
