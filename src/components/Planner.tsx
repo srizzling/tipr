@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-  ABILITY_SLOTS,
   CURRENT_BUILD_KEY,
   MAX_BOXES_PER_STAT,
   MAX_PARTS,
@@ -10,6 +9,8 @@ import {
   encodeBuild,
   fitToBudget,
   newBuild,
+  placeAbility,
+  setAbilitySlot,
   setTuning,
   topSpeed,
   totalBoxes,
@@ -20,6 +21,7 @@ import {
 import { STAT_IDS, type Ability, type GameData, type Part } from '../data/types';
 import { STAT_LABEL, highlight, useKeywordRe } from './highlight';
 import { FAULT_GROUPS, faultGroup } from '../lib/faults';
+import AbilityBoard from './AbilityBoard';
 
 type Mode = 'all' | 'mine';
 type PickerState =
@@ -56,7 +58,6 @@ export default function Planner({ data }: Props) {
   const budget = mode === 'all' ? Infinity : earned;
   const cls = data.vehicleClasses.find((c) => c.id === build.classId) ?? data.vehicleClasses[0];
   const style = data.racerStyles.find((s) => s.id === build.styleId);
-  const abilityById = useMemo(() => new Map(data.abilities.map((a) => [a.id, a])), [data.abilities]);
   const partById = useMemo(() => new Map(data.parts.map((p) => [p.id, p])), [data.parts]);
 
   const keywordRe = useKeywordRe(data.glossary);
@@ -227,22 +228,12 @@ export default function Planner({ data }: Props) {
 
           <section className="panel">
             <h2>Abilities</h2>
-            <div className="abilities">
-              {Array.from({ length: ABILITY_SLOTS }, (_, i) => (
-                <AbilitySlot
-                  key={i}
-                  label={`Ability ${i + 1}`}
-                  ability={abilityById.get(build.abilities[i] ?? '')}
-                  onOpen={() => setPicker({ kind: 'ability', slot: i })}
-                />
-              ))}
-              <AbilitySlot
-                label="Crash Ability"
-                ability={abilityById.get(build.crashAbility ?? '')}
-                onOpen={() => setPicker({ kind: 'ability', slot: 'crash' })}
-                wide
-              />
-            </div>
+            <AbilityBoard
+              build={build}
+              abilities={data.abilities}
+              onChange={setBuild}
+              onOpenPicker={(slot) => setPicker({ kind: 'ability', slot })}
+            />
           </section>
         </div>
 
@@ -310,12 +301,11 @@ export default function Planner({ data }: Props) {
           })}
           onClose={() => setPicker(null)}
           onPick={(a) => {
-            if (picker.slot === 'crash') update({ crashAbility: a?.id ?? null });
-            else {
-              const abilities = [...build.abilities];
-              abilities[picker.slot as number] = a?.id ?? null;
-              update({ abilities });
-            }
+            setBuild((b) =>
+              a
+                ? placeAbility(b, picker.slot, a.id, (id) => data.abilities.find((x) => x.id === id)?.crash ?? false)
+                : setAbilitySlot(b, picker.slot, null),
+            );
             setPicker(null);
           }}
           clearable
@@ -360,28 +350,6 @@ export default function Planner({ data }: Props) {
         />
       )}
     </div>
-  );
-}
-
-function AbilitySlot({
-  label,
-  ability,
-  onOpen,
-  wide,
-}: {
-  label: string;
-  ability?: Ability;
-  onOpen: () => void;
-  wide?: boolean;
-}) {
-  return (
-    <button className={`ability ${wide ? 'wide' : ''} ${ability ? 'filled' : ''}`} onClick={onOpen}>
-      <span className="orb" />
-      <span>
-        <b>{ability?.name ?? ''}</b>
-        <small>{label}</small>
-      </span>
-    </button>
   );
 }
 

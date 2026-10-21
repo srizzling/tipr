@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
   MAX_TUNING_BOXES,
+  addAbility,
+  placeAbility,
   decodeBuild,
   emptyTuning,
   fitToBudget,
@@ -69,5 +71,43 @@ describe('share link', () => {
 
   it('rejects garbage', () => {
     expect(decodeBuild('not a build')).toBeNull();
+  });
+});
+
+describe('ability placement', () => {
+  const crash = (id: string) => id.startsWith('ion-');
+  const base = () => {
+    const b = newBuild('landspeeder');
+    b.abilities = ['vent', 'surge', null, null];
+    return b;
+  };
+
+  it('puts a new ability in an empty slot', () => {
+    expect(placeAbility(base(), 2, 'shield', crash).abilities).toEqual(['vent', 'surge', 'shield', null]);
+  });
+
+  it('replaces an occupied slot', () => {
+    expect(placeAbility(base(), 0, 'shield', crash).abilities).toEqual(['shield', 'surge', null, null]);
+  });
+
+  it('swaps when dragging between occupied slots', () => {
+    expect(placeAbility(base(), 1, 'vent', crash).abilities).toEqual(['surge', 'vent', null, null]);
+  });
+
+  it('moves into an empty slot and frees the old one', () => {
+    expect(placeAbility(base(), 3, 'vent', crash).abilities).toEqual([null, 'surge', null, 'vent']);
+  });
+
+  it('keeps crash abilities out of normal slots and the reverse', () => {
+    expect(placeAbility(base(), 2, 'ion-blast', crash)).toEqual(base());
+    expect(placeAbility(base(), 'crash', 'vent', crash)).toEqual(base());
+    expect(placeAbility(base(), 'crash', 'ion-blast', crash).crashAbility).toBe('ion-blast');
+  });
+
+  it('adds to the first free slot of the right kind', () => {
+    expect(addAbility(base(), 'shield', crash).abilities).toEqual(['vent', 'surge', 'shield', null]);
+    const full = { ...base(), abilities: ['a', 'b', 'c', 'd'] };
+    expect(addAbility(full, 'shield', crash)).toEqual(full);
+    expect(addAbility(base(), 'ion-blast', crash).crashAbility).toBe('ion-blast');
   });
 });

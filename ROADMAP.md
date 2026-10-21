@@ -11,6 +11,7 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [x] Game data schema (`src/data/types.ts`)
 - [ ] Game data seeded from Games Lantern (4 classes, 20 styles, 45 abilities, ~318 parts, glossary)
 - [x] Faults are optional per part (they happen during a run), and the picker groups all 59 by the system they affect
+- [x] Drag-and-drop abilities: library to slot, slot to slot (swap), slot to library (clear); touch uses long-press
 - [ ] Planner: class, racer style and rank, four ability slots plus crash slot, up to four parts, tuning boxes
 - [ ] "All unlocked" and "My unlocks" modes (manual sliders for events completed and Tuning Points earned)
 - [x] Share build by link: `/b/<code>` opens a read-only build page with an "Edit this build" button

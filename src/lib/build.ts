@@ -83,6 +83,47 @@ export function topSpeed(baseSpeed: number, tuning: Record<StatId, number>, podr
   return baseSpeed + totalBoxes(tuning) * (podracer ? PODRACER_KM_H_PER_BOX : KM_H_PER_BOX);
 }
 
+export type AbilitySlot = number | 'crash';
+
+const abilityAt = (b: Build, slot: AbilitySlot) => (slot === 'crash' ? b.crashAbility : (b.abilities[slot] ?? null));
+
+export function findAbilitySlot(b: Build, id: string): AbilitySlot | null {
+  if (b.crashAbility === id) return 'crash';
+  const i = b.abilities.indexOf(id);
+  return i === -1 ? null : i;
+}
+
+export function setAbilitySlot(b: Build, slot: AbilitySlot, id: string | null): Build {
+  if (slot === 'crash') return { ...b, crashAbility: id };
+  const abilities = [...b.abilities];
+  abilities[slot] = id;
+  return { ...b, abilities };
+}
+
+/**
+ * Puts ability `id` into `to`. The ability moves if it is already placed somewhere (or comes from `from`),
+ * and whatever was in `to` takes its old place, so dragging between slots swaps them. Crash abilities only go
+ * in the crash slot and everything else only in the normal slots; invalid drops return the build unchanged.
+ */
+export function placeAbility(b: Build, to: AbilitySlot, id: string, isCrash: (id: string) => boolean): Build {
+  if (isCrash(id) !== (to === 'crash')) return b;
+  const from = findAbilitySlot(b, id);
+  if (from === to) return b;
+  const displaced = abilityAt(b, to);
+  let next = b;
+  if (from !== null) next = setAbilitySlot(next, from, displaced);
+  return setAbilitySlot(next, to, id);
+}
+
+/** Puts `id` in the first empty slot of the right kind, or returns the build unchanged if none is free. */
+export function addAbility(b: Build, id: string, isCrash: (id: string) => boolean): Build {
+  if (findAbilitySlot(b, id) !== null) return b;
+  const slot: AbilitySlot | undefined = isCrash(id)
+    ? b.crashAbility === null ? 'crash' : undefined
+    : b.abilities.findIndex((a) => a === null) === -1 ? undefined : b.abilities.findIndex((a) => a === null);
+  return slot === undefined ? b : setAbilitySlot(b, slot, id);
+}
+
 /** Share-link encoding: compact JSON in base64url. */
 export function encodeBuild(b: Build): string {
   const compact = [
