@@ -29,7 +29,7 @@ const COLORS = {
   gold: '#e8b04a',
 };
 
-const escapeXml = (s: string) =>
+export const escapeXml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 
 /** resvg does not wrap text, so keep every line short enough to fit its panel. */

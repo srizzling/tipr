@@ -7,6 +7,7 @@ import { BuildNotFound, SharedBuild } from './SharedBuild';
 export default function BuildView() {
   const [code, setCode] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [imageLabel, setImageLabel] = useState('Save image');
   useEffect(() => setCode(location.pathname.replace(/^\/b\//, '').replace(/\/$/, '')), []);
 
   const build = useMemo(() => (code ? decodeBuild(code) : null), [code]);
@@ -19,6 +20,18 @@ export default function BuildView() {
       code={code}
       data={gameData}
       copied={copied}
+      imageLabel={imageLabel}
+      onImage={async () => {
+        setImageLabel('Drawing…');
+        try {
+          const { saveBuildImage } = await import('../lib/share-image');
+          await saveBuildImage(build);
+          setImageLabel('Saved');
+        } catch {
+          setImageLabel('Could not make image');
+        }
+        setTimeout(() => setImageLabel('Save image'), 2000);
+      }}
       onCopy={async () => {
         await navigator.clipboard.writeText(location.href);
         setCopied(true);

@@ -10,12 +10,16 @@ export function SharedBuild({
   data,
   copied = false,
   onCopy,
+  imageLabel = 'Save image',
+  onImage,
 }: {
   build: Build;
   code: string;
   data: GameData;
   copied?: boolean;
   onCopy?: () => void;
+  imageLabel?: string;
+  onImage?: () => void;
 }) {
   const cls = data.vehicleClasses.find((c) => c.id === build.classId);
   if (!cls) return <BuildNotFound />;
@@ -39,6 +43,9 @@ export function SharedBuild({
           <a className="pill action" href={`/compare?a=${code}`}>
             Compare
           </a>
+          <button className="pill action" onClick={onImage}>
+            {imageLabel}
+          </button>
           <button className="pill action" onClick={onCopy}>
             {copied ? 'Link copied' : 'Copy link'}
           </button>

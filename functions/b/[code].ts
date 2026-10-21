@@ -9,6 +9,8 @@ import { SharedBuild } from '../../src/components/SharedBuild';
 
 interface Env {
   ASSETS: Fetcher;
+  /** "1" turns on per-build preview images (paid Workers plan only, see functions/og/b). */
+  DYNAMIC_OG?: string;
 }
 
 const escapeHtml = (s: string) =>
@@ -35,9 +37,13 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, params, env })
   const { title, description } = buildSummary(build, gameData);
   const url = new URL(`/b/${code}`, request.url).toString();
   const markup = renderToStaticMarkup(createElement(SharedBuild, { build, code, data: gameData }));
-  // Cards are pre-rendered per class and style at build time (see src/pages/og), so no image work happens here.
+  // By default the preview is a card pre-rendered per class and style (src/pages/og), so no image work happens here.
+  // With DYNAMIC_OG=1 it is a replica of this exact build screen, rendered once per build and cached.
   const hasStyle = build.styleId !== null && gameData.racerStyles.some((x) => x.id === build.styleId);
-  const image = new URL(`/og/${cardId(build.classId, hasStyle ? build.styleId : null)}.png`, request.url).toString();
+  const image = new URL(
+    env.DYNAMIC_OG === '1' ? `/og/b/${code}` : `/og/${cardId(build.classId, hasStyle ? build.styleId : null)}.png`,
+    request.url,
+  ).toString();
   const t = escapeHtml(title);
   const d = escapeHtml(description);
 

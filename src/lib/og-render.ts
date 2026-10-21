@@ -20,8 +20,12 @@ function load() {
 }
 
 export async function renderCardPng(card: CardContent): Promise<Uint8Array> {
+  return renderSvgPng(cardSvg(card));
+}
+
+export async function renderSvgPng(svg: string): Promise<Uint8Array> {
   const fonts = await load();
-  const resvg = new Resvg(cardSvg(card), {
+  const resvg = new Resvg(svg, {
     fitTo: { mode: 'width', value: CARD_WIDTH },
     font: { fontBuffers: [fonts.medium, fonts.bold], defaultFontFamily: 'Rajdhani', loadSystemFonts: false },
   });

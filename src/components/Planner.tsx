@@ -38,6 +38,7 @@ export default function Planner() {
   const [earned, setEarned] = useState(163);
   const [picker, setPicker] = useState<PickerState>(null);
   const [copied, setCopied] = useState(false);
+  const [imageState, setImageState] = useState<'idle' | 'working' | 'copied' | 'failed'>('idle');
 
   // hydrate from share link, then keep the URL in sync
   useEffect(() => {
@@ -70,6 +71,19 @@ export default function Planner() {
     setTimeout(() => setCopied(false), 1500);
   };
 
+  /** Draws the build screen to a PNG in the browser: copy it to the clipboard, or save it if copying is not allowed. */
+  const shareImage = async (mode: 'copy' | 'save') => {
+    setImageState('working');
+    try {
+      const { copyBuildImage, saveBuildImage } = await import('../lib/share-image');
+      if (mode === 'copy') await copyBuildImage(build);
+      else await saveBuildImage(build);
+      setImageState('copied');
+    } catch {
+      setImageState('failed');
+    }
+    setTimeout(() => setImageState('idle'), 2000);
+  };
   const cycleClass = (dir: 1 | -1) => {
     const i = data.vehicleClasses.findIndex((c) => c.id === build.classId);
     const next = data.vehicleClasses[(i + dir + data.vehicleClasses.length) % data.vehicleClasses.length];
@@ -87,6 +101,8 @@ export default function Planner() {
       const k = e.key.toLowerCase();
       if (k === 's') void share();
       else if (k === 'c') goCompare();
+      else if (k === 'i') void shareImage('copy');
+      else if (k === 'd') void shareImage('save');
       else if (k === 'r') update({ tuning: emptyTuning() });
       else return;
       e.preventDefault();
@@ -274,6 +290,12 @@ export default function Planner() {
       <div className="keys">
         <Key k="S" onClick={share}>
           {copied ? 'Link copied' : 'Share link'}
+        </Key>
+        <Key k="I" onClick={() => shareImage('copy')}>
+          {imageState === 'working' ? 'Drawing…' : imageState === 'copied' ? 'Image ready' : imageState === 'failed' ? 'Could not make image' : 'Copy image'}
+        </Key>
+        <Key k="D" onClick={() => shareImage('save')}>
+          Save image
         </Key>
         <Key k="C" onClick={goCompare}>
           Compare

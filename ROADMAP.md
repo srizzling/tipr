@@ -37,7 +37,8 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [ ] **Static reference pages:** one page per racer style, ability, part and status term, generated from the data. These are the search traffic.
 - [x] `/b/<code>` is rendered on the server by a Cloudflare Pages Function (`functions/b/[code].ts`): real page title, Open Graph text previews, build content in the HTML, 404 for invalid codes, `noindex`
 - [x] Link-preview images: 85 cards (one per vehicle class and racer style, plus a default) rendered at build time with resvg, served statically. The Function points each shared build at the matching card, so there is no runtime image cost
-- [ ] Per-build preview image showing speed, abilities and parts (needs a paid Workers plan for the CPU time, or an external renderer)
+- [x] **Build screen image:** a replica of the build screen with the real stats, parts and faults. *Copy image* and *Save image* draw it in the browser (free, works today); the same renderer feeds an optional per-build link preview
+- [ ] Turn on per-build link previews: set `DYNAMIC_OG` to `"1"` in `wrangler.jsonc`. It needs Cloudflare's paid Workers plan, because drawing takes about 40 to 110 ms of CPU and the free plan allows 10 ms. Until then, previews use the static class and style card
 - [ ] Donations link: set `DONATE_URL` in `src/site.ts` (and add `.github/FUNDING.yml`) once a platform is chosen
 - [ ] Saved builds and a "garage" in localStorage
 - [ ] "What should I buy next?" view showing the next Tuning Point box and its cost

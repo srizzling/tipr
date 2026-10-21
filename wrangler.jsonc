@@ -2,5 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "tipr",
   "pages_build_output_dir": "./dist",
-  "compatibility_date": "2026-10-01"
+  "compatibility_date": "2026-10-01",
+  "vars": {
+    // "1" renders a per-build preview image on demand. Needs Cloudflare's paid Workers plan (CPU limit).
+    "DYNAMIC_OG": "0"
+  }
 }

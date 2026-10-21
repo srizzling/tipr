@@ -2,55 +2,9 @@ import type { ReactNode } from 'react';
 import { MAX_BOXES_PER_STAT, MAX_ENERGY_SCALE, maxEnergy, topSpeed, type InstalledPart } from '../lib/build';
 import { STAT_IDS, type Part, type StatId, type VehicleClass } from '../data/types';
 import { STAT_LABEL, highlight } from './highlight';
+import { ICON_PATHS, type IconName } from '../lib/icons';
 
-/* Original line icons (not the game's art). 24x24 viewBox, drawn with strokes so they inherit currentColor. */
-const ICONS = {
-  speed: (
-    <>
-      <path d="M4 17a8 8 0 1 1 16 0" />
-      <path d="M12 17l4-5" />
-    </>
-  ),
-  afterburner: (
-    <>
-      <path d="M6 9l6-5 6 5" />
-      <path d="M6 14l6-5 6 5" />
-      <path d="M6 19l6-5 6 5" />
-    </>
-  ),
-  ramjet: <path d="M12 3c3 4 5 6 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z" />,
-  cornering: (
-    <>
-      <path d="M5 20c0-8 3-12 12-12" />
-      <path d="M13 4l4 4-4 4" />
-    </>
-  ),
-  resilience: <path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z" />,
-  battery: (
-    <>
-      <rect x="3" y="8" width="15" height="8" rx="1.5" />
-      <path d="M20.5 10.5v3" />
-      <path d="M7 11v2M10 11v2" />
-    </>
-  ),
-  maneuvering: (
-    <>
-      <path d="M4 8c4-4 9 0 14-2" />
-      <path d="M4 18c4-4 9 0 14-2" />
-      <path d="M15 3l3 3-3 3" />
-    </>
-  ),
-  ability: <path d="M12 3l2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z" />,
-  part: <path d="M12 3l7.5 4.5v9L12 21l-7.5-4.5v-9z" />,
-  fault: (
-    <>
-      <path d="M12 4l9 16H3z" />
-      <path d="M12 10v4M12 17v.5" />
-    </>
-  ),
-} as const;
-
-export type IconName = keyof typeof ICONS;
+export type { IconName };
 
 export function Icon({ name, size = 22 }: { name: IconName; size?: number }) {
   return (
@@ -66,7 +20,9 @@ export function Icon({ name, size = 22 }: { name: IconName; size?: number }) {
       strokeLinejoin="round"
       aria-hidden
     >
-      {ICONS[name]}
+      {ICON_PATHS[name].map((d) => (
+        <path key={d} d={d} />
+      ))}
     </svg>
   );
 }
