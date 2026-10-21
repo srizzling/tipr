@@ -21,7 +21,7 @@ import {
   type Build,
 } from '../lib/build';
 import type { Ability } from '../data/types';
-import { Icon } from './ui';
+import { AbilityGlyph } from './ui';
 
 interface Props {
   build: Build;
@@ -135,7 +135,7 @@ function Slot({
       onClick={onOpen}
       aria-label={ability ? `${label}: ${ability.name}. Choose another ability` : `${label}: empty. Choose an ability`}
     >
-      <span className="orb">{ability && <Icon name="ability" size={22} />}</span>
+      <span className="orb">{ability && <AbilityGlyph ability={ability} />}</span>
       <span>
         <b>{ability?.name ?? ''}</b>
         <small>{label}</small>
@@ -213,7 +213,7 @@ function LibraryChip({ ability, used, onAdd }: { ability: Ability; used: boolean
       title={`${ability.text} (${ability.cost} cr)`}
       onClick={() => onAdd(ability.id)}
     >
-      <small>T{ability.tier}</small> {ability.name}
+      <AbilityGlyph ability={ability} size={16} /> <small>T{ability.tier}</small> {ability.name}
     </button>
   );
 }

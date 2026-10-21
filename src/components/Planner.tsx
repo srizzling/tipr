@@ -1,4 +1,4 @@
-import { useDeferredValue, useEffect, useMemo, useState } from 'react';
+import { useDeferredValue, useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   CURRENT_BUILD_KEY,
   MAX_PARTS,
@@ -19,7 +19,8 @@ import {
 import type { Ability, Part } from '../data/types';
 import { gameData } from '../data';
 import { highlight, useKeywordRe } from './highlight';
-import { Key, PanelHeading, PartRow, StatRows, TipLogo, VerdictStrip } from './ui';
+import { AbilityGlyph, Key, PanelHeading, PartArt, PartRow, StatRows, TipLogo, VerdictStrip } from './ui';
+import { partArtUrl } from '../lib/game-art';
 import { buildVerdict } from '../lib/verdict';
 import { FAULT_GROUPS, faultGroup } from '../lib/faults';
 import AbilityBoard from './AbilityBoard';
@@ -323,6 +324,11 @@ export default function Planner() {
             name: a.name,
             meta: `Tier ${a.tier} · ${a.cost} cr`,
             text: a.text,
+            art: (
+              <span className="pick-glyph">
+                <AbilityGlyph ability={a} size={26} />
+              </span>
+            ),
           })}
           onClose={() => setPicker(null)}
           onPick={(a) => {
@@ -346,6 +352,7 @@ export default function Planner() {
             name: p.name,
             meta: `${p.rarity}${p.price ? ` · ${p.price} cr` : ''}${p.unlockEvents ? ` · ${p.unlockEvents} events` : ''}`,
             text: p.downside ? `${p.text} — ${p.downside}` : p.text,
+            art: partArtUrl(p) ? <span className="pick-art-wrap"><PartArt part={p} /></span> : undefined,
           })}
           onClose={() => setPicker(null)}
           onPick={(p) => {
@@ -383,7 +390,7 @@ interface PickerProps<T extends { id: string }> {
   items: T[];
   selectedIds?: string[];
   disabled?: (item: T) => boolean;
-  render: (item: T) => { name: string; meta: string; text: string };
+  render: (item: T) => { name: string; meta: string; text: string; art?: ReactNode };
   onPick: (item: T | null) => void;
   onClose: () => void;
   clearable?: boolean;
@@ -471,6 +478,7 @@ function Picker<T extends { id: string }>({
             <li key={i.id}>
               {group && (idx === 0 || shown[idx - 1].g !== g) && <h3 className="group-head">{g}</h3>}
               <button disabled={disabled?.(i)} onClick={() => onPick(i)} className={selectedIds.includes(i.id) ? 'used' : ''}>
+                {r.art}
                 <b>{r.name}</b> <small>{r.meta}</small>
                 <p>{text}</p>
               </button>

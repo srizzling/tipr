@@ -14,6 +14,7 @@
     pkgs.gitleaks
     pkgs.zizmor
     pkgs.actionlint
+    pkgs.imagemagick
   ];
 
   # https://devenv.sh/languages/

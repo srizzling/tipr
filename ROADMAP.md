@@ -28,8 +28,9 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [ ] Read the Games Lantern terms of use, then add data credit to the footer
 - [ ] Verify unconfirmed data against the game (see "Data to verify")
 - [x] Restyled to follow the game's build screen: Rajdhani (open-licence) font, panel headings with rules, translucent rows, italic text with gold keywords, icon-led stat rows, Max Energy dots, `INSTALLED PARTS n/4`, red fault boxes, vehicle arrows, S/C/R key hints
-- [ ] Better original icons: today they are simple line icons, and parts and abilities share one generic glyph each. The game uses a unique icon per part and ability
-- [ ] Closer matches still missing: Aurebesh headings, the vehicle blueprint drawing, the blurred paper backdrop (all game art, so we skip them by choice)
+- [x] **The game's own art, self-hosted** (your decision): 9 ability glyphs, 7 stat glyphs and 245 part cards, converted small by `scripts/fetch-icons.mjs` into `public/game/` (about 1 MB). Shown in the planner, pickers, shared pages and the share image. One switch, `USE_GAME_ART` in `src/lib/game-art.ts`, falls back to our original line icons everywhere
+- [ ] Part icons: the game's build screen uses a small glyph per part, but only the large photo cards are on the data site, so parts show the card as a thumbnail instead
+- [ ] Closer matches still missing: Aurebesh headings, the vehicle blueprint drawing, the blurred paper backdrop (we have not sourced these)
 - [ ] Accessibility pass (keyboard on the tuning boxes and pickers) and a Playwright smoke test
 
 ## v1.x: content and growth
@@ -79,7 +80,7 @@ These are conflicts or gaps in the sources, so they are marked unverified in the
 
 ## Risks
 
-- **IP:** Lucasfilm and Disney could object to a fan site with ads. Mitigations: no game art or logos, clear disclaimer, no use of "Star Wars" in the site name.
+- **IP:** Lucasfilm and Disney could object to a fan site with ads, and the site now shows the game's artwork (ability and stat glyphs, part cards). Mitigations: a clear disclaimer and credit in the footer, `public/game/NOTICE.md`, a takedown route, all game art in one folder, and the `USE_GAME_ART` switch that removes it in one change. AdSense reviews can also reject sites that rely on copyrighted images, so be ready to flip the switch before applying.
 - **Data source:** the scraped database has no content licence. Facts and the game's own text are reusable in principle, but their terms need checking and the data can be rebuilt from saves and guides if needed.
 - **Game updates:** patches will change numbers and add parts. Keep the scrape script re-runnable and show a data version on the site.
 - **Cloud saves:** an edited or restored save can be re-synced by Steam. The importer only reads the file and never writes.

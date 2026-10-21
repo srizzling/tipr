@@ -14,6 +14,7 @@ import {
 import { ICON_PATHS, type IconName } from './icons';
 import { CARD_HEIGHT, CARD_WIDTH, escapeXml, fit } from './og-card';
 import { buildVerdict, type Verdict } from './verdict';
+import { abilityArtUrl, partArtUrl, statArtUrl, type StatArt } from './game-art';
 
 /**
  * A faithful replica of the build screen (stats, style, abilities, parts) as a 1200x630 SVG, filled with a real
@@ -83,6 +84,8 @@ export interface CardOptions {
   fontCss?: string;
   /** The joke shown in the header. Defaults to the build's standard verdict (seed 0), which is what shared pages show. */
   verdict?: Verdict;
+  /** The game's art as data: URLs, keyed by the URL path (see artUrlsFor). Without it, original line icons are drawn. */
+  images?: Record<string, string>;
 }
 
 export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {}): string {
@@ -112,6 +115,11 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
   const speed = topSpeed(cls.baseSpeed, build.tuning, cls.id === 'podracer');
   const parts: string[] = [];
   const push = (s: string) => parts.push(s);
+  const img = (url: string | null) => (url ? opts.images?.[url] : undefined);
+  const statGlyph = (stat: StatArt, x: number, y: number, size: number) => {
+    const href = img(statArtUrl(stat));
+    return href ? `<image href="${href}" x="${x}" y="${y}" width="${size}" height="${size}"/>` : icon(stat === 'speed' ? 'speed' : stat, x, y, size, C.text);
+  };
 
   // ---- frame and header ----
   push(rect(0, 0, CARD_WIDTH, CARD_HEIGHT, 0, C.paper));
@@ -145,13 +153,13 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
   panel(LX, 120, 340, 474, 'Vehicle stats');
   push(t(LX + 14, 70 + 120, 20, C.bright, escapeXml(cls.name.toUpperCase()), 'font-weight="700" letter-spacing="1.5"'));
   push(rect(LX + 12, 200, 316, 38, 6, C.row));
-  push(icon('speed', LX + 22, 208, 22, C.text));
+  push(statGlyph('speed', LX + 22, 208, 22));
   push(t(LX + 54, 226, 17, C.bright, 'SPEED', 'font-weight="700" letter-spacing="2.5"'));
   push(t(LX + 322, 229, 28, C.bright, String(speed), 'font-weight="700" text-anchor="end"'));
   STAT_IDS.forEach((stat, i) => {
     const y = 244 + i * 49;
     push(rect(LX + 12, y, 316, 44, 6, C.row));
-    push(icon(stat, LX + 22, y + 11, 22, C.text));
+    push(statGlyph(stat, LX + 22, y + 11, 22));
     push(t(LX + 54, y + 16, 12, C.muted, escapeXml((stat === 'maneuvering' ? cls.maneuveringName : STAT_LABELS[stat]).toUpperCase()), 'font-weight="600" letter-spacing="1.5"'));
     for (let b = 0; b < MAX_BOXES_PER_STAT; b++) {
       push(rect(LX + 54 + b * 19, y + 24, 15, 12, 4, b < build.tuning[stat] ? C.bright : C.box, b < build.tuning[stat] ? '' : 'opacity="0.55"'));
@@ -197,7 +205,11 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
     push(rect(s.x, s.y, s.w, h, 8, C.row));
     const cy = s.y + h / 2;
     push(`<circle cx="${s.x + 22}" cy="${cy}" r="${r}" fill="${a ? '#eef3f1' : 'rgba(255,255,255,0.1)'}"/>`);
-    if (a) push(icon('ability', s.x + 22 - 7, cy - 7, 14, C.slate));
+    if (a) {
+      const href = img(abilityArtUrl(a));
+      const gs = crash ? 16 : 20;
+      push(href ? `<image href="${href}" x="${s.x + 22 - gs / 2}" y="${cy - gs / 2}" width="${gs}" height="${gs}" filter="url(#tint)"/>` : icon('ability', s.x + 22 - 7, cy - 7, 14, C.slate));
+    }
     const nx = s.x + 22 + r + 9;
     if (a && crash) {
       push(t(nx, cy + 5, 13, C.bright, `${escapeXml(fit(a.name.toUpperCase(), 40))} <tspan font-size="11" fill="${C.muted}" font-weight="500" letter-spacing="0">· Crash Ability</tspan>`, 'font-weight="700" letter-spacing="0.8"'));
@@ -219,12 +231,19 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
   list.forEach(({ part, fault }, i) => {
     const y = 166 + i * 106;
     push(rect(RX + 12, y, 320, 100, 8, C.row));
-    push(rect(RX + 22, y + 10, 40, 40, 8, 'rgba(255,255,255,0.1)'));
-    const tone = part.rarity === 'legendary' ? C.gold : part.rarity === 'epic' ? '#c4a0ec' : part.rarity === 'rare' ? '#8cc0ee' : C.bright;
-    push(icon('part', RX + 29, y + 17, 26, tone));
-    if (fault) push(icon('fault', RX + 24, y + 36, 12, C.red));
-    push(t(RX + 74, y + 22, 16, C.bright, escapeXml(fit(part.name.toUpperCase(), 26)), 'font-weight="700" letter-spacing="1"'));
-    wrap(part.text, 42, 2).forEach((line, li) => push(t(RX + 74, y + 40 + li * 15, 14, C.text, rich(line), '')));
+    const card = img(partArtUrl(part));
+    if (card) {
+      push(`<clipPath id="pc${i}"><rect x="${RX + 22}" y="${y + 10}" width="76" height="40" rx="8"/></clipPath>`);
+      push(`<image href="${card}" x="${RX + 22}" y="${y + 10}" width="76" height="40" preserveAspectRatio="xMidYMid slice" clip-path="url(#pc${i})"/>`);
+    } else {
+      push(rect(RX + 22, y + 10, 40, 40, 8, 'rgba(255,255,255,0.1)'));
+      const tone = part.rarity === 'legendary' ? C.gold : part.rarity === 'epic' ? '#c4a0ec' : part.rarity === 'rare' ? '#8cc0ee' : C.bright;
+      push(icon('part', RX + 29, y + 17, 26, tone));
+    }
+    const tx = card ? RX + 108 : RX + 74;
+    if (fault) push(card ? `<rect x="${RX + 26}" y="${y + 34}" width="16" height="16" rx="4" fill="rgba(18,12,12,0.75)"/>${icon('fault', RX + 28, y + 36, 12, C.red)}` : icon('fault', RX + 24, y + 36, 12, C.red));
+    push(t(tx, y + 22, 16, C.bright, escapeXml(fit(part.name.toUpperCase(), card ? 24 : 26)), 'font-weight="700" letter-spacing="1"'));
+    wrap(part.text, card ? 32 : 42, 2).forEach((line, li) => push(t(tx, y + 40 + li * 15, 14, C.text, rich(line), '')));
     if (fault) {
       const fl = wrap(fault.text, 42, 2);
       const bh = 10 + 14 * fl.length;
@@ -234,6 +253,8 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
   });
   if (list.length === 0) push(t(RX + 14, 190, 15, C.muted, 'No parts installed.', ''));
 
-  const defs = opts.fontCss ? `<defs><style>${opts.fontCss}</style></defs>` : '';
+  // Turns the white ability glyphs dark teal so they read on the pale orb, like the game's slots.
+  const tint = '<filter id="tint"><feColorMatrix type="matrix" values="0 0 0 0 0.2 0 0 0 0 0.29 0 0 0 0 0.32 0 0 0 1 0"/></filter>';
+  const defs = `<defs>${opts.fontCss ? `<style>${opts.fontCss}</style>` : ''}${tint}</defs>`;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${CARD_WIDTH}" height="${CARD_HEIGHT}" viewBox="0 0 ${CARD_WIDTH} ${CARD_HEIGHT}" font-family="Rajdhani" font-weight="500">${defs}${parts.join('\n')}</svg>`;
 }

@@ -1,7 +1,7 @@
 import { MAX_PARTS, type Build } from '../lib/build';
 import type { GameData } from '../data/types';
 import { highlight, useKeywordRe } from './highlight';
-import { Icon, PanelHeading, PartRow, StatRows } from './ui';
+import { AbilityGlyph, PanelHeading, PartRow, StatRows } from './ui';
 
 /** The three read-only panels (stats, style and abilities, installed parts) for one build. */
 export default function BuildPanels({ build, data, compact }: { build: Build; data: GameData; compact?: boolean }) {
@@ -41,7 +41,7 @@ export default function BuildPanels({ build, data, compact }: { build: Build; da
           <div className="abilities">
             {build.abilities.map((id, i) => (
               <div key={i} className={`ability ${ability(id) ? 'filled' : ''}`}>
-                <span className="orb">{ability(id) && <Icon name="ability" size={22} />}</span>
+                <span className="orb">{ability(id) && <AbilityGlyph ability={ability(id)!} />}</span>
                 <span>
                   <b>{ability(id)?.name ?? ''}</b>
                   <small>Ability {i + 1}</small>
@@ -49,7 +49,7 @@ export default function BuildPanels({ build, data, compact }: { build: Build; da
               </div>
             ))}
             <div className={`ability wide ${ability(build.crashAbility) ? 'filled' : ''}`}>
-              <span className="orb">{ability(build.crashAbility) && <Icon name="ability" size={22} />}</span>
+              <span className="orb">{ability(build.crashAbility) && <AbilityGlyph ability={ability(build.crashAbility)!} />}</span>
               <span>
                 <b>{ability(build.crashAbility)?.name ?? ''}</b>
                 <small>Crash Ability</small>

@@ -51,6 +51,8 @@ export interface Ability {
   text: string;
   crash: boolean;
   upgradesFromId?: string;
+  /** Icon id (file name stem) for the small ability glyph, see scripts/fetch-icons.mjs and src/lib/game-art.ts */
+  icon?: string;
 }
 
 export type Rarity = 'common' | 'rare' | 'epic' | 'legendary' | 'experimental';
@@ -71,6 +73,8 @@ export interface Part {
   family?: string;
   tier?: number;
   source: string; // URL
+  /** Card art id (file name stem), see scripts/fetch-icons.mjs and src/lib/game-art.ts */
+  icon?: string;
 }
 
 export interface GlossaryTerm {

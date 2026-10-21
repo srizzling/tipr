@@ -127,7 +127,9 @@ function parsePage(md) {
     const nl = sec.indexOf('\n');
     sections[sec.slice(0, nl).trim()] = sec.slice(nl + 1);
   }
-  return { title, header, intro, sections };
+  // The page opens with the item's card image; its file name is the icon id (the art itself is fetched by scripts/fetch-icons.mjs).
+  const icon = (lines[0].match(/\/Icons\/(?:[A-Za-z]+\/)*([A-Za-z0-9_]+)\.webp/) ?? [])[1];
+  return { title, header, intro, sections, icon };
 }
 const paras = (body) => body.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
 const links = (md, kind) => [...md.matchAll(new RegExp(`\\]\\((?:${BASE.replace(/\./g, '\\.')})?/${kind}/([a-z0-9-]+)\\)`, 'g'))].map((m) => m[1]);
@@ -165,13 +167,14 @@ function buildAbilities() {
     const from = links(fromPart, 'abilities')[0];
     // the site adds an editorial 'Pre-race check: ...' label under some abilities; it is not game text, so it is dropped
     const text = pg.intro.filter((p) => !p.startsWith('Pre-race check:')).map(clean).join('\n');
-    return { id: slug, name: pg.title, tier: Number(m[1]), cost: Number(m[3]), text, crash: !!m[2], upgradesFromId: from };
+    return { id: slug, name: pg.title, tier: Number(m[1]), cost: Number(m[3]), text, crash: !!m[2], upgradesFromId: from, icon: pg.icon?.replace(/_Lg_Icn$/, '_Icn') };
   });
   const byId = Object.fromEntries(raw.map((a) => [a.id, a]));
   const rootOf = (a) => (a.upgradesFromId ? rootOf(byId[a.upgradesFromId]) : a.id);
   return raw.map((a) => {
     const o = { id: a.id, name: a.name, family: rootOf(a), tier: a.tier, cost: a.cost, text: a.text, crash: a.crash };
     if (a.upgradesFromId) o.upgradesFromId = a.upgradesFromId;
+    if (a.icon) o.icon = a.icon;
     return o;
   }).sort((a, b) => a.family.localeCompare(b.family) || a.tier - b.tier || a.id.localeCompare(b.id));
 }
@@ -250,6 +253,7 @@ function buildParts() {
     o.fault = fault; o.unlockEvents = unlockEvents;
     if (family) o.family = family;
     if (tier) o.tier = tier;
+    if (pg.icon) o.icon = pg.icon;
     o.source = url;
     return o;
   }).sort((a, b) => a.id.localeCompare(b.id));
@@ -317,11 +321,13 @@ function validate(d, prev) {
   for (const a of d.abilities) {
     if (blank(a.name) || blank(a.text)) problems.push(`ability ${a.id}: empty name/text`);
     if (!num(a.cost) || a.cost <= 0) problems.push(`ability ${a.id}: bad cost ${a.cost}`);
+    if (!a.icon) problems.push(`ability ${a.id}: no icon`);
     if (![1, 2, 3].includes(a.tier)) problems.push(`ability ${a.id}: bad tier ${a.tier}`);
     if (a.upgradesFromId && !ab.has(a.upgradesFromId)) problems.push(`ability ${a.id}: unknown upgradesFromId ${a.upgradesFromId}`);
   }
   for (const p of d.parts) {
     if (blank(p.name) || blank(p.text)) problems.push(`part ${p.id}: empty name/text`);
+    if (!p.icon) problems.push(`part ${p.id}: no icon`);
     if (p.price === null) { if (!p.fault && !NULL_PRICE_IDS.has(p.id)) problems.push(`part ${p.id}: null price is not in the allow-list`); }
     else if (!num(p.price) || p.price <= 0) problems.push(`part ${p.id}: bad price ${p.price}`);
     if (p.unlockEvents === null) { if (!NULL_UNLOCK_IDS.has(p.id)) problems.push(`part ${p.id}: null unlockEvents is not in the allow-list`); }

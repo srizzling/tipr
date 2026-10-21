@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { MAX_BOXES_PER_STAT, MAX_ENERGY_SCALE, maxEnergy, topSpeed, type InstalledPart } from '../lib/build';
-import { STAT_IDS, type Part, type StatId, type VehicleClass } from '../data/types';
+import { STAT_IDS, type Ability, type Part, type StatId, type VehicleClass } from '../data/types';
+import { abilityArtUrl, partArtUrl, statArtUrl, type StatArt } from '../lib/game-art';
 import { STAT_LABEL, highlight } from './highlight';
 import { ICON_PATHS, type IconName } from '../lib/icons';
 
@@ -25,6 +26,27 @@ export function Icon({ name, size = 22 }: { name: IconName; size?: number }) {
       ))}
     </svg>
   );
+}
+
+/** The game's stat glyph when available, otherwise our own line icon. */
+export function StatIcon({ stat, size = 22 }: { stat: StatArt; size?: number }) {
+  const src = statArtUrl(stat);
+  if (src) return <img className="glyph" src={src} width={size} height={size} alt="" loading="lazy" decoding="async" />;
+  return <Icon name={stat === 'speed' ? 'speed' : stat} size={size} />;
+}
+
+/** An ability's glyph (the game's art, or our generic spark). */
+export function AbilityGlyph({ ability, size = 22 }: { ability: Pick<Ability, 'icon'>; size?: number }) {
+  const src = abilityArtUrl(ability);
+  if (src) return <img className="glyph dark" src={src} width={size} height={size} alt="" loading="lazy" decoding="async" />;
+  return <Icon name="ability" size={size} />;
+}
+
+/** A part's card art as a small thumbnail, or our generic hexagon. */
+export function PartArt({ part, w = 76, h = 40 }: { part: Pick<Part, 'icon'>; w?: number; h?: number }) {
+  const src = partArtUrl(part);
+  if (src) return <img className="part-art" src={src} width={w} height={h} alt="" loading="lazy" decoding="async" />;
+  return <Icon name="part" size={26} />;
 }
 
 /** Panel title with a rule under it, and an optional bold subtitle, as on the game's build screen. */
@@ -87,13 +109,13 @@ export function StatRows({
   return (
     <>
       <div className="speed">
-        <Icon name="speed" />
+        <StatIcon stat="speed" />
         <span>Speed</span>
         <b>{topSpeed(cls.baseSpeed, tuning, cls.id === 'podracer')}</b>
       </div>
       {STAT_IDS.map((stat) => (
         <div className="stat" key={stat}>
-          <Icon name={stat} />
+          <StatIcon stat={stat} />
           <div className="stat-main">
             <span className="stat-name">{stat === 'maneuvering' ? cls.maneuveringName : STAT_LABEL[stat]}</span>
             <div className="boxes" role={onSet ? 'group' : undefined} aria-label={onSet ? `${stat} boxes` : undefined}>
@@ -146,8 +168,8 @@ export function PartRow({
 }) {
   return (
     <li className={`part ${part.rarity}`}>
-      <div className="part-icon">
-        <Icon name="part" size={26} />
+      <div className={`part-icon ${partArtUrl(part) ? 'has-art' : ''}`}>
+        <PartArt part={part} />
         {fault && (
           <span className="part-warn">
             <Icon name="fault" size={14} />

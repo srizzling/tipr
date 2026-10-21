@@ -6,7 +6,8 @@
     "tier": 1,
     "cost": 1000,
     "text": "Vehicle flies automatically for 10s. Ramjet heating reduced while active.",
-    "crash": false
+    "crash": false,
+    "icon": "T_UI_Ability_Autopilot_Icn"
   },
   {
     "id": "overcharged-autopilot",
@@ -16,7 +17,8 @@
     "cost": 2000,
     "text": "Vehicle flies automatically for 20s. Gain Overcharged while active.",
     "crash": false,
-    "upgradesFromId": "autopilot"
+    "upgradesFromId": "autopilot",
+    "icon": "T_UI_Ability_Autopilot_Icn"
   },
   {
     "id": "surging-autopilot",
@@ -26,7 +28,8 @@
     "cost": 2000,
     "text": "Vehicle flies automatically for 15s. Gain Surging while active.",
     "crash": false,
-    "upgradesFromId": "autopilot"
+    "upgradesFromId": "autopilot",
+    "icon": "T_UI_Ability_Autopilot_Icn"
   },
   {
     "id": "overcharged-autopilot-ii",
@@ -36,7 +39,8 @@
     "cost": 4000,
     "text": "Vehicle flies automatically for 20s. Gain Overcharged while active. Activating an Ability extends the duration by 5s.",
     "crash": false,
-    "upgradesFromId": "overcharged-autopilot"
+    "upgradesFromId": "overcharged-autopilot",
+    "icon": "T_UI_Ability_Autopilot_Icn"
   },
   {
     "id": "surging-autopilot-ii",
@@ -46,7 +50,8 @@
     "cost": 4000,
     "text": "Vehicle flies automatically for 15s. Gain Surging and massively increase Speed while active.",
     "crash": false,
-    "upgradesFromId": "surging-autopilot"
+    "upgradesFromId": "surging-autopilot",
+    "icon": "T_UI_Ability_Autopilot_Icn"
   },
   {
     "id": "concussion-mine",
@@ -55,7 +60,8 @@
     "tier": 1,
     "cost": 1000,
     "text": "Drop a charge that explodes on proximity and applies Concussed and System Malfunction to nearby opponents.",
-    "crash": false
+    "crash": false,
+    "icon": "T_UI_Ability_Mines_Icn"
   },
   {
     "id": "concussion-mine-ii",
@@ -65,7 +71,8 @@
     "cost": 2000,
     "text": "Drop 2 charges that explode on proximity and apply Concussed and System Malfunction to nearby opponents.",
     "crash": false,
-    "upgradesFromId": "concussion-mine"
+    "upgradesFromId": "concussion-mine",
+    "icon": "T_UI_Ability_Mines_Icn"
   },
   {
     "id": "freezing-concussion-mine-ii",
@@ -75,7 +82,8 @@
     "cost": 2000,
     "text": "Drop a charge that applies Concussed and System Malfunction to nearby opponents and emits a lingering Frozen effect. Recover 1 Energy for each affected racer.",
     "crash": false,
-    "upgradesFromId": "freezing-concussion-mine"
+    "upgradesFromId": "freezing-concussion-mine",
+    "icon": "T_UI_Ability_Mines_Icn"
   },
   {
     "id": "concussion-mine-iii",
@@ -85,7 +93,8 @@
     "cost": 4000,
     "text": "Drop 3 charges that explode on proximity and apply Concussed and System Malfunction to nearby opponents.",
     "crash": false,
-    "upgradesFromId": "concussion-mine-ii"
+    "upgradesFromId": "concussion-mine-ii",
+    "icon": "T_UI_Ability_Mines_Icn"
   },
   {
     "id": "freezing-concussion-mine",
@@ -95,7 +104,8 @@
     "cost": 4000,
     "text": "Drop a charge that applies Concussed and System Malfunction to nearby opponents and emits a lingering Frozen effect.",
     "crash": false,
-    "upgradesFromId": "concussion-mine"
+    "upgradesFromId": "concussion-mine",
+    "icon": "T_UI_Ability_Mines_Icn"
   },
   {
     "id": "ion-blast",
@@ -104,7 +114,8 @@
     "tier": 1,
     "cost": 1000,
     "text": "Crash Ability. Emit a blast that applies Disrupted to nearby opponents. Upon reset, gain considerably increased Speed for each affected opponent.",
-    "crash": true
+    "crash": true,
+    "icon": "T_UI_Ability_IonBlast_Icn"
   },
   {
     "id": "charging-blast",
@@ -114,7 +125,8 @@
     "cost": 2000,
     "text": "Crash Ability. Emit a blast that applies Disrupted to nearby opponents. Upon reset, gain Overcharged, moderately increased Speed, and recover 2 Energy for each affected opponent.",
     "crash": true,
-    "upgradesFromId": "ion-blast"
+    "upgradesFromId": "ion-blast",
+    "icon": "T_UI_Ability_IonBlast_Icn"
   },
   {
     "id": "cooling-blast",
@@ -124,7 +136,8 @@
     "cost": 2000,
     "text": "Crash Ability. Emit a blast that applies Disrupted to nearby opponents. Upon reset, gain Cooled for 10s and moderately increased Speed for each affected opponent.",
     "crash": true,
-    "upgradesFromId": "ion-blast"
+    "upgradesFromId": "ion-blast",
+    "icon": "T_UI_Ability_IonBlast_Icn"
   },
   {
     "id": "shielding-blast",
@@ -134,7 +147,8 @@
     "cost": 2000,
     "text": "Crash Ability. Emit a blast that applies Disrupted to nearby opponents. Upon reset, gain Shielded for 10s and moderately increased Speed for each affected opponent.",
     "crash": true,
-    "upgradesFromId": "ion-blast"
+    "upgradesFromId": "ion-blast",
+    "icon": "T_UI_Ability_IonBlast_Icn"
   },
   {
     "id": "ion-bolt",
@@ -143,7 +157,8 @@
     "tier": 1,
     "cost": 1000,
     "text": "Lock on to the closest nearby opponent and apply Disrupted to target.",
-    "crash": false
+    "crash": false,
+    "icon": "T_UI_Ability_IonBolt_Icn"
   },
   {
     "id": "concussive-bolt",
@@ -153,7 +168,8 @@
     "cost": 2000,
     "text": "Lock on to the closest nearby opponent and apply Disrupted and Concussed to target.",
     "crash": false,
-    "upgradesFromId": "ion-bolt"
+    "upgradesFromId": "ion-bolt",
+    "icon": "T_UI_Ability_IonBolt_Icn"
   },
   {
     "id": "multi-bolt",
@@ -163,7 +179,8 @@
     "cost": 2000,
     "text": "Lock on to up to 5 nearby opponents and apply Disrupted to all targets.",
     "crash": false,
-    "upgradesFromId": "ion-bolt"
+    "upgradesFromId": "ion-bolt",
+    "icon": "T_UI_Ability_IonBolt_Icn"
   },
   {
     "id": "concussive-bolt-ii",
@@ -173,7 +190,8 @@
     "cost": 4000,
     "text": "Lock on to the closest nearby opponent and apply Disrupted and Concussed to target for an extended duration.",
     "crash": false,
-    "upgradesFromId": "concussive-bolt"
+    "upgradesFromId": "concussive-bolt",
+    "icon": "T_UI_Ability_IonBolt_Icn"
   },
   {
     "id": "multi-bolt-ii",
@@ -183,7 +201,8 @@
     "cost": 4000,
     "text": "Lock on to up to 5 nearby opponents and apply Disrupted to all targets. Gain Surging for 5s for each affected opponent.",
     "crash": false,
-    "upgradesFromId": "multi-bolt"
+    "upgradesFromId": "multi-bolt",
+    "icon": "T_UI_Ability_IonBolt_Icn"
   },
   {
     "id": "shield",
@@ -192,7 +211,8 @@
     "tier": 1,
     "cost": 1000,
     "text": "Gain Shielded for 10s.",
-    "crash": false
+    "crash": false,
+    "icon": "T_UI_Ability_Shield_Icn"
   },
   {
     "id": "impact-shield",
@@ -202,7 +222,8 @@
     "cost": 2000,
     "text": "Gain Shielded for 10s. Collisions trigger System Malfunction on opponents.",
     "crash": false,
-    "upgradesFromId": "shield"
+    "upgradesFromId": "shield",
+    "icon": "T_UI_Ability_Shield_Icn"
   },
   {
     "id": "surging-shield",
@@ -212,7 +233,8 @@
     "cost": 2000,
     "text": "Gain Shielded for 10s. Impacts grant Surging for 5s.",
     "crash": false,
-    "upgradesFromId": "shield"
+    "upgradesFromId": "shield",
+    "icon": "T_UI_Ability_Shield_Icn"
   },
   {
     "id": "impact-shield-ii",
@@ -222,7 +244,8 @@
     "cost": 4000,
     "text": "Gain Shielded for 10s. Collisions extend Shielded duration and trigger System Malfunction on opponents.",
     "crash": false,
-    "upgradesFromId": "impact-shield"
+    "upgradesFromId": "impact-shield",
+    "icon": "T_UI_Ability_Shield_Icn"
   },
   {
     "id": "surging-shield-ii",
@@ -232,7 +255,8 @@
     "cost": 4000,
     "text": "Gain Shielded, retained until it is broken. Impacts grant Surging for 5s.",
     "crash": false,
-    "upgradesFromId": "surging-shield"
+    "upgradesFromId": "surging-shield",
+    "icon": "T_UI_Ability_Shield_Icn"
   },
   {
     "id": "shockwave",
@@ -241,7 +265,8 @@
     "tier": 1,
     "cost": 1000,
     "text": "Blast nearby opponents away and apply System Malfunction to affected opponents.",
-    "crash": false
+    "crash": false,
+    "icon": "T_UI_Ability_Shockwave_Icn"
   },
   {
     "id": "magnetic-shockwave",
@@ -251,7 +276,8 @@
     "cost": 2000,
     "text": "Pull nearby opponents into proximity before blasting them away and applying System Malfunction to affected opponents.",
     "crash": false,
-    "upgradesFromId": "shockwave"
+    "upgradesFromId": "shockwave",
+    "icon": "T_UI_Ability_Shockwave_Icn"
   },
   {
     "id": "vectored-shockwave",
@@ -261,7 +287,8 @@
     "cost": 2000,
     "text": "Blast nearby opponents away, propelling you forward and applying System Malfunction to affected opponents.",
     "crash": false,
-    "upgradesFromId": "shockwave"
+    "upgradesFromId": "shockwave",
+    "icon": "T_UI_Ability_Shockwave_Icn"
   },
   {
     "id": "magnetic-shockwave-ii",
@@ -271,7 +298,8 @@
     "cost": 4000,
     "text": "Pull nearby opponents into proximity before blasting them away and applying System Malfunction and Concussed to affected opponents.",
     "crash": false,
-    "upgradesFromId": "magnetic-shockwave"
+    "upgradesFromId": "magnetic-shockwave",
+    "icon": "T_UI_Ability_Shockwave_Icn"
   },
   {
     "id": "vectored-shockwave-ii",
@@ -281,7 +309,8 @@
     "cost": 4000,
     "text": "Blast nearby opponents away, propelling you forward with increased power and applying System Malfunction to affected opponents.",
     "crash": false,
-    "upgradesFromId": "vectored-shockwave"
+    "upgradesFromId": "vectored-shockwave",
+    "icon": "T_UI_Ability_Shockwave_Icn"
   },
   {
     "id": "status-scrubber",
@@ -290,7 +319,8 @@
     "tier": 1,
     "cost": 1000,
     "text": "Clear negative status effects. If any are cleared, recover 1 Energy.",
-    "crash": false
+    "crash": false,
+    "icon": "T_UI_Ability_StatusScrubber_Icn"
   },
   {
     "id": "auto-scrubber",
@@ -300,7 +330,8 @@
     "cost": 2000,
     "text": "Clear negative status effects. If any are cleared, recover 1 Energy. Ability activates automatically upon System Malfunction at a cost of 0 Energy.",
     "crash": false,
-    "upgradesFromId": "status-scrubber"
+    "upgradesFromId": "status-scrubber",
+    "icon": "T_UI_Ability_StatusScrubber_Icn"
   },
   {
     "id": "multi-scrubber",
@@ -310,7 +341,8 @@
     "cost": 2000,
     "text": "Clear negative status effects. If any are cleared, recover 3 Energy.",
     "crash": false,
-    "upgradesFromId": "status-scrubber"
+    "upgradesFromId": "status-scrubber",
+    "icon": "T_UI_Ability_StatusScrubber_Icn"
   },
   {
     "id": "auto-scrubber-ii",
@@ -320,7 +352,8 @@
     "cost": 4000,
     "text": "Clear negative status effects. If any are cleared, recover 2 Energy. Ability activates automatically upon gaining any negative status effect at a cost of 0 Energy.",
     "crash": false,
-    "upgradesFromId": "auto-scrubber"
+    "upgradesFromId": "auto-scrubber",
+    "icon": "T_UI_Ability_StatusScrubber_Icn"
   },
   {
     "id": "multi-scrubber-ii",
@@ -330,7 +363,8 @@
     "cost": 4000,
     "text": "Clear negative status effects. If any are cleared, recover 4 Energy.",
     "crash": false,
-    "upgradesFromId": "multi-scrubber"
+    "upgradesFromId": "multi-scrubber",
+    "icon": "T_UI_Ability_StatusScrubber_Icn"
   },
   {
     "id": "surge",
@@ -339,7 +373,8 @@
     "tier": 1,
     "cost": 1000,
     "text": "Gain Surging for 10s, lost on impact. Overtakes extend the duration.",
-    "crash": false
+    "crash": false,
+    "icon": "T_UI_Ability_Surge_Icn"
   },
   {
     "id": "impact-surge",
@@ -349,7 +384,8 @@
     "cost": 2000,
     "text": "Gain Surging for 10s. Overtakes, Takedowns, and vehicle collisions extend the duration​.",
     "crash": false,
-    "upgradesFromId": "surge"
+    "upgradesFromId": "surge",
+    "icon": "T_UI_Ability_Surge_Icn"
   },
   {
     "id": "overtaking-surge",
@@ -359,7 +395,8 @@
     "cost": 2000,
     "text": "Gain Surging for 10s, lost on impact. Overtakes extend the duration and increase its potency.",
     "crash": false,
-    "upgradesFromId": "surge"
+    "upgradesFromId": "surge",
+    "icon": "T_UI_Ability_Surge_Icn"
   },
   {
     "id": "impact-surge-ii",
@@ -369,7 +406,8 @@
     "cost": 4000,
     "text": "Gain Surging for 10s. Overtakes, Takedowns, and vehicle collisions extend the duration. Takedowns recharge Energy.",
     "crash": false,
-    "upgradesFromId": "impact-surge"
+    "upgradesFromId": "impact-surge",
+    "icon": "T_UI_Ability_Surge_Icn"
   },
   {
     "id": "overtaking-surge-ii",
@@ -379,7 +417,8 @@
     "cost": 4000,
     "text": "Gain Surging for 20s, lost on impact. Overtakes extend the duration and increase its potency.",
     "crash": false,
-    "upgradesFromId": "overtaking-surge"
+    "upgradesFromId": "overtaking-surge",
+    "icon": "T_UI_Ability_Surge_Icn"
   },
   {
     "id": "vent",
@@ -388,7 +427,8 @@
     "tier": 1,
     "cost": 1000,
     "text": "Gain Cooled and reduce Ramjet heat.",
-    "crash": false
+    "crash": false,
+    "icon": "T_UI_Ability_Vent_Icn"
   },
   {
     "id": "flame-vent",
@@ -398,7 +438,8 @@
     "cost": 2000,
     "text": "Gain Cooled and reduce Ramjet heat. Applies Burning and System Malfunction to nearby opponents.",
     "crash": false,
-    "upgradesFromId": "vent"
+    "upgradesFromId": "vent",
+    "icon": "T_UI_Ability_Vent_Icn"
   },
   {
     "id": "vent-ii",
@@ -408,7 +449,8 @@
     "cost": 2000,
     "text": "Gain Cooled and reduce Ramjet heat for an extended duration.",
     "crash": false,
-    "upgradesFromId": "vent"
+    "upgradesFromId": "vent",
+    "icon": "T_UI_Ability_Vent_Icn"
   },
   {
     "id": "auto-vent",
@@ -418,7 +460,8 @@
     "cost": 4000,
     "text": "Gain Cooled and reduce Ramjet heat for an extended duration. Activates automatically upon nearing the end of the Redlining zone.",
     "crash": false,
-    "upgradesFromId": "vent-ii"
+    "upgradesFromId": "vent-ii",
+    "icon": "T_UI_Ability_Vent_Icn"
   },
   {
     "id": "corrosive-vent",
@@ -428,7 +471,8 @@
     "cost": 4000,
     "text": "Gain Cooled and reduce Ramjet heat. Applies Corroded to nearby opponents.",
     "crash": false,
-    "upgradesFromId": "flame-vent"
+    "upgradesFromId": "flame-vent",
+    "icon": "T_UI_Ability_Vent_Icn"
   },
   {
     "id": "supercooled-vent",
@@ -438,6 +482,7 @@
     "cost": 4000,
     "text": "Gain Cooled and reduce Ramjet heat while gradually gaining Frozen. Upon fully Frozen, Vent disengages.",
     "crash": false,
-    "upgradesFromId": "vent-ii"
+    "upgradesFromId": "vent-ii",
+    "icon": "T_UI_Ability_Vent_Icn"
   }
 ]

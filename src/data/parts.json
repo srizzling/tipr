@@ -7,6 +7,7 @@
     "text": "Each Ability activation, +10% Afterburner refill rate.",
     "fault": false,
     "unlockEvents": 25,
+    "icon": "T_UI_AFX_Ability_IncreaseAfterburnerRegen_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ability-catalyst"
   },
   {
@@ -17,6 +18,7 @@
     "text": "While Corroded, rapidly recharge Energy.",
     "fault": false,
     "unlockEvents": 91,
+    "icon": "T_UI_AFX_Energy_CorrodeRechargesOverTime_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/acid-battery"
   },
   {
@@ -28,6 +30,7 @@
     "downside": "Upon emptying Afterburner tank, become Corroded for 2s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Afterburner_onEmptyCorrode_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/acidic-fuel"
   },
   {
@@ -39,6 +42,7 @@
     "downside": "While Redlining, become Corroded.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Overheating_AppliesCorrode_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/acrid-alarm"
   },
   {
@@ -49,6 +53,7 @@
     "text": "While airborne, Ramjet generates no heat.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Ramjet_NoHeatWhileAirborne_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/aerial-intakes"
   },
   {
@@ -59,6 +64,7 @@
     "text": "While airborne, gain Surging.",
     "fault": false,
     "unlockEvents": 12,
+    "icon": "T_UI_AFX_Surge_GainWhileAirborne_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/aerial-surge"
   },
   {
@@ -71,6 +77,7 @@
     "unlockEvents": 0,
     "family": "afterburner-efficiency",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_MoreDuration_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/afterburner-efficiency-i"
   },
   {
@@ -83,6 +90,7 @@
     "unlockEvents": 0,
     "family": "afterburner-efficiency",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_MoreDuration_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/afterburner-efficiency-ii"
   },
   {
@@ -95,6 +103,7 @@
     "unlockEvents": 16,
     "family": "afterburner-efficiency",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_MoreDuration_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/afterburner-efficiency-iii"
   },
   {
@@ -107,6 +116,7 @@
     "unlockEvents": 65,
     "family": "afterburner-efficiency",
     "tier": 4,
+    "icon": "T_UI_AFX_Afterburner_MoreDuration_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/afterburner-efficiency-iv"
   },
   {
@@ -117,6 +127,7 @@
     "text": "When Ramjet becomes ready, fully refill Afterburner.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Afterburner_FullyRechargeWhenRamjetReady_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/afterburner-recharger"
   },
   {
@@ -127,6 +138,7 @@
     "text": "During System Malfunction, Afterburner is 100% more powerful.",
     "fault": false,
     "unlockEvents": 75,
+    "icon": "T_UI_AFX_SysMalf_PowerfulRamjetAndAfterburner_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/afterburner-reconfiguration"
   },
   {
@@ -137,6 +149,7 @@
     "text": "During System Malfunction, Afterburner is 100% more powerful.",
     "fault": false,
     "unlockEvents": 45,
+    "icon": "T_UI_AFX_SysMalf_PowerfulAfterburner_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/afterburner-reconfiguration-2"
   },
   {
@@ -147,6 +160,7 @@
     "text": "While Burning, Afterburner is 100% more powerful.",
     "fault": false,
     "unlockEvents": 97,
+    "icon": "T_UI_AFX_Burning_PowerfulAfterburner_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/afterburner-thermalizer"
   },
   {
@@ -157,6 +171,7 @@
     "text": "Every Takedown, Cooled becomes 10% more potent.",
     "fault": false,
     "unlockEvents": 85,
+    "icon": "T_UI_AFX_Takedown_IncreaseCooledPotency_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/amplifying-regulator"
   },
   {
@@ -169,6 +184,7 @@
     "unlockEvents": 103,
     "family": "antacid-coating",
     "tier": 1,
+    "icon": "T_UI_AFX_Corrode_NoLongerChokes_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/antacid-coating"
   },
   {
@@ -180,6 +196,7 @@
     "downside": "Surging is blocked.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_BlockSurge_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/anti-surge-device"
   },
   {
@@ -191,6 +208,7 @@
     "downside": "While Redlining, become Frozen for 10s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Overheating_AppliesFrozen_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/athermic-alarm"
   },
   {
@@ -201,6 +219,7 @@
     "text": "Afterburner power is increased and Cornering maneuverability improved.",
     "fault": false,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_GarlicSordes_1_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/bleeding-edge-tech"
   },
   {
@@ -211,6 +230,7 @@
     "text": "Vehicle collisions result in lower received damage and higher given damage.",
     "fault": false,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_SwedeNesodon_1_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/built-for-battle"
   },
   {
@@ -221,6 +241,7 @@
     "text": "Protected from Burning.",
     "fault": false,
     "unlockEvents": 45,
+    "icon": "T_UI_AFX_Conditions_BurningProtection_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/burn-protection"
   },
   {
@@ -232,6 +253,7 @@
     "downside": "On impact, become Burning for 8s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Burning_GainBurningWhenTakedown_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/burning-contacts"
   },
   {
@@ -242,6 +264,7 @@
     "text": "While Burning, Ramjet is 200% more powerful.",
     "fault": false,
     "unlockEvents": 80,
+    "icon": "T_UI_AFX_Burning_PowerfulRamjet_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/burning-ramjet"
   },
   {
@@ -254,6 +277,7 @@
     "unlockEvents": 35,
     "family": "calibrating-landings",
     "tier": 1,
+    "icon": "T_UI_AFX_Landing_IncreaseSpeedStat_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/calibrating-landings-i"
   },
   {
@@ -266,6 +290,7 @@
     "unlockEvents": 55,
     "family": "calibrating-landings",
     "tier": 2,
+    "icon": "T_UI_AFX_Landing_IncreaseSpeedStat_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/calibrating-landings-ii"
   },
   {
@@ -278,6 +303,7 @@
     "unlockEvents": 75,
     "family": "calibrating-landings",
     "tier": 3,
+    "icon": "T_UI_AFX_Landing_IncreaseSpeedStat_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/calibrating-landings-iii"
   },
   {
@@ -288,6 +314,7 @@
     "text": "Perfect Start grants Overcharged for 30s.",
     "fault": false,
     "unlockEvents": 16,
+    "icon": "T_UI_AFX_PerfectStart_GainOvercharged_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/charging-coils"
   },
   {
@@ -298,6 +325,7 @@
     "text": "On Perfect Landing, gain Overcharged for 10s.",
     "fault": false,
     "unlockEvents": 55,
+    "icon": "T_UI_AFX_Overcharged_GainUponLanding_V1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/charging-repulsors-i"
   },
   {
@@ -310,6 +338,7 @@
     "unlockEvents": 80,
     "family": "charging-repulsors",
     "tier": 2,
+    "icon": "T_UI_AFX_Overcharged_GainUponLanding_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/charging-repulsors-ii"
   },
   {
@@ -320,6 +349,7 @@
     "text": "While Cooled, protected from Corroded.",
     "fault": false,
     "unlockEvents": 109,
+    "icon": "T_UI_AFX_Cooled_CorrodeProtection_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/chassis-cleansing"
   },
   {
@@ -331,6 +361,7 @@
     "downside": "While Burning, become Choked.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Burning_GainChoked_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/choking-burn"
   },
   {
@@ -342,6 +373,7 @@
     "downside": "At race start, Afterburner is 50% weaker for 60s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_StartWithWeakAfterburner_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/coldstart-afterburner"
   },
   {
@@ -353,6 +385,7 @@
     "downside": "Vehicle collisions result in higher received damage.",
     "fault": true,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_OnionDearc_2_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/complex-interlocks"
   },
   {
@@ -365,6 +398,7 @@
     "unlockEvents": 4,
     "family": "coolant-cycler",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_CooledAfterFullUse_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/coolant-cycler-i"
   },
   {
@@ -377,6 +411,7 @@
     "unlockEvents": 25,
     "family": "coolant-cycler",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_CooledAfterFullUse_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/coolant-cycler-ii"
   },
   {
@@ -389,6 +424,7 @@
     "unlockEvents": 70,
     "family": "coolant-cycler",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_CooledAfterFullUse_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/coolant-cycler-iii"
   },
   {
@@ -401,6 +437,7 @@
     "unlockEvents": 8,
     "family": "cooling-actuator",
     "tier": 1,
+    "icon": "T_UI_AFX_Takedown_GainCooled_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-actuator-i"
   },
   {
@@ -413,6 +450,7 @@
     "unlockEvents": 8,
     "family": "cooling-actuator",
     "tier": 2,
+    "icon": "T_UI_AFX_Takedown_GainCooled_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-actuator-ii"
   },
   {
@@ -425,6 +463,7 @@
     "unlockEvents": 35,
     "family": "cooling-actuator",
     "tier": 3,
+    "icon": "T_UI_AFX_Takedown_GainCooled_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-actuator-iii"
   },
   {
@@ -437,6 +476,7 @@
     "unlockEvents": 70,
     "family": "cooling-actuator",
     "tier": 4,
+    "icon": "T_UI_AFX_Takedown_GainCooled_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-actuator-iv"
   },
   {
@@ -447,6 +487,7 @@
     "text": "While airborne, gain Cooled.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Cooled_GainWhileAirborne_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-aerofoils"
   },
   {
@@ -459,6 +500,7 @@
     "unlockEvents": 12,
     "family": "cooling-dampers",
     "tier": 1,
+    "icon": "T_UI_AFX_Cooled_GainOnLanding_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-dampers-i"
   },
   {
@@ -471,6 +513,7 @@
     "unlockEvents": 12,
     "family": "cooling-dampers",
     "tier": 2,
+    "icon": "T_UI_AFX_Cooled_GainOnLanding_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-dampers-ii"
   },
   {
@@ -483,6 +526,7 @@
     "unlockEvents": 60,
     "family": "cooling-dampers",
     "tier": 3,
+    "icon": "T_UI_AFX_Cooled_GainOnLanding_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-dampers-iii"
   },
   {
@@ -495,6 +539,7 @@
     "unlockEvents": 103,
     "family": "cooling-dampers",
     "tier": 4,
+    "icon": "T_UI_AFX_Cooled_GainOnLanding_v4_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-dampers-iv"
   },
   {
@@ -505,6 +550,7 @@
     "text": "While Cooled, gain Overcharged.",
     "fault": false,
     "unlockEvents": 65,
+    "icon": "T_UI_AFX_Cooled_CooledToOvercharged_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-overcharge"
   },
   {
@@ -515,6 +561,7 @@
     "text": "While Slipstreaming, gain Cooled.",
     "fault": false,
     "unlockEvents": 35,
+    "icon": "T_UI_AFX_Cooled_GainWhileSlipstream_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-slipstream"
   },
   {
@@ -525,6 +572,7 @@
     "text": "While Surging, gain Cooled.",
     "fault": false,
     "unlockEvents": 55,
+    "icon": "T_UI_AFX_Surge_SurgeToCooled_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cooling-surge"
   },
   {
@@ -535,6 +583,7 @@
     "text": "Takes 200% longer to Crash from Corroded.",
     "fault": false,
     "unlockEvents": 40,
+    "icon": "T_UI_AFX_Conditions_CorrodeResistance_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/corrode-resistance"
   },
   {
@@ -545,6 +594,7 @@
     "text": "Takes 200% longer to Crash from Corroded.",
     "fault": false,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_Conditions_CorrodeResistance_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/corrode-resistance-2"
   },
   {
@@ -555,6 +605,7 @@
     "text": "Corroded clears 300% faster.",
     "fault": false,
     "unlockEvents": 65,
+    "icon": "T_UI_AFX_Conditions_CorrodeShedding_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/corrosion-shedding"
   },
   {
@@ -566,6 +617,7 @@
     "downside": "100% faster to Crash from Corroded.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Conditions_CorrodeVulnerability_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/corrosion-vulnerability"
   },
   {
@@ -577,6 +629,7 @@
     "downside": "Upon activating an Ability, become Corroded.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Ability_GainCorroded_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cracked-battery"
   },
   {
@@ -588,6 +641,7 @@
     "downside": "While airborne, Afterburner tank is emptied.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Afterburner_DecayWhileAirborne_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/cracked-fuelpipes"
   },
   {
@@ -598,6 +652,7 @@
     "text": "Perfect recovery zone during Critical Malfunction is larger.",
     "fault": false,
     "unlockEvents": 30,
+    "icon": "T_UI_AFX_CritMalf_EasierCheck_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/critical-assist"
   },
   {
@@ -608,6 +663,7 @@
     "text": "While 1 Crash remains, gain Cooled.",
     "fault": false,
     "unlockEvents": 16,
+    "icon": "T_UI_AFX_Crashes_CooledWhenOneCrashRemains_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/critical-cooling"
   },
   {
@@ -618,6 +674,7 @@
     "text": "While 1 Crash remains, gain Surging, Shielded and Cooled.",
     "fault": false,
     "unlockEvents": 115,
+    "icon": "T_UI_AFX_Crashes_CooledSurgingShieldedWhenOneCrashRemains_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/critical-hope"
   },
   {
@@ -630,6 +687,7 @@
     "unlockEvents": 60,
     "family": "critical-injectors",
     "tier": 1,
+    "icon": "T_UI_AFX_CritMalf_PerfectIncreasesSpeed_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/critical-injectors-i"
   },
   {
@@ -642,6 +700,7 @@
     "unlockEvents": 85,
     "family": "critical-injectors",
     "tier": 2,
+    "icon": "T_UI_AFX_CritMalf_PerfectIncreasesSpeed_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/critical-injectors-ii"
   },
   {
@@ -652,6 +711,7 @@
     "text": "While 1 Crash remains, gain Shielded.",
     "fault": false,
     "unlockEvents": 20,
+    "icon": "T_UI_AFX_Crashes_ShieldWhenOneCrashRemains_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/critical-shielding"
   },
   {
@@ -662,6 +722,7 @@
     "text": "While 1 Crash remains, gain Surging.",
     "fault": false,
     "unlockEvents": 75,
+    "icon": "T_UI_AFX_Crashes_SurgingWhenOneCrashRemains_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/critical-surging"
   },
   {
@@ -672,6 +733,7 @@
     "text": "While Surging, protected from Choked.",
     "fault": false,
     "unlockEvents": 50,
+    "icon": "T_UI_AFX_Surge_CancelChoked_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/dechoking-mechanism"
   },
   {
@@ -683,6 +745,7 @@
     "downside": "Redlining duration is significantly shorter.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Ramjet_ReducedAlarm_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/defective-alarm"
   },
   {
@@ -693,6 +756,7 @@
     "text": "At race start, gain Shielded for 10s.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Shielded_GainOnRaceStart_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/defensive-start"
   },
   {
@@ -704,6 +768,7 @@
     "downside": "On landing, System Malfunction and become Concussed.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Landing_BecomeConcussed_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/degraded-dampers"
   },
   {
@@ -714,6 +779,7 @@
     "text": "After a full Afterburner use, become Shielded for 5s.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Afterburner_ShieldedAfterFullUse_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/depleted-shielding"
   },
   {
@@ -725,6 +791,7 @@
     "downside": "Upon activating an Ability, become Burning for 10s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Burning_AbilityTriggersBurning_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/disregulated-heating"
   },
   {
@@ -736,6 +803,7 @@
     "downside": "Disrupted blocks Afterburner for 30s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_DisruptedDecaysAfterburner_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/disrupted-fuel"
   },
   {
@@ -746,6 +814,7 @@
     "text": "Protected from Disrupted.",
     "fault": false,
     "unlockEvents": 8,
+    "icon": "T_UI_AFX_Conditions_DisruptedProtection_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/disruption-protection"
   },
   {
@@ -758,6 +827,7 @@
     "unlockEvents": 30,
     "family": "dissipative-plating",
     "tier": 1,
+    "icon": "T_UI_AFX_Conditions_DecreaseBurningPotency_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/dissipative-plating-i"
   },
   {
@@ -770,6 +840,7 @@
     "unlockEvents": 30,
     "family": "dissipative-plating",
     "tier": 2,
+    "icon": "T_UI_AFX_Conditions_DecreaseBurningPotency_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/dissipative-plating-ii"
   },
   {
@@ -782,6 +853,7 @@
     "unlockEvents": 75,
     "family": "dissipative-plating",
     "tier": 3,
+    "icon": "T_UI_AFX_Conditions_DecreaseBurningPotency_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/dissipative-plating-iii"
   },
   {
@@ -792,6 +864,7 @@
     "text": "Vehicle drag is reduced, improving Cornering.",
     "fault": false,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_OnionDearc_1_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/double-control-surfaces"
   },
   {
@@ -803,6 +876,7 @@
     "downside": "While Cornering, top speed is reduced.",
     "fault": true,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_CabbageCretornis_2_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/draggy-control-surfaces"
   },
   {
@@ -814,6 +888,7 @@
     "downside": "-2 total Energy.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Ability_OneLessTotalEnergy_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/dud-battery"
   },
   {
@@ -824,6 +899,7 @@
     "text": "During System Malfunction and 10s after, gain Cooled.",
     "fault": false,
     "unlockEvents": 35,
+    "icon": "T_UI_AFX_SysMalf_GainCooled_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/emergency-cooling"
   },
   {
@@ -835,6 +911,7 @@
     "downside": "While airborne, become Frozen.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Condition_FrozenWhenAirborne_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/endothermic-repulsors"
   },
   {
@@ -845,6 +922,7 @@
     "text": "Afterburner power and tank refill rate are increased.",
     "fault": false,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_CeleryHexing_1_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/energy-surplus"
   },
   {
@@ -857,6 +935,7 @@
     "unlockEvents": 12,
     "family": "enhanced-coolant",
     "tier": 1,
+    "icon": "T_UI_AFX_Conditions_Cooled_IncreasedPotency_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enhanced-coolant-i"
   },
   {
@@ -869,6 +948,7 @@
     "unlockEvents": 12,
     "family": "enhanced-coolant",
     "tier": 2,
+    "icon": "T_UI_AFX_Conditions_Cooled_IncreasedPotency_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enhanced-coolant-ii"
   },
   {
@@ -881,6 +961,7 @@
     "unlockEvents": 45,
     "family": "enhanced-coolant",
     "tier": 3,
+    "icon": "T_UI_AFX_Conditions_Cooled_IncreasedPotency_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enhanced-coolant-iii"
   },
   {
@@ -893,6 +974,7 @@
     "unlockEvents": 80,
     "family": "enhanced-coolant",
     "tier": 4,
+    "icon": "T_UI_AFX_Conditions_Cooled_IncreasedPotency_v4_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enhanced-coolant-iv"
   },
   {
@@ -905,6 +987,7 @@
     "unlockEvents": 0,
     "family": "enriched-fuel",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_IncreasedTopSpeed_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enriched-fuel-i"
   },
   {
@@ -917,6 +1000,7 @@
     "unlockEvents": 0,
     "family": "enriched-fuel",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_IncreasedTopSpeed_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enriched-fuel-ii"
   },
   {
@@ -929,6 +1013,7 @@
     "unlockEvents": 20,
     "family": "enriched-fuel",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_IncreasedTopSpeed_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enriched-fuel-iii"
   },
   {
@@ -941,6 +1026,7 @@
     "unlockEvents": 91,
     "family": "enriched-fuel",
     "tier": 4,
+    "icon": "T_UI_AFX_Afterburner_IncreasedTopSpeed_v4_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enriched-fuel-iv"
   },
   {
@@ -951,6 +1037,7 @@
     "text": "Afterburner speed boost increased by 100%.",
     "fault": false,
     "unlockEvents": 91,
+    "icon": "T_UI_AFX_Afterburner_IncreasedTopSpeed_v4_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enriched-fuel-iv-2"
   },
   {
@@ -961,6 +1048,7 @@
     "text": "While Surging, Afterburner power increased by 100%.",
     "fault": false,
     "unlockEvents": 109,
+    "icon": "T_UI_AFX_Surging_AfterburnerMorePowerful_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/enriching-siphon"
   },
   {
@@ -971,6 +1059,7 @@
     "text": "Redlining expands Afterburner tank by 10% each time.",
     "fault": false,
     "unlockEvents": 8,
+    "icon": "T_UI_AFX_Afterburner_OverheatingStacksFuel_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/expanding-fueltank"
   },
   {
@@ -982,6 +1071,7 @@
     "downside": "After 3s of Burning, vehicle will Crash.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Conditions_ExplosiveBurning_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/explosive-burning"
   },
   {
@@ -993,6 +1083,7 @@
     "downside": "Frozen has 50% greater impairment on Cornering.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Frozen_IncreasedSteeringPenalty_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/exposed-servos"
   },
   {
@@ -1005,6 +1096,7 @@
     "unlockEvents": 0,
     "family": "extended-alarm",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_ExtendedAlarm_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/extended-alarm-i"
   },
   {
@@ -1017,6 +1109,7 @@
     "unlockEvents": 0,
     "family": "extended-alarm",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_ExtendedAlarm_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/extended-alarm-ii"
   },
   {
@@ -1029,6 +1122,7 @@
     "unlockEvents": 35,
     "family": "extended-alarm",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_ExtendedAlarm_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/extended-alarm-iii"
   },
   {
@@ -1041,6 +1135,7 @@
     "unlockEvents": 115,
     "family": "extended-alarm",
     "tier": 4,
+    "icon": "T_UI_AFX_Ramjet_ExtendedAlarm_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/extended-alarm-iv"
   },
   {
@@ -1053,6 +1148,7 @@
     "unlockEvents": 12,
     "family": "extended-cooling",
     "tier": 1,
+    "icon": "T_UI_AFX_Conditions_CooledLastsLonger_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/extended-cooling-i"
   },
   {
@@ -1065,6 +1161,7 @@
     "unlockEvents": 50,
     "family": "extended-cooling",
     "tier": 2,
+    "icon": "T_UI_AFX_Conditions_CooledLastsLonger_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/extended-cooling-ii"
   },
   {
@@ -1077,6 +1174,7 @@
     "unlockEvents": 97,
     "family": "extended-cooling",
     "tier": 3,
+    "icon": "T_UI_AFX_Conditions_CooledLastsLonger_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/extended-cooling-iii"
   },
   {
@@ -1088,6 +1186,7 @@
     "downside": "On System Malfunction, become Frozen.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_SysMalf_GainFrozen_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/failsafe-coolant"
   },
   {
@@ -1100,6 +1199,7 @@
     "unlockEvents": 0,
     "family": "faster-attachments",
     "tier": 1,
+    "icon": "T_UI_AFX_Ability_FasterCooldown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/faster-attachments-i"
   },
   {
@@ -1112,6 +1212,7 @@
     "unlockEvents": 0,
     "family": "faster-attachments",
     "tier": 2,
+    "icon": "T_UI_AFX_Ability_FasterCooldown_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/faster-attachments-ii"
   },
   {
@@ -1124,6 +1225,7 @@
     "unlockEvents": 20,
     "family": "faster-attachments",
     "tier": 3,
+    "icon": "T_UI_AFX_Ability_FasterCooldown_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/faster-attachments-iii"
   },
   {
@@ -1136,6 +1238,7 @@
     "unlockEvents": 75,
     "family": "faster-attachments",
     "tier": 4,
+    "icon": "T_UI_AFX_Ability_FasterCooldown_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/faster-attachments-iv"
   },
   {
@@ -1149,6 +1252,7 @@
     "unlockEvents": null,
     "family": "faulty-abilities",
     "tier": 1,
+    "icon": "T_UI_AFX_Faulty_Ability_LongerCooldown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/faulty-abilities"
   },
   {
@@ -1160,6 +1264,7 @@
     "downside": "Failing a Perfect Start causes a Crash.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_PerfectStart_Crash_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/faulty-activator"
   },
   {
@@ -1171,6 +1276,7 @@
     "downside": "Critical Malfunction skill check moves 100% faster.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_CritMalf_HardCheck_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/faulty-failsafe"
   },
   {
@@ -1182,6 +1288,7 @@
     "downside": "When Redlining, become Burning for 10s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Overheating_AppliesBurn_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/flammable-manifold"
   },
   {
@@ -1193,6 +1300,7 @@
     "downside": "Upon activating an Ability, trigger System Malfunction.",
     "fault": true,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_MYST_FracturedTools_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fractured-abilities"
   },
   {
@@ -1204,6 +1312,7 @@
     "downside": "After a Crash, become Disrupted for 10s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Crash_ReturnDisrupted_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fragile-subsystems"
   },
   {
@@ -1216,6 +1325,7 @@
     "unlockEvents": 35,
     "family": "freeze-resistance",
     "tier": 1,
+    "icon": "T_UI_AFX_Conditions_FreezeResistance_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/freeze-resistance-i"
   },
   {
@@ -1228,6 +1338,7 @@
     "unlockEvents": 35,
     "family": "freeze-resistance",
     "tier": 2,
+    "icon": "T_UI_AFX_Conditions_FreezeResistance_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/freeze-resistance-ii"
   },
   {
@@ -1238,6 +1349,7 @@
     "text": "Frozen clears 200% faster.",
     "fault": false,
     "unlockEvents": 70,
+    "icon": "T_UI_AFX_Conditions_FreezeShedding_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/freeze-shedding"
   },
   {
@@ -1251,6 +1363,7 @@
     "unlockEvents": 0,
     "family": "freeze-vulnerability",
     "tier": 2,
+    "icon": "T_UI_AFX_Faulty_FreezeVulnerability_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/freeze-vulnerability"
   },
   {
@@ -1261,6 +1374,7 @@
     "text": "Protected from Frozen.",
     "fault": false,
     "unlockEvents": 65,
+    "icon": "T_UI_AFX_Conditions_FreezeProtection_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/frost-protection"
   },
   {
@@ -1272,6 +1386,7 @@
     "downside": "While Slipstreaming, gradually become Frozen.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Slipstreaming_BecomeFrozen_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/frosted-aerofoils"
   },
   {
@@ -1283,6 +1398,7 @@
     "downside": "While using Afterburner, gradually become Frozen.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Afterburner_becomeFrozen_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/frosted-injectors"
   },
   {
@@ -1293,6 +1409,7 @@
     "text": "While Frozen, massively increase Speed.",
     "fault": false,
     "unlockEvents": 70,
+    "icon": "T_UI_AFX_Frozen_IncreaseSpeed_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/frozen-finesse"
   },
   {
@@ -1305,6 +1422,7 @@
     "unlockEvents": 8,
     "family": "fuel-agitator",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_MorePowerPerTakedown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-agitator-i"
   },
   {
@@ -1317,6 +1435,7 @@
     "unlockEvents": 8,
     "family": "fuel-agitator",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_MorePowerPerTakedown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-agitator-ii"
   },
   {
@@ -1329,6 +1448,7 @@
     "unlockEvents": 25,
     "family": "fuel-agitator",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_MorePowerPerTakedown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-agitator-iii"
   },
   {
@@ -1341,6 +1461,7 @@
     "unlockEvents": 40,
     "family": "fuel-agitator",
     "tier": 4,
+    "icon": "T_UI_AFX_Afterburner_MorePowerPerTakedown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-agitator-iv"
   },
   {
@@ -1353,6 +1474,7 @@
     "unlockEvents": 16,
     "family": "fuel-coolant",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_CooledSavesFuel_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-coolant-i"
   },
   {
@@ -1365,6 +1487,7 @@
     "unlockEvents": 16,
     "family": "fuel-coolant",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_CooledSavesFuel_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-coolant-ii"
   },
   {
@@ -1377,6 +1500,7 @@
     "unlockEvents": 80,
     "family": "fuel-coolant",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_CooledSavesFuel_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-coolant-iii"
   },
   {
@@ -1389,6 +1513,7 @@
     "unlockEvents": 103,
     "family": "fuel-coolant",
     "tier": 4,
+    "icon": "T_UI_AFX_Afterburner_CooledSavesFuel_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-coolant-iv"
   },
   {
@@ -1399,6 +1524,7 @@
     "text": "At 6+ Energy, Afterburner refills 150% faster.",
     "fault": false,
     "unlockEvents": 109,
+    "icon": "T_UI_AFX_Energy_FasterAfterburnerRecharge_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-synthesis"
   },
   {
@@ -1411,6 +1537,7 @@
     "unlockEvents": 50,
     "family": "fuel-vortexer",
     "tier": 1,
+    "icon": "T_UI_AFX_Surging_AfterburnerMoreDuration_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-vortexer-i"
   },
   {
@@ -1423,6 +1550,7 @@
     "unlockEvents": 50,
     "family": "fuel-vortexer",
     "tier": 2,
+    "icon": "T_UI_AFX_Surging_AfterburnerMoreDuration_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-vortexer-ii"
   },
   {
@@ -1435,6 +1563,7 @@
     "unlockEvents": 97,
     "family": "fuel-vortexer",
     "tier": 3,
+    "icon": "T_UI_AFX_Surging_AfterburnerMoreDuration_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-vortexer-iii"
   },
   {
@@ -1447,6 +1576,7 @@
     "unlockEvents": 115,
     "family": "fuel-vortexer",
     "tier": 4,
+    "icon": "T_UI_AFX_Surging_AfterburnerMoreDuration_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/fuel-vortexer-iv"
   },
   {
@@ -1458,6 +1588,7 @@
     "downside": "Upon emptying Afterburner tank, System Malfunction for 20s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Afterburner_onEmptySysMalf_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/glitched-fuel"
   },
   {
@@ -1470,6 +1601,7 @@
     "unlockEvents": 65,
     "family": "hail-mary-reset",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_CriticalResetChance_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/hail-mary-reset-i"
   },
   {
@@ -1482,6 +1614,7 @@
     "unlockEvents": 85,
     "family": "hail-mary-reset",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_CriticalResetChance_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/hail-mary-reset-ii"
   },
   {
@@ -1494,6 +1627,7 @@
     "unlockEvents": 109,
     "family": "hail-mary-reset",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_CriticalResetChance_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/hail-mary-reset-iii"
   },
   {
@@ -1506,6 +1640,7 @@
     "unlockEvents": 0,
     "family": "heat-reduction",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_HeatReduction_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/heat-reduction-i"
   },
   {
@@ -1518,6 +1653,7 @@
     "unlockEvents": 0,
     "family": "heat-reduction",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_HeatReduction_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/heat-reduction-ii"
   },
   {
@@ -1530,6 +1666,7 @@
     "unlockEvents": 55,
     "family": "heat-reduction",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_HeatReduction_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/heat-reduction-iii"
   },
   {
@@ -1542,6 +1679,7 @@
     "unlockEvents": 91,
     "family": "heat-reduction",
     "tier": 4,
+    "icon": "T_UI_AFX_Ramjet_HeatReduction_v4_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/heat-reduction-iv"
   },
   {
@@ -1554,6 +1692,7 @@
     "unlockEvents": 12,
     "family": "heated-fuel",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_OverheatingIncreasesPowerOnce_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/heated-fuel-i"
   },
   {
@@ -1566,6 +1705,7 @@
     "unlockEvents": 12,
     "family": "heated-fuel",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_OverheatingIncreasesPowerOnce_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/heated-fuel-ii"
   },
   {
@@ -1578,6 +1718,7 @@
     "unlockEvents": 91,
     "family": "heated-fuel",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_OverheatingIncreasesPowerOnce_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/heated-fuel-iii"
   },
   {
@@ -1590,6 +1731,7 @@
     "unlockEvents": 109,
     "family": "heated-fuel",
     "tier": 4,
+    "icon": "T_UI_AFX_Afterburner_OverheatingIncreasesPowerOnce_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/heated-fuel-iv"
   },
   {
@@ -1601,6 +1743,7 @@
     "downside": "Upon emptying Afterburner tank, become Frozen for 20s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Afterburner_onEmptyBecomeFrozen_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/iced-fuel"
   },
   {
@@ -1612,6 +1755,7 @@
     "downside": "At race start, become Frozen for 30s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_gainFrozen_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/iced-ignition"
   },
   {
@@ -1623,6 +1767,7 @@
     "downside": "Upon emptying Afterburner tank, become Burning for 20s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Afterburner_onEmptyBecomeBurning_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ignited-fuel"
   },
   {
@@ -1635,6 +1780,7 @@
     "unlockEvents": 35,
     "family": "impact-regulator",
     "tier": 1,
+    "icon": "T_UI_AFX_Concussion_ClearQuicklyAndGainSpeed_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/impact-regulator-i"
   },
   {
@@ -1647,6 +1793,7 @@
     "unlockEvents": 35,
     "family": "impact-regulator",
     "tier": 2,
+    "icon": "T_UI_AFX_Concussion_ClearQuicklyAndGainSpeed_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/impact-regulator-ii"
   },
   {
@@ -1659,6 +1806,7 @@
     "unlockEvents": 70,
     "family": "impact-regulator",
     "tier": 3,
+    "icon": "T_UI_AFX_Concussion_ClearQuicklyAndGainSpeed_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/impact-regulator-iii"
   },
   {
@@ -1670,6 +1818,7 @@
     "downside": "Perfect Start zone is significantly smaller.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_PerfectStartDifficulty_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/imprecise-calibration"
   },
   {
@@ -1680,6 +1829,7 @@
     "text": "Slipstreaming speed bonus increased by 100%.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Slipstreaming_ImprovedBuffs_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/improved-drafting"
   },
   {
@@ -1692,6 +1842,7 @@
     "unlockEvents": 0,
     "family": "improved-regulators",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_FasterRechargeLostOnCrash_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/improved-regulators-i"
   },
   {
@@ -1704,6 +1855,7 @@
     "unlockEvents": 0,
     "family": "improved-regulators",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_FasterRechargeLostOnCrash_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/improved-regulators-ii"
   },
   {
@@ -1714,6 +1866,7 @@
     "text": "Afterburner fuel refills 100% faster.",
     "fault": false,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_Afterburner_FasterRechargeLostOnCrash_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/improved-regulators-ii-2"
   },
   {
@@ -1726,6 +1879,7 @@
     "unlockEvents": 25,
     "family": "improved-regulators",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_FasterRechargeLostOnCrash_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/improved-regulators-iii"
   },
   {
@@ -1738,6 +1892,7 @@
     "unlockEvents": 60,
     "family": "improved-regulators",
     "tier": 4,
+    "icon": "T_UI_AFX_Afterburner_FasterRechargeLostOnCrash_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/improved-regulators-iv"
   },
   {
@@ -1749,6 +1904,7 @@
     "downside": "While Overcharged, become Burning.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Overcharged_GainBurning_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/incendiary-overcharge"
   },
   {
@@ -1760,6 +1916,7 @@
     "downside": "Slipstreaming is blocked.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_NoSlipstreaming_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/inefficient-aerodynamics"
   },
   {
@@ -1770,6 +1927,7 @@
     "text": "When speed reaches 450, gain Shielded for 10s.",
     "fault": false,
     "unlockEvents": 20,
+    "icon": "T_UI_AFX_Shielded_GainOnSpeed_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/inertial-shield"
   },
   {
@@ -1782,6 +1940,7 @@
     "unlockEvents": 30,
     "family": "insulated-servos",
     "tier": 1,
+    "icon": "T_UI_AFX_Frozen_ReducedSteeringPenalty_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/insulated-servos-i"
   },
   {
@@ -1794,6 +1953,7 @@
     "unlockEvents": 30,
     "family": "insulated-servos",
     "tier": 2,
+    "icon": "T_UI_AFX_Frozen_ReducedSteeringPenalty_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/insulated-servos-ii"
   },
   {
@@ -1806,6 +1966,7 @@
     "unlockEvents": 65,
     "family": "insulated-servos",
     "tier": 3,
+    "icon": "T_UI_AFX_Frozen_ReducedSteeringPenalty_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/insulated-servos-iii"
   },
   {
@@ -1818,6 +1979,7 @@
     "unlockEvents": 45,
     "family": "jolted-boost",
     "tier": 1,
+    "icon": "T_UI_AFX_Concussed_gainSurge_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/jolted-boost-i"
   },
   {
@@ -1830,6 +1992,7 @@
     "unlockEvents": 45,
     "family": "jolted-boost",
     "tier": 2,
+    "icon": "T_UI_AFX_Concussed_gainSurge_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/jolted-boost-ii"
   },
   {
@@ -1842,6 +2005,7 @@
     "unlockEvents": 91,
     "family": "jolted-boost",
     "tier": 3,
+    "icon": "T_UI_AFX_Concussed_gainSurge_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/jolted-boost-iii"
   },
   {
@@ -1854,6 +2018,7 @@
     "unlockEvents": 55,
     "family": "kinetic-energizer",
     "tier": 1,
+    "icon": "T_UI_AFX_Energy_AddOnTakedown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/kinetic-energizer-i"
   },
   {
@@ -1866,6 +2031,7 @@
     "unlockEvents": 103,
     "family": "kinetic-energizer",
     "tier": 2,
+    "icon": "T_UI_AFX_Energy_AddOnTakedown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/kinetic-energizer-ii"
   },
   {
@@ -1878,6 +2044,7 @@
     "unlockEvents": 25,
     "family": "kinetic-refueler",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_RefillOnImpact_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/kinetic-refueler-i"
   },
   {
@@ -1890,6 +2057,7 @@
     "unlockEvents": 40,
     "family": "kinetic-refueler",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_RefillOnImpact_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/kinetic-refueler-ii"
   },
   {
@@ -1902,6 +2070,7 @@
     "unlockEvents": 55,
     "family": "kinetic-refueler",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_RefillOnImpact_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/kinetic-refueler-iii"
   },
   {
@@ -1913,6 +2082,7 @@
     "downside": "Vehicle drag is increased, reducing top speed.",
     "fault": true,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_CeleryHexing_2_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/large-cross-section"
   },
   {
@@ -1924,6 +2094,7 @@
     "downside": "Afterburner fuel refills 200% slower.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_AfterburnMustBeFull_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/leaky-tank"
   },
   {
@@ -1936,6 +2107,7 @@
     "unlockEvents": 4,
     "family": "lethal-velocity",
     "tier": 1,
+    "icon": "T_UI_AFX_Takedown_IncreaseSpeedStat_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/lethal-velocity-i"
   },
   {
@@ -1948,6 +2120,7 @@
     "unlockEvents": 4,
     "family": "lethal-velocity",
     "tier": 2,
+    "icon": "T_UI_AFX_Takedown_IncreaseSpeedStat_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/lethal-velocity-ii"
   },
   {
@@ -1960,6 +2133,7 @@
     "unlockEvents": 50,
     "family": "lethal-velocity",
     "tier": 3,
+    "icon": "T_UI_AFX_Takedown_IncreaseSpeedStat_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/lethal-velocity-iii"
   },
   {
@@ -1972,6 +2146,7 @@
     "unlockEvents": 80,
     "family": "lethal-velocity",
     "tier": 4,
+    "icon": "T_UI_AFX_Takedown_IncreaseSpeedStat_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/lethal-velocity-iv"
   },
   {
@@ -1983,6 +2158,7 @@
     "downside": "Frozen lasts 300% longer.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Frozen_LastsLonger_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/lingering-frost"
   },
   {
@@ -1994,6 +2170,7 @@
     "downside": "Cornering maneuverability is reduced.",
     "fault": true,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_PepperTarchia_2_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/massive-momentum"
   },
   {
@@ -2005,6 +2182,7 @@
     "downside": "Afterburner tank refills at a reduced rate.",
     "fault": true,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_SwedeNesodon_2_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/old-dog-old-tricks"
   },
   {
@@ -2016,6 +2194,7 @@
     "downside": "Humans aren't built for flying podracers, especially such a dusty one.",
     "fault": true,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_Custom_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/only-human"
   },
   {
@@ -2028,6 +2207,7 @@
     "unlockEvents": 0,
     "family": "optimized-fuel",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_FullFuelIncreasesPower_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-fuel-i"
   },
   {
@@ -2040,6 +2220,7 @@
     "unlockEvents": 0,
     "family": "optimized-fuel",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_FullFuelIncreasesPower_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-fuel-ii"
   },
   {
@@ -2052,6 +2233,7 @@
     "unlockEvents": 8,
     "family": "optimized-fuel",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_FullFuelIncreasesPower_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-fuel-iii"
   },
   {
@@ -2064,6 +2246,7 @@
     "unlockEvents": 60,
     "family": "optimized-fuel",
     "tier": 4,
+    "icon": "T_UI_AFX_Afterburner_FullFuelIncreasesPower_v4_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-fuel-iv"
   },
   {
@@ -2076,6 +2259,7 @@
     "unlockEvents": 25,
     "family": "optimized-inlets",
     "tier": 1,
+    "icon": "T_UI_AFX_PerfectStart_ImprovedSlipstreaming_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-inlets-i"
   },
   {
@@ -2088,6 +2272,7 @@
     "unlockEvents": 45,
     "family": "optimized-inlets",
     "tier": 2,
+    "icon": "T_UI_AFX_PerfectStart_ImprovedSlipstreaming_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-inlets-ii"
   },
   {
@@ -2100,6 +2285,7 @@
     "unlockEvents": 115,
     "family": "optimized-inlets",
     "tier": 3,
+    "icon": "T_UI_AFX_PerfectStart_ImprovedSlipstreaming_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-inlets-iii"
   },
   {
@@ -2110,6 +2296,7 @@
     "text": "While on straights, Afterburner power and top speed are increased.",
     "fault": false,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_CabbageCretornis_1_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-nozzles"
   },
   {
@@ -2122,6 +2309,7 @@
     "unlockEvents": 0,
     "family": "optimized-radiators",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_ImprovedCooldown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-radiators-i"
   },
   {
@@ -2134,6 +2322,7 @@
     "unlockEvents": 0,
     "family": "optimized-radiators",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_ImprovedCooldown_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-radiators-ii"
   },
   {
@@ -2146,6 +2335,7 @@
     "unlockEvents": 97,
     "family": "optimized-radiators",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_ImprovedCooldown_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-radiators-iii"
   },
   {
@@ -2158,6 +2348,7 @@
     "unlockEvents": 55,
     "family": "optimized-surge",
     "tier": 1,
+    "icon": "T_UI_AFX_Condition_Surging_IncreasedPotency_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-surge-i"
   },
   {
@@ -2170,6 +2361,7 @@
     "unlockEvents": 85,
     "family": "optimized-surge",
     "tier": 2,
+    "icon": "T_UI_AFX_Condition_Surging_IncreasedPotency_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-surge-ii"
   },
   {
@@ -2182,6 +2374,7 @@
     "unlockEvents": 109,
     "family": "optimized-surge",
     "tier": 3,
+    "icon": "T_UI_AFX_Condition_Surging_IncreasedPotency_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/optimized-surge-iii"
   },
   {
@@ -2192,6 +2385,7 @@
     "text": "Maximum top speed is increased.",
     "fault": false,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_PepperTarchia_1_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overbuilt-engines"
   },
   {
@@ -2202,6 +2396,7 @@
     "text": "When speed reaches 350, gain Overcharged for 10s.",
     "fault": false,
     "unlockEvents": 97,
+    "icon": "T_UI_AFX_Overcharged_GainWhileSpeeding_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overcharged-injector"
   },
   {
@@ -2212,6 +2407,7 @@
     "text": "While Overcharged, gain Surging.",
     "fault": false,
     "unlockEvents": 80,
+    "icon": "T_UI_AFX_Overcharged_GainSurge_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overcharged-supercharger"
   },
   {
@@ -2222,6 +2418,7 @@
     "text": "On System Malfunction, gain Overcharged for 10s.",
     "fault": false,
     "unlockEvents": 25,
+    "icon": "T_UI_AFX_SysMalf_GainOvercharged_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overcharged-systems"
   },
   {
@@ -2232,6 +2429,7 @@
     "text": "While Overcharged, Afterburner fuel refills 200% faster.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Afterburner_OverchargedRechargeRate_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overcharging-afterburner"
   },
   {
@@ -2242,6 +2440,7 @@
     "text": "On Ramjet activation, gain Overcharged for 10s.",
     "fault": false,
     "unlockEvents": 115,
+    "icon": "T_UI_AFX_Overcharged_RamjetActivatesOvercharged_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overcharging-propellant"
   },
   {
@@ -2254,6 +2453,7 @@
     "unlockEvents": 4,
     "family": "overflow-shielding",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_GainShieldWhenCritical_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overflow-shielding-i"
   },
   {
@@ -2266,6 +2466,7 @@
     "unlockEvents": 4,
     "family": "overflow-shielding",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_GainShieldWhenCritical_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overflow-shielding-ii"
   },
   {
@@ -2278,6 +2479,7 @@
     "unlockEvents": 97,
     "family": "overflow-shielding",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_GainShieldWhenCritical_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overflow-shielding-iii"
   },
   {
@@ -2290,6 +2492,7 @@
     "unlockEvents": 40,
     "family": "overheat-loop",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_OverheatIncreasesPowerUntilCrash_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overheat-loop-i"
   },
   {
@@ -2302,6 +2505,7 @@
     "unlockEvents": 50,
     "family": "overheat-loop",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_OverheatIncreasesPowerUntilCrash_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overheat-loop-ii"
   },
   {
@@ -2314,6 +2518,7 @@
     "unlockEvents": 75,
     "family": "overheat-loop",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_OverheatIncreasesPowerUntilCrash_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overheat-loop-iii"
   },
   {
@@ -2325,6 +2530,7 @@
     "downside": "When speed is above 450, become Burning.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Burning_GainWhileSpeeding_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/overheated-motivators"
   },
   {
@@ -2335,6 +2541,7 @@
     "text": "Choked no longer cancels active Ramjet.",
     "fault": false,
     "unlockEvents": 60,
+    "icon": "T_UI_AFX_Choke_NoInteruptCurrentRamjet_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/particulate-filter"
   },
   {
@@ -2347,6 +2554,7 @@
     "unlockEvents": 60,
     "family": "phase-change-radiators",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_CooledWhenCritical_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/phase-change-radiators-i"
   },
   {
@@ -2359,6 +2567,7 @@
     "unlockEvents": 65,
     "family": "phase-change-radiators",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_CooledWhenCritical_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/phase-change-radiators-ii"
   },
   {
@@ -2371,6 +2580,7 @@
     "unlockEvents": 103,
     "family": "phase-change-radiators",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_CooledWhenCritical_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/phase-change-radiators-iii"
   },
   {
@@ -2381,6 +2591,7 @@
     "text": "+13 Energy",
     "fault": false,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_Faulty_Ability_OneLessTotalEnergy_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/plug-f-power-cell"
   },
   {
@@ -2391,6 +2602,7 @@
     "text": "All Slipstreaming bonuses are retained until impact.",
     "fault": false,
     "unlockEvents": 40,
+    "icon": "T_UI_AFX_Slipstreaming_LastsUntilImpact_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/polished-inlets"
   },
   {
@@ -2403,6 +2615,7 @@
     "unlockEvents": 60,
     "family": "power-cascade",
     "tier": 1,
+    "icon": "T_UI_AFX_Takedown_GainSurgeAndOvercharged_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/power-cascade-i"
   },
   {
@@ -2415,6 +2628,7 @@
     "unlockEvents": 75,
     "family": "power-cascade",
     "tier": 2,
+    "icon": "T_UI_AFX_Takedown_GainSurgeAndOvercharged_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/power-cascade-ii"
   },
   {
@@ -2427,6 +2641,7 @@
     "unlockEvents": 103,
     "family": "power-cascade",
     "tier": 3,
+    "icon": "T_UI_AFX_Takedown_GainSurgeAndOvercharged_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/power-cascade-iii"
   },
   {
@@ -2439,6 +2654,7 @@
     "unlockEvents": 0,
     "family": "protective-ignition",
     "tier": 1,
+    "icon": "T_UI_AFX_PerfectStart_GainShield_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/protective-ignition-i"
   },
   {
@@ -2451,6 +2667,7 @@
     "unlockEvents": 12,
     "family": "protective-ignition",
     "tier": 2,
+    "icon": "T_UI_AFX_PerfectStart_GainShield_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/protective-ignition-ii"
   },
   {
@@ -2463,6 +2680,7 @@
     "unlockEvents": 60,
     "family": "protective-ignition",
     "tier": 3,
+    "icon": "T_UI_AFX_PerfectStart_GainShield_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/protective-ignition-iii"
   },
   {
@@ -2473,6 +2691,7 @@
     "text": "While Overcharged, protected from System Malfunction.",
     "fault": false,
     "unlockEvents": 91,
+    "icon": "T_UI_AFX_Overcharged_RemoveSysMalf_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/protective-overcharge"
   },
   {
@@ -2483,6 +2702,7 @@
     "text": "Upon Surging, ready Ramjet and reset heat.",
     "fault": false,
     "unlockEvents": 80,
+    "icon": "T_UI_AFX_Surging_ResetRamjet_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/purging-surge"
   },
   {
@@ -2494,6 +2714,7 @@
     "downside": "While Slipstreaming, gradually become Burning.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Slipstreaming_GainHeated_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/pyrophoric-surfaces"
   },
   {
@@ -2506,6 +2727,7 @@
     "unlockEvents": 16,
     "family": "ramjet-accelerator",
     "tier": 1,
+    "icon": "T_UI_AFX_Cooled_PowerfulRamjet_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-accelerator-i"
   },
   {
@@ -2518,6 +2740,7 @@
     "unlockEvents": 16,
     "family": "ramjet-accelerator",
     "tier": 2,
+    "icon": "T_UI_AFX_Cooled_PowerfulRamjet_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-accelerator-ii"
   },
   {
@@ -2530,6 +2753,7 @@
     "unlockEvents": 70,
     "family": "ramjet-accelerator",
     "tier": 3,
+    "icon": "T_UI_AFX_Cooled_PowerfulRamjet_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-accelerator-iii"
   },
   {
@@ -2542,6 +2766,7 @@
     "unlockEvents": 109,
     "family": "ramjet-accelerator",
     "tier": 4,
+    "icon": "T_UI_AFX_Cooled_PowerfulRamjet_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-accelerator-iv"
   },
   {
@@ -2554,6 +2779,7 @@
     "unlockEvents": 0,
     "family": "ramjet-cooling",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_CoolsFaster_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-cooling-i"
   },
   {
@@ -2566,6 +2792,7 @@
     "unlockEvents": 0,
     "family": "ramjet-cooling",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_CoolsFaster_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-cooling-ii"
   },
   {
@@ -2578,6 +2805,7 @@
     "unlockEvents": 40,
     "family": "ramjet-cooling",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_CoolsFaster_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-cooling-iii"
   },
   {
@@ -2590,6 +2818,7 @@
     "unlockEvents": 65,
     "family": "ramjet-cooling",
     "tier": 4,
+    "icon": "T_UI_AFX_Ramjet_CoolsFaster_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-cooling-iv"
   },
   {
@@ -2602,6 +2831,7 @@
     "unlockEvents": 4,
     "family": "ramjet-power",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_MorePower_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-power-i"
   },
   {
@@ -2614,6 +2844,7 @@
     "unlockEvents": 4,
     "family": "ramjet-power",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_MorePower_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-power-ii"
   },
   {
@@ -2626,6 +2857,7 @@
     "unlockEvents": 85,
     "family": "ramjet-power",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_MorePower_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-power-iii"
   },
   {
@@ -2638,6 +2870,7 @@
     "unlockEvents": 109,
     "family": "ramjet-power",
     "tier": 4,
+    "icon": "T_UI_AFX_Ramjet_MorePower_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-power-iv"
   },
   {
@@ -2648,6 +2881,7 @@
     "text": "During System Malfunction, Ramjet is 100% more powerful.",
     "fault": false,
     "unlockEvents": 75,
+    "icon": "T_UI_AFX_SysMalf_PowerfulRamjetAndAfterburner_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramjet-reconfiguration"
   },
   {
@@ -2660,6 +2894,7 @@
     "unlockEvents": null,
     "family": "ramming-jet",
     "tier": 1,
+    "icon": "T_UI_AFX_MYST_Ramjet_MorePowerPerTakedown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramming-jet-i"
   },
   {
@@ -2672,6 +2907,7 @@
     "unlockEvents": null,
     "family": "ramming-jet",
     "tier": 2,
+    "icon": "T_UI_AFX_MYST_Ramjet_MorePowerPerTakedown_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramming-jet-ii"
   },
   {
@@ -2684,6 +2920,7 @@
     "unlockEvents": null,
     "family": "ramming-jet",
     "tier": 3,
+    "icon": "T_UI_AFX_MYST_Ramjet_MorePowerPerTakedown_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/ramming-jet-iii"
   },
   {
@@ -2694,6 +2931,7 @@
     "text": "On Perfect Landing, refill Afterburner fuel by 50%.",
     "fault": false,
     "unlockEvents": 50,
+    "icon": "T_UI_AFX_Afterburner_RefillOnLanding_V1_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/reconstituted-fuel-i"
   },
   {
@@ -2704,6 +2942,7 @@
     "text": "On Perfect Landing, fully refill Afterburner fuel.",
     "fault": false,
     "unlockEvents": 60,
+    "icon": "T_UI_AFX_Afterburner_RefillOnLanding_V2_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/reconstituted-fuel-ii"
   },
   {
@@ -2714,6 +2953,7 @@
     "text": "On landing, fully refill Afterburner fuel.",
     "fault": false,
     "unlockEvents": 91,
+    "icon": "T_UI_AFX_Afterburner_RefillOnLanding_V2_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/reconstituted-fuel-iii"
   },
   {
@@ -2724,6 +2964,7 @@
     "text": "After a Crash, gain Cooled for 30s.",
     "fault": false,
     "unlockEvents": 97,
+    "icon": "T_UI_AFX_Crash_ReturnWithCooled_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/recovery-coolant"
   },
   {
@@ -2734,6 +2975,7 @@
     "text": "After a Crash, gain Shielded for 30s.",
     "fault": false,
     "unlockEvents": 70,
+    "icon": "T_UI_AFX_Crash_ReturnWithShield_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/recovery-shield"
   },
   {
@@ -2744,6 +2986,7 @@
     "text": "After a Crash, gain Surging for 30s.",
     "fault": false,
     "unlockEvents": 103,
+    "icon": "T_UI_AFX_Crash_ReturnWithSurge_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/recovery-surge"
   },
   {
@@ -2754,6 +2997,7 @@
     "text": "Releasing Ramjet while Redlining readies it but increases heat gain.",
     "fault": false,
     "unlockEvents": 91,
+    "icon": "T_UI_AFX_Ramjet_OverheatingReleaseResetsHeat_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/redline-purge"
   },
   {
@@ -2764,6 +3008,7 @@
     "text": "While Redlining, Ramjet is 100% more powerful.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Ramjet_AlarmBoost_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/redlining-power"
   },
   {
@@ -2774,6 +3019,7 @@
     "text": "Upon activating an Ability, fully refill Afterburner.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Ability_RechargeAfterburner_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/refueling-abilities"
   },
   {
@@ -2784,6 +3030,7 @@
     "text": "On Takedown, ready Ramjet and reset heat.",
     "fault": false,
     "unlockEvents": 25,
+    "icon": "T_UI_AFX_Takedown_ResetHeat_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/release-actuators"
   },
   {
@@ -2794,6 +3041,7 @@
     "text": "While Surging, all Abilities reload 150% faster.",
     "fault": false,
     "unlockEvents": 75,
+    "icon": "T_UI_AFX_Surging_FasterAbilityCooldowns_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/reload-surge"
   },
   {
@@ -2804,6 +3052,7 @@
     "text": "While airborne, gain Overcharged.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Overcharge_WhenAirborne_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/repulsor-surplus"
   },
   {
@@ -2816,6 +3065,7 @@
     "unlockEvents": 0,
     "family": "repulsormod",
     "tier": 1,
+    "icon": "T_UI_AFX_Landing_PerfectBoost_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/repulsormod-i"
   },
   {
@@ -2828,6 +3078,7 @@
     "unlockEvents": 0,
     "family": "repulsormod",
     "tier": 2,
+    "icon": "T_UI_AFX_Landing_PerfectBoost_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/repulsormod-ii"
   },
   {
@@ -2840,6 +3091,7 @@
     "unlockEvents": 16,
     "family": "repulsormod",
     "tier": 3,
+    "icon": "T_UI_AFX_Landing_PerfectBoost_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/repulsormod-iii"
   },
   {
@@ -2852,6 +3104,7 @@
     "unlockEvents": 40,
     "family": "repulsormod",
     "tier": 4,
+    "icon": "T_UI_AFX_Landing_PerfectBoost_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/repulsormod-iv"
   },
   {
@@ -2862,6 +3115,7 @@
     "text": "Ramjet no longer slows Afterburner refill rate.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Afterburner_RamjetCharge_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/residual-afterburner"
   },
   {
@@ -2872,6 +3126,7 @@
     "text": "While Surging, protected from System Malfunction.",
     "fault": false,
     "unlockEvents": 109,
+    "icon": "T_UI_AFX_Surging_BlockSysMalf_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/robust-surge"
   },
   {
@@ -2882,6 +3137,7 @@
     "text": "Every 3 Takedowns restores a Crash.",
     "fault": false,
     "unlockEvents": 85,
+    "icon": "T_UI_AFX_Crashes_RestoredOnTakedowns_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/scrap-reclaimer"
   },
   {
@@ -2894,6 +3150,7 @@
     "unlockEvents": 0,
     "family": "scrap-recycler",
     "tier": 1,
+    "icon": "T_UI_AFX_Energy_GainOnTakedown_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/scrap-recycler-i"
   },
   {
@@ -2906,6 +3163,7 @@
     "unlockEvents": 0,
     "family": "scrap-recycler",
     "tier": 2,
+    "icon": "T_UI_AFX_Energy_GainOnTakedown_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/scrap-recycler-ii"
   },
   {
@@ -2918,6 +3176,7 @@
     "unlockEvents": 85,
     "family": "scrap-recycler",
     "tier": 3,
+    "icon": "T_UI_AFX_Energy_GainOnTakedown_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/scrap-recycler-iii"
   },
   {
@@ -2930,6 +3189,7 @@
     "unlockEvents": 115,
     "family": "scrap-recycler",
     "tier": 4,
+    "icon": "T_UI_AFX_Energy_GainOnTakedown_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/scrap-recycler-iv"
   },
   {
@@ -2940,6 +3200,7 @@
     "text": "On Takedown, instantly reload all Abilities.",
     "fault": false,
     "unlockEvents": 30,
+    "icon": "T_UI_AFX_Takedown_AbilityCooldown_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/scrap-reloader"
   },
   {
@@ -2952,6 +3213,7 @@
     "unlockEvents": 50,
     "family": "shield-cycler",
     "tier": 1,
+    "icon": "T_UI_AFX_Ability_GainShielded_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/shield-cycler-i"
   },
   {
@@ -2964,6 +3226,7 @@
     "unlockEvents": 80,
     "family": "shield-cycler",
     "tier": 2,
+    "icon": "T_UI_AFX_Ability_GainShielded_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/shield-cycler-ii"
   },
   {
@@ -2974,6 +3237,7 @@
     "text": "While using Afterburner, gain Shielded.",
     "fault": false,
     "unlockEvents": 103,
+    "icon": "T_UI_AFX_Afterburner_gainShieldWhile_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/shielding-fuel"
   },
   {
@@ -2984,6 +3248,7 @@
     "text": "Upon taking first place, gain Shielded for 30s.",
     "fault": false,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_FirstPlace_GainShielded_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/shielding-lead"
   },
   {
@@ -2994,6 +3259,7 @@
     "text": "While using Ramjet, gain Shielded.",
     "fault": false,
     "unlockEvents": 91,
+    "icon": "T_UI_AFX_Ramjet_GainShieldWhile_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/shielding-ramjet"
   },
   {
@@ -3006,6 +3272,7 @@
     "unlockEvents": 0,
     "family": "shielding-repulsor",
     "tier": 1,
+    "icon": "T_UI_AFX_Shielded_GainOnPerfectLanding_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/shielding-repulsor-i"
   },
   {
@@ -3018,6 +3285,7 @@
     "unlockEvents": 0,
     "family": "shielding-repulsor",
     "tier": 2,
+    "icon": "T_UI_AFX_Shielded_GainOnPerfectLanding_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/shielding-repulsor-ii"
   },
   {
@@ -3030,6 +3298,7 @@
     "unlockEvents": 8,
     "family": "shielding-repulsor",
     "tier": 3,
+    "icon": "T_UI_AFX_Shielded_GainOnPerfectLanding_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/shielding-repulsor-iii"
   },
   {
@@ -3040,6 +3309,7 @@
     "text": "While Surging, gain Shielded.",
     "fault": false,
     "unlockEvents": 97,
+    "icon": "T_UI_AFX_Surge_GainShielded_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/shielding-surge"
   },
   {
@@ -3050,6 +3320,7 @@
     "text": "While Slipstreaming, speed-based Ramjet cooling improved by 100%.",
     "fault": false,
     "unlockEvents": 40,
+    "icon": "T_UI_AFX_Cooled_CoolRamjetWhileSlipstream_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/slipstream-intakes"
   },
   {
@@ -3061,6 +3332,7 @@
     "downside": "Maximum top speed is reduced.",
     "fault": true,
     "unlockEvents": null,
+    "icon": "T_UI_AFX_PlaneTrait_GarlicSordes_2_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/small-thrusters"
   },
   {
@@ -3073,6 +3345,7 @@
     "unlockEvents": 4,
     "family": "spark-plugs",
     "tier": 1,
+    "icon": "T_UI_AFX_Ignition_PerfectStartPower_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/spark-plugs-i"
   },
   {
@@ -3085,6 +3358,7 @@
     "unlockEvents": 4,
     "family": "spark-plugs",
     "tier": 2,
+    "icon": "T_UI_AFX_Ignition_PerfectStartPower_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/spark-plugs-ii"
   },
   {
@@ -3097,6 +3371,7 @@
     "unlockEvents": 30,
     "family": "spark-plugs",
     "tier": 3,
+    "icon": "T_UI_AFX_Ignition_PerfectStartPower_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/spark-plugs-iii"
   },
   {
@@ -3109,6 +3384,7 @@
     "unlockEvents": 70,
     "family": "spark-plugs",
     "tier": 4,
+    "icon": "T_UI_AFX_Ignition_PerfectStartPower_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/spark-plugs-iv"
   },
   {
@@ -3120,6 +3396,7 @@
     "downside": "At race start, System Malfunction for 30s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_GainSysMalf_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/startup-malfunction"
   },
   {
@@ -3131,6 +3408,7 @@
     "downside": "Vehicle steering pulls in one direction.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_StuckSteering_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/steering-malfunction"
   },
   {
@@ -3142,6 +3420,7 @@
     "downside": "System Malfunction triggers Critical Malfunction more often.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_CritMalf_MoreLikely_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/strained-circuits"
   },
   {
@@ -3152,6 +3431,7 @@
     "text": "After every Crash, +8% top speed.",
     "fault": false,
     "unlockEvents": 75,
+    "icon": "T_UI_AFX_Crashes_IncreaseTopSpeed_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/strategic-ablation"
   },
   {
@@ -3162,6 +3442,7 @@
     "text": "While Frozen, Cooled is 100% more potent.",
     "fault": false,
     "unlockEvents": 115,
+    "icon": "T_UI_AFX_Frozen_MoreCooling_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/subzero-cooling"
   },
   {
@@ -3172,6 +3453,7 @@
     "text": "While Frozen, Ramjet is 100% more powerful.",
     "fault": false,
     "unlockEvents": 40,
+    "icon": "T_UI_AFX_Frozen_PowerfulRamjet_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/superconducting-ramjet"
   },
   {
@@ -3182,6 +3464,7 @@
     "text": "While Cooled, Abilities reload 200% faster.",
     "fault": false,
     "unlockEvents": 85,
+    "icon": "T_UI_AFX_Cooled_FastAbilityCooldown_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/supercooled-attachments"
   },
   {
@@ -3194,6 +3477,7 @@
     "unlockEvents": 20,
     "family": "surging-alarm",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_GainSurgingWhenCritical_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/surging-alarm-i"
   },
   {
@@ -3206,6 +3490,7 @@
     "unlockEvents": 20,
     "family": "surging-alarm",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_GainSurgingWhenCritical_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/surging-alarm-ii"
   },
   {
@@ -3218,6 +3503,7 @@
     "unlockEvents": 45,
     "family": "surging-alarm",
     "tier": 3,
+    "icon": "T_UI_AFX_Ramjet_GainSurgingWhenCritical_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/surging-alarm-iii"
   },
   {
@@ -3228,6 +3514,7 @@
     "text": "When entering Surging, fully refill Afterburner.",
     "fault": false,
     "unlockEvents": 80,
+    "icon": "T_UI_AFX_Afterburner_SurgingFillsFuel_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/surging-fuel"
   },
   {
@@ -3240,6 +3527,7 @@
     "unlockEvents": 20,
     "family": "surging-inlets",
     "tier": 1,
+    "icon": "T_UI_AFX_Slipstream_gainSurging_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/surging-inlets-i"
   },
   {
@@ -3252,6 +3540,7 @@
     "unlockEvents": 30,
     "family": "surging-inlets",
     "tier": 2,
+    "icon": "T_UI_AFX_Slipstream_gainSurging_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/surging-inlets-ii"
   },
   {
@@ -3264,6 +3553,7 @@
     "unlockEvents": 55,
     "family": "surging-inlets",
     "tier": 3,
+    "icon": "T_UI_AFX_Slipstream_gainSurging_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/surging-inlets-iii"
   },
   {
@@ -3274,6 +3564,7 @@
     "text": "At 8+ Energy, gain Cooled.",
     "fault": false,
     "unlockEvents": 70,
+    "icon": "T_UI_AFX_Energy_GainCooled_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/surplus-cooling"
   },
   {
@@ -3284,6 +3575,7 @@
     "text": "At 8+ Energy, gain Surging.",
     "fault": false,
     "unlockEvents": 45,
+    "icon": "T_UI_AFX_Energy_GainSurging_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/surplus-surging"
   },
   {
@@ -3296,6 +3588,7 @@
     "unlockEvents": 0,
     "family": "system-degausser",
     "tier": 1,
+    "icon": "T_UI_AFX_SysMalf_ShorterMalfunction_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/system-degausser-i"
   },
   {
@@ -3308,6 +3601,7 @@
     "unlockEvents": 0,
     "family": "system-degausser",
     "tier": 2,
+    "icon": "T_UI_AFX_SysMalf_ShorterMalfunction_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/system-degausser-ii"
   },
   {
@@ -3319,6 +3613,7 @@
     "downside": "System Malfunction lasts 200% longer.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_SysMalf_TripleDuration_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/system-fragmentation"
   },
   {
@@ -3329,6 +3624,7 @@
     "text": "During System Malfunction and 10s after, gain Surging.",
     "fault": false,
     "unlockEvents": 115,
+    "icon": "T_UI_AFX_SysMalf_GainSurge_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/system-surge"
   },
   {
@@ -3339,6 +3635,7 @@
     "text": "Perfect recovery from Critical Malfunction recovers a Crash.",
     "fault": false,
     "unlockEvents": 20,
+    "icon": "T_UI_AFX_CritMalf_PerfectRecoversCrash_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/systematic-servicing"
   },
   {
@@ -3349,6 +3646,7 @@
     "text": "While Burning, gain Overcharged.",
     "fault": false,
     "unlockEvents": 85,
+    "icon": "T_UI_AFX_Burning_GainOvercharged_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/thermal-inverter"
   },
   {
@@ -3362,6 +3660,7 @@
     "unlockEvents": 0,
     "family": "thermal-loop",
     "tier": 2,
+    "icon": "T_UI_AFX_Faulty_Ramjet_HeatIncrease_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/thermal-loop"
   },
   {
@@ -3372,6 +3671,7 @@
     "text": "While using Afterburner, gain Cooled.",
     "fault": false,
     "unlockEvents": 45,
+    "icon": "T_UI_AFX_Afterburner_gainCooledWhile_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/thermoactive-fuel"
   },
   {
@@ -3384,6 +3684,7 @@
     "unlockEvents": 16,
     "family": "thermocycling-dampers",
     "tier": 1,
+    "icon": "T_UI_AFX_Ramjet_ResetHeatOnLanding_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/thermocycling-dampers-i"
   },
   {
@@ -3396,6 +3697,7 @@
     "unlockEvents": 20,
     "family": "thermocycling-dampers",
     "tier": 2,
+    "icon": "T_UI_AFX_Ramjet_ResetHeatOnLanding_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/thermocycling-dampers-ii"
   },
   {
@@ -3408,6 +3710,7 @@
     "unlockEvents": 30,
     "family": "thermophilic-fuel",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_OverheatIncreasesPowerUntilCrash_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/thermophilic-fuel-i"
   },
   {
@@ -3420,6 +3723,7 @@
     "unlockEvents": 65,
     "family": "thermophilic-fuel",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_OverheatIncreasesPowerUntilCrash_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/thermophilic-fuel-ii"
   },
   {
@@ -3432,6 +3736,7 @@
     "unlockEvents": 97,
     "family": "thermophilic-fuel",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_OverheatIncreasesPowerUntilCrash_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/thermophilic-fuel-iii"
   },
   {
@@ -3442,6 +3747,7 @@
     "text": "Ramjet temperature can decrease while active.",
     "fault": false,
     "unlockEvents": 103,
+    "icon": "T_UI_AFX_Ramjet_TempCanDropWhileBoosting_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/uncapped-cooling"
   },
   {
@@ -3454,6 +3760,7 @@
     "unlockEvents": 0,
     "family": "underbody-intakes",
     "tier": 1,
+    "icon": "T_UI_AFX_Afterburner_BetterWhileAirborne_v1_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/underbody-intakes-i"
   },
   {
@@ -3466,6 +3773,7 @@
     "unlockEvents": 0,
     "family": "underbody-intakes",
     "tier": 2,
+    "icon": "T_UI_AFX_Afterburner_BetterWhileAirborne_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/underbody-intakes-ii"
   },
   {
@@ -3478,6 +3786,7 @@
     "unlockEvents": 25,
     "family": "underbody-intakes",
     "tier": 3,
+    "icon": "T_UI_AFX_Afterburner_BetterWhileAirborne_v3_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/underbody-intakes-iii"
   },
   {
@@ -3489,6 +3798,7 @@
     "downside": "Overcharged is blocked.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_BlockOvercharged_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/underclocking-device"
   },
   {
@@ -3500,6 +3810,7 @@
     "downside": "Burning no longer ends by itself.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Burning_NoDecay_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/unquenchable-components"
   },
   {
@@ -3511,6 +3822,7 @@
     "downside": "During System Malfunction, Afterburner tank is emptied.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_SysMalf_LessPowerfulAfterburner_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/unreliable-afterburner"
   },
   {
@@ -3522,6 +3834,7 @@
     "downside": "At race start, become Disrupted for 20s.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_GainDisrupted_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/unsettled-start"
   },
   {
@@ -3533,6 +3846,7 @@
     "downside": "On System Malfunction, become Corroded.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_SysMalf_BecomeCorroded_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/unstable-plating"
   },
   {
@@ -3543,6 +3857,7 @@
     "text": "Start a race with +4 Energy, lost on Crash.",
     "fault": false,
     "unlockEvents": 8,
+    "icon": "T_UI_AFX_Ability_MoreTotalEnergyUntilCrash_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/volatile-battery"
   },
   {
@@ -3554,6 +3869,7 @@
     "downside": "While using Afterburner, become Burning.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Afterburner_GainBurning_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/volatile-fuel"
   },
   {
@@ -3567,6 +3883,7 @@
     "unlockEvents": 0,
     "family": "weak-ramjet",
     "tier": 2,
+    "icon": "T_UI_AFX_Faulty_Ramjet_LessPower_v2_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/weak-ramjet"
   },
   {
@@ -3578,6 +3895,7 @@
     "downside": "On impact, become Concussed.",
     "fault": true,
     "unlockEvents": 0,
+    "icon": "T_UI_AFX_Faulty_Concussed_OnImpact_Lg_Icn",
     "source": "https://galacticracer.gameslantern.com/vehicle-parts/weakened-cockpit"
   }
 ]

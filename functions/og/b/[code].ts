@@ -3,6 +3,7 @@ import wasm from '@resvg/resvg-wasm/index_bg.wasm';
 import { decodeBuild } from '../../../src/lib/build';
 import { buildCardSvg } from '../../../src/lib/build-card';
 import { gameData } from '../../../src/data';
+import { artUrlsFor, mimeOf, toBase64 } from '../../../src/lib/game-art';
 
 interface Env {
   ASSETS: Fetcher;
@@ -39,7 +40,16 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, params, env, w
   })();
   const fonts = await ready;
 
-  const resvg = new Resvg(buildCardSvg(build, gameData), {
+  // Embed the build's art from our own static files.
+  const images: Record<string, string> = {};
+  await Promise.all(
+    artUrlsFor(build, gameData).map(async (url) => {
+      const res = await env.ASSETS.fetch(new URL(url, request.url));
+      if (res.ok) images[url] = `data:${mimeOf(url)};base64,${toBase64(new Uint8Array(await res.arrayBuffer()))}`;
+    }),
+  );
+
+  const resvg = new Resvg(buildCardSvg(build, gameData, { images }), {
     fitTo: { mode: 'width', value: 1200 },
     font: { fontBuffers: [fonts.medium, fonts.bold], defaultFontFamily: 'Rajdhani', loadSystemFonts: false },
   });
