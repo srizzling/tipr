@@ -2,7 +2,7 @@
 
 Status of **This Is Pod Racing (tipr)**, a build planner for Star Wars: Galactic Racer. Unofficial fan project.
 
-Scope decisions so far: campaign builds only, client-side only (no backend), compare-only ranking, PC save files first, ads reserved but not live.
+Scope decisions so far: campaign builds only, client-side only (one small exception: the builds board uses one D1 table), compare-only ranking, PC save files first, ads reserved but not live.
 
 ## v1 prototype (in progress)
 
@@ -12,7 +12,7 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [ ] Game data seeded from Games Lantern (4 classes, 20 styles, 45 abilities, ~318 parts, glossary)
 - [x] Faults are optional per part (they happen during a run), and the picker groups all 59 by the system they affect
 - [x] Drag-and-drop abilities: library to slot, slot to slot (swap), slot to library (clear); touch uses long-press
-- [ ] Planner: class, racer style and rank, four ability slots plus crash slot, up to four parts, tuning boxes
+- [ ] Planner: class, racer style and rank, four ability slots plus crash slot, up to six parts, tuning boxes
 - [ ] "All unlocked" and "My unlocks" modes (manual sliders for events completed and Tuning Points earned)
 - [x] Share build by link: `/b/<code>` opens a read-only build page with an "Edit this build" button
 - [ ] Podracer class and the six multiplayer-only podracer styles
@@ -57,6 +57,10 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 - [x] **Build verdicts:** a funny title and roast for every build, written from what is in it (stat spread, faults, class, style, abilities), with a reroll button. Shown on the planner, shared pages, the share image and link-preview text. 17 rules, about 60 original jokes
 - [ ] More jokes and community in-jokes: add rules as the community's running gags appear, and let people submit verdicts (needs a backend)
 - [ ] Donations link: set `DONATE_URL` in `src/site.ts` (and add `.github/FUNDING.yml`) once a platform is chosen
+- [x] **Builds board:** `/builds/` lists builds that players shared with a video link (YouTube, Twitch, Streamable, Medal, Vimeo). No sign-in and no approval: links go live at once. A **Report** button hides a link for the reporter immediately, and for everyone after 3 different people report it. Stored in one D1 table, read through a 60-second edge cache, with a per-IP rate limit, a honeypot field and a host allowlist. Needs the D1 database from OpenTofu and its id in `wrangler.jsonc` (see `infra/README.md`) before the next release
+- [x] **Reddit builds on the board:** the same `/builds/` list also shows builds spotted in r/StarWarsGalacticRacer posts, tagged **From Reddit**, crediting the author and linking to their post, mixed in by date. They are picked by hand from `src/data/discover.json` and bundled into the page (no backend; `/discover/` redirects to `/builds/`). First batch: 4 builds, because only a few of 85 recent posts show a readable build screen (the rest are clips, memes or discussion). Two of the four came from the poster's own comment under a video post, so comments are worth checking, but Reddit rate-limits unauthenticated reads (HTTP 429) and 3 video posts' comments could not be fetched. Each Reddit card has a click-to-load embed ("Watch the video here" or "Show the screenshot here"): nothing is requested from Reddit until the visitor clicks, then Reddit's own embed page (`embed.reddit.com`) loads in a sandboxed iframe, with no script of theirs on our pages. The CSP denies frames everywhere except that domain on `/builds/` (set per page in `src/pages/builds.astro`), and `redditEmbedUrl` only ever builds a URL from a plain post permalink. Reddit sees the visit and may set its own cookies once loaded, which the card says. Reddit entries have no Report button. Their level, speed and boxes are counted by eye from the screenshot (green boxes as Tuning Points, white as extra boxes), so a box or two may be off. `src/lib/discover.test.ts` checks every id against the game data
+- [ ] **Before launch: set `PUBLIC_CONTACT_URL`** (a `mailto:` or form, see `src/site.ts`) so the people credited as Reddit sources on the builds board can ask for a build to be removed. The page hides the line until it is set
+- [ ] Builds board follow-ups: Cloudflare Turnstile if spam shows up, a way to unhide a link someone reported unfairly (today: `wrangler d1 execute`), and a "my submissions" list
 - [x] **Garage:** save builds in this browser, rename, delete, open, compare and copy links on `/garage/`; the compare page can pick from it
 - [x] Tuning hint under the stats: what the next box costs, points to max, and points left in My unlocks mode
 - [x] Parts that need more events than you have completed are flagged in My unlocks mode
@@ -74,6 +78,7 @@ Scope decisions so far: campaign builds only, client-side only (no backend), com
 
 ## v3: community and ranking
 
+- [x] **Extra boxes:** the planner has a "Tuning Points / Extra boxes" switch above the stat rows; each stat holds 10 boxes (7 small, 3 large), Tuning Point boxes are bright and extra ones gold, both add 4 km/h and Energy, and compare, the share image and the lists count them. Share links gain an optional eighth element only when a build has extra boxes, so every older link is unchanged
 - [ ] **Backend** (Cloudflare Workers and D1) and sign-in
 - [ ] Publish builds, upvotes and "Best builds per style or class"
 - [ ] Build comments and "fork this build"
@@ -88,7 +93,8 @@ These are conflicts or gaps in the sources, so they are marked unverified in the
 - Tuning Points awarded per Scenario, Galactic Gauntlet and Championship Race, and whether the +1 for a race needs a top-three finish
 - Whether "15" is the vehicle level cap (14 purchasable boxes) or a separate limit
 - Whether campaign Tuning Points have any effect in multiplayer (the developers say upgrade perks match, but progression is separate)
-- Number of part slots (sources say 4) and ability slots (sources say up to 5)
+- Ability slots (sources say up to 5). Part slots: two player screenshots show "6/6" and one shows "3/4", so the slot count seems to grow with progress (4 early, up to 6). We allow 6 and do not model how slots unlock
+- Tuning boxes: modelled as **Tuning Point boxes** (at most 14, 7 per stat) plus **extra boxes** (up to 10 boxes per stat in all). Five player screenshots (27 to 59 filled boxes) fit `speed = base + 4 km/h x every filled box` to within 1 or 2 km/h (the game shows 1 more than we do), and all four screenshots that show green boxes have exactly 14 of them, never more than 7 in a stat, so green looks like Tuning Points and white like another source (perhaps the in-tour and shop +1 upgrades). That reading is still unconfirmed: it needs a save or an in-game check. Also unconfirmed: whether Energy counts extra Battery boxes (it looks like 3 plus every Battery box)
 - Cost of unlocking the Speeder Bike and Skim Speeder (10 and 20 Tuning Points are reported)
 - Red downside text for every Fault part
 - Save file format and property names

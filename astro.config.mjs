@@ -26,7 +26,8 @@ export default defineConfig({
   site: process.env.SITE_URL ?? 'https://thisispodracing.pages.dev',
   integrations: [react(), sharedBuildRewrite, sitemap({ filter: (page) => !page.includes('/b/') })],
   // Astro hashes its own inline scripts and styles and emits a Content-Security-Policy <meta> tag.
-  security: { csp: true },
+  // Pages may frame only themselves (nothing does); the builds page adds Reddit's embed domain for its click-to-load posts.
+  security: { csp: { directives: ["frame-src 'self'"] } },
   // Fetch a page when the pointer hovers its link, so moving between reference pages feels instant.
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
 });
