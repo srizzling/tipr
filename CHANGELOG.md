@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/srizzling/tipr/compare/v0.2.0...v0.2.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* **deploy:** 🐛 set the builds board D1 database id ([#18](https://github.com/srizzling/tipr/issues/18)) ([0f77b51](https://github.com/srizzling/tipr/commit/0f77b516451ba85b91114ca8bd894fa3cc27b2f8))
+
 ## [0.2.0](https://github.com/srizzling/tipr/compare/v0.1.1...v0.2.0) (2026-10-23)
 
 
