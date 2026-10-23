@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/srizzling/tipr/compare/v0.1.1...v0.2.0) (2026-10-23)
+
+
+### Features
+
+* builds board, Reddit builds and extra boxes ([#16](https://github.com/srizzling/tipr/issues/16)) ([c01c81d](https://github.com/srizzling/tipr/commit/c01c81d428a0ff6babb6f42b9d65dc97b17ae320))
+
 ## [0.1.1](https://github.com/srizzling/tipr/compare/v0.1.0...v0.1.1) (2026-10-21)
 
 
