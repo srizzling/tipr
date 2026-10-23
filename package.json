@@ -16,7 +16,10 @@
     "check:budget": "node scripts/check-budget.mjs",
     "data:check": "node scripts/scrape-data.mjs build --check",
     "data:refresh": "node scripts/scrape-data.mjs all --refresh",
-    "test": "vitest run"
+    "test": "vitest run",
+    "db:local": "wrangler d1 migrations apply DB --local",
+    "db:remote": "wrangler d1 migrations apply DB --remote",
+    "dev:functions": "astro build && wrangler pages dev dist"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.1",

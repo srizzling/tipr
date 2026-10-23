@@ -8,7 +8,7 @@
 // (to create the bucket). It is only used here. The script then creates:
 //   1. a private R2 bucket for OpenTofu state,
 //   2. R2 keys that can only read and write that bucket (the key id is the token id, the secret is its SHA-256, as R2 expects),
-//   3. a narrow API token with only "Pages Write", used by OpenTofu and by the release workflow's deploy step.
+//   3. a narrow API token with only "Pages Write" and "D1 Write", used by OpenTofu and by the release workflow's deploy step.
 // and writes infra/.env (mode 600, git-ignored) and infra/backend.hcl (git-ignored). With --github it also stores the Pages
 // token and the account id as secrets of the `production` environment on GitHub. Secrets are never printed.
 import { execFileSync } from 'node:child_process';
@@ -121,11 +121,11 @@ if (pagesToken && !rotate) {
 } else {
   const made = await cf('POST', `/accounts/${account}/tokens`, {
     name: 'thisispodracing pages deploy',
-    policies: [{ effect: 'allow', resources: { [`com.cloudflare.api.account.${account}`]: '*' }, permission_groups: [group('Pages Write')] }],
+    policies: [{ effect: 'allow', resources: { [`com.cloudflare.api.account.${account}`]: '*' }, permission_groups: [group('Pages Write'), group('D1 Write')] }],
   });
   if (!made.success) fail(`could not create the Pages token: ${explain(made)}`);
   pagesToken = made.result.value;
-  say(`Pages token: ${dryRun ? 'would be created' : 'created'}, with only "Pages Write"`);
+  say(`Pages token: ${dryRun ? 'would be created' : 'created'}, with only "Pages Write" and "D1 Write"`);
 }
 
 if (dryRun) {
