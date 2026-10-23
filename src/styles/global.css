@@ -95,7 +95,10 @@ ul { list-style: none; }
 .boxes { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
 .box { width: 15px; height: 12px; border-radius: 4px; border: 0; background: #6f8a8c; padding: 0; opacity: 0.55; }
 .box.on { background: #f1f6f4; opacity: 1; }
-.box.big { width: 20px; height: 15px; margin-left: 2px; background: #6f8a8c; opacity: 0.35; }
+.box.big { width: 20px; height: 15px; background: #6f8a8c; opacity: 0.35; }
+.box.big:nth-child(8) { margin-left: 2px; }
+.box.extra, .box.big.extra { background: var(--gold); opacity: 1; }
+.box.big.on { background: #f1f6f4; opacity: 1; }
 .energy { padding: 6px 4px 0; }
 .dots { display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap; }
 .dot { width: 9px; height: 9px; border-radius: 50%; background: #6f8a8c; opacity: 0.5; }
@@ -313,5 +316,16 @@ button.pill:disabled { opacity: 0.4; cursor: not-allowed; }
 .garage-actions .danger { color: #f2b3aa; }
 .garage-rename { display: flex; gap: 8px; }
 .garage-rename input { flex: 1; }
+.field.plain { text-transform: none; font-weight: 500; font-size: 1rem; letter-spacing: 0; }
+.board-form { display: grid; gap: 12px; }
+.board-form .label { display: block; font-size: 0.8rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+.board-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.board-send { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.board-send .pill:disabled { opacity: 0.6; }
+.form-error { color: #f2b3aa; font-weight: 600; }
+.board-notice { background: var(--row); border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; }
+.fault-tag { color: #f2b3aa; }
+.reddit-frame { display: block; width: 100%; max-width: 640px; height: 500px; margin-top: 8px; border: 0; border-radius: 8px; background: var(--slate-3); }
+.src-tag { margin-left: 10px; padding: 1px 9px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; vertical-align: middle; }
 .garage-pick { margin-top: 8px; text-transform: none; font-weight: 600; }
 

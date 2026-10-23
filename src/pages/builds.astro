@@ -1,0 +1,27 @@
+---
+import Ref from '../layouts/Ref.astro';
+import Builds from '../components/Builds';
+import { CONTACT_URL } from '../site';
+
+// Only this page may frame anything, and only Reddit's embed domain (see the Reddit cards in Builds.tsx).
+Astro.csp?.insertDirective('frame-src https://embed.reddit.com');
+---
+
+<Ref
+  title="Builds with video"
+  description="Star Wars: Galactic Racer builds shared by players with a link to a video, plus builds spotted on Reddit and credited to their authors."
+  heading="Builds"
+  kicker="Shared by players"
+>
+  <p slot="meta" class="lede">
+    Builds players have shared with a video, and builds spotted in Reddit posts (tagged <b>From Reddit</b> and credited to
+    their authors). Add your own, or report a link that does not belong.
+  </p>
+  <Builds client:only="react">
+    <section class="panel" slot="fallback"><p class="hint">Loading the board…</p></section>
+  </Builds>
+  <p class="hint">
+    Not affiliated with Reddit or the players credited.
+    {CONTACT_URL && <> Posted one of the Reddit builds and want it removed? <a href={CONTACT_URL}>Tell us</a> and it comes down.</>}
+  </p>
+</Ref>

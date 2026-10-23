@@ -4,7 +4,14 @@ import { STAT_IDS, type StatId } from '../data/types';
 export const TUNING_STEP_COSTS = [1, 3, 4, 6, 8, 9, 11, 13, 14, 16, 17, 19, 20, 22] as const;
 export const MAX_TUNING_BOXES = TUNING_STEP_COSTS.length; // 14, i.e. vehicle level 15
 export const MAX_BOXES_PER_STAT = 7; // only the 7 small boxes take Tuning Points
-export const MAX_PARTS = 4;
+/**
+ * Every stat row on the game's build screen has 10 boxes: 7 small and 3 large. Tuning Points fill at most 14 boxes in
+ * total (the model above); the rest come from other sources we call "extra boxes" (the screenshots show them in a second
+ * colour). Both kinds add the same speed and Energy. See "Tuning boxes" in ROADMAP.md.
+ */
+export const MAX_STAT_BOXES = 10;
+/** The most installed parts we have seen on the game's build screen ("6/6"). Early builds show 4 slots ("3/4"), so the count seems to grow with progress. */
+export const MAX_PARTS = 6;
 export const ABILITY_SLOTS = 4;
 export const KM_H_PER_BOX = 4;
 export const PODRACER_KM_H_PER_BOX = 7;
@@ -24,7 +31,10 @@ export interface Build {
   classId: string;
   styleId: string | null;
   styleRank: 1 | 2 | 3;
+  /** Boxes bought with Tuning Points: at most 14 in total and 7 per stat. */
   tuning: Record<StatId, number>;
+  /** Extra boxes from other sources, on top of `tuning`: at most MAX_STAT_BOXES per stat in all. */
+  bonus: Record<StatId, number>;
   abilities: (string | null)[]; // ABILITY_SLOTS long
   crashAbility: string | null;
   parts: InstalledPart[]; // <= MAX_PARTS
@@ -40,10 +50,28 @@ export function newBuild(classId: string): Build {
     styleId: null,
     styleRank: 1,
     tuning: emptyTuning(),
+    bonus: emptyTuning(),
     abilities: Array(ABILITY_SLOTS).fill(null),
     crashAbility: null,
     parts: [],
   };
+}
+
+/** Tuning boxes and extra boxes added up per stat: what the game counts for speed and Energy. */
+export function combinedBoxes(tuning: Record<StatId, number>, bonus: Record<StatId, number>): Record<StatId, number> {
+  return Object.fromEntries(STAT_IDS.map((s) => [s, tuning[s] + bonus[s]])) as Record<StatId, number>;
+}
+
+/** Drops extra boxes that no longer fit once Tuning Point boxes were added (a stat holds MAX_STAT_BOXES in all). */
+export function clampBonus(tuning: Record<StatId, number>, bonus: Record<StatId, number>): Record<StatId, number> {
+  return Object.fromEntries(
+    STAT_IDS.map((s) => [s, Math.max(0, Math.min(Math.floor(Number(bonus[s]) || 0), MAX_STAT_BOXES - tuning[s]))]),
+  ) as Record<StatId, number>;
+}
+
+/** Sets a stat's box count to `total` (Tuning Point boxes included) by changing only its extra boxes. */
+export function setBonusTotal(tuning: Record<StatId, number>, bonus: Record<StatId, number>, stat: StatId, total: number): Record<StatId, number> {
+  return clampBonus(tuning, { ...bonus, [stat]: Math.max(0, Math.floor(total) - tuning[stat]) });
 }
 
 export function totalBoxes(tuning: Record<StatId, number>): number {
@@ -151,6 +179,8 @@ export function encodeBuild(b: Build): string {
     b.abilities,
     b.crashAbility,
     b.parts.map((p) => (p.fault ? [p.id, p.fault] : p.id)),
+    // Only written when there are extra boxes, so every build without them keeps the code it always had.
+    ...(STAT_IDS.some((s) => b.bonus[s] > 0) ? [STAT_IDS.map((s) => b.bonus[s])] : []),
   ];
   return btoa(JSON.stringify(compact)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
@@ -167,7 +197,7 @@ export function decodeBuild(s: string): Build | null {
   if (s.length > MAX_CODE_LENGTH || !CODE_PATTERN.test(s)) return null;
   try {
     const pad = s.replace(/-/g, '+').replace(/_/g, '/');
-    const [classId, styleId, styleRank, boxes, abilities, crashAbility, parts] = JSON.parse(
+    const [classId, styleId, styleRank, boxes, abilities, crashAbility, parts, extra] = JSON.parse(
       atob(pad + '='.repeat((4 - (pad.length % 4)) % 4)),
     );
     if (typeof classId !== 'string' || !ID_PATTERN.test(classId) || !Array.isArray(boxes) || !Array.isArray(abilities) || !Array.isArray(parts)) {
@@ -177,11 +207,13 @@ export function decodeBuild(s: string): Build | null {
     STAT_IDS.forEach((stat, i) => {
       tuning = setTuning(tuning, stat, Number(boxes[i]) || 0);
     });
+    const bonus = clampBonus(tuning, Object.fromEntries(STAT_IDS.map((stat, i) => [stat, Array.isArray(extra) ? extra[i] : 0])) as Record<StatId, number>);
     return {
       classId,
       styleId: idOrNull(styleId),
       styleRank: [1, 2, 3].includes(styleRank) ? styleRank : 1,
       tuning,
+      bonus,
       abilities: Array.from({ length: ABILITY_SLOTS }, (_, i) => idOrNull(abilities[i])),
       crashAbility: idOrNull(crashAbility),
       parts: parts

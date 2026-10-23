@@ -21,7 +21,7 @@ export default function BuildPanels({ build, data, compact }: { build: Build; da
     <main className={compact ? 'cols compact' : 'cols'}>
       <section className="panel">
         <PanelHeading title="Vehicle stats" sub={cls.name} />
-        <StatRows cls={cls} tuning={build.tuning} />
+        <StatRows cls={cls} tuning={build.tuning} bonus={build.bonus} />
       </section>
 
       <div className="stack">

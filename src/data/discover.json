@@ -1,0 +1,234 @@
+[
+  {
+    "id": "reject-the-ramjet",
+    "title": "Reject the ramjet, embrace the Afterburner",
+    "author": "Rebel_Scum_This",
+    "post": "https://www.reddit.com/r/StarWarsGalacticRacer/comments/1xb6n9n/reject_the_ramjet_embrace_the_afterburner/",
+    "posted": "2026-10-20",
+    "media": "image",
+    "note": "Beat the game on Ace difficulty. The Ramjet is only there to power up and reset the Afterburner, and Ion Bolt was picked for Kestar Bool.",
+    "build": {
+      "classId": "skim-speeder",
+      "styleId": "afterburner",
+      "styleRank": 3,
+      "tuning": {
+        "afterburner": 7,
+        "ramjet": 0,
+        "cornering": 0,
+        "resilience": 0,
+        "battery": 3,
+        "maneuvering": 4
+      },
+      "bonus": {
+        "afterburner": 3,
+        "ramjet": 0,
+        "cornering": 10,
+        "resilience": 10,
+        "battery": 5,
+        "maneuvering": 6
+      },
+      "abilities": [
+        "overtaking-surge-ii",
+        "status-scrubber",
+        "shield",
+        "ion-bolt"
+      ],
+      "crashAbility": null,
+      "parts": [
+        {
+          "id": "reconstituted-fuel-ii",
+          "fault": null
+        },
+        {
+          "id": "enriched-fuel-iv",
+          "fault": null
+        },
+        {
+          "id": "fuel-vortexer-iv",
+          "fault": null
+        },
+        {
+          "id": "surging-alarm-iii",
+          "fault": null
+        },
+        {
+          "id": "afterburner-recharger",
+          "fault": "thermal-loop"
+        },
+        {
+          "id": "heated-fuel-iv",
+          "fault": null
+        }
+      ]
+    }
+  },
+  {
+    "id": "stumbled-into-an-op-build",
+    "title": "Stumbled into an OP build",
+    "author": "homestar29",
+    "post": "https://www.reddit.com/r/StarWarsGalacticRacer/comments/1xax6pf/stumbled_into_an_op_build/",
+    "posted": "2026-10-20",
+    "media": "image",
+    "note": "Thermal Inverter (Burning gives Overcharged) with Firebug and Ramjet Power IV. The poster says it gets almost too fast.",
+    "build": {
+      "classId": "landspeeder",
+      "styleId": "firebug",
+      "styleRank": 3,
+      "tuning": {
+        "afterburner": 2,
+        "ramjet": 3,
+        "cornering": 3,
+        "resilience": 2,
+        "battery": 2,
+        "maneuvering": 2
+      },
+      "bonus": {
+        "afterburner": 2,
+        "ramjet": 3,
+        "cornering": 7,
+        "resilience": 1,
+        "battery": 0,
+        "maneuvering": 4
+      },
+      "abilities": [
+        "corrosive-vent",
+        "overtaking-surge",
+        null,
+        null
+      ],
+      "crashAbility": null,
+      "parts": [
+        {
+          "id": "thermal-inverter",
+          "fault": null
+        },
+        {
+          "id": "scrap-reclaimer",
+          "fault": null
+        },
+        {
+          "id": "ramjet-power-iv",
+          "fault": null
+        },
+        {
+          "id": "calibrating-landings-iii",
+          "fault": "iced-fuel"
+        },
+        {
+          "id": "lethal-velocity-iv",
+          "fault": "pyrophoric-surfaces"
+        },
+        {
+          "id": "optimized-surge-iii",
+          "fault": "incendiary-overcharge"
+        }
+      ]
+    }
+  },
+  {
+    "id": "best-build-by-far",
+    "title": "Best build by far top and beat Keslar for the 1st time also",
+    "author": "AnyTry9515",
+    "post": "https://www.reddit.com/r/StarWarsGalacticRacer/comments/1x0qdf1/best_build_by_far_top_and_beat_keslar_for_the_1st/",
+    "posted": "2026-10-08",
+    "media": "video",
+    "note": "A Firebug Landspeeder built around an endless Ramjet. The poster reports a top speed over 1000. The post is a video; the build screen is a photo of a TV from the poster's comment, so a tooltip may be hiding a part.",
+    "build": {
+      "classId": "landspeeder",
+      "styleId": "firebug",
+      "styleRank": 2,
+      "tuning": {
+        "afterburner": 4,
+        "ramjet": 3,
+        "cornering": 5,
+        "resilience": 0,
+        "battery": 0,
+        "maneuvering": 2
+      },
+      "bonus": {
+        "afterburner": 6,
+        "ramjet": 7,
+        "cornering": 5,
+        "resilience": 7,
+        "battery": 3,
+        "maneuvering": 8
+      },
+      "abilities": [
+        "flame-vent",
+        "overtaking-surge",
+        null,
+        null
+      ],
+      "crashAbility": null,
+      "parts": [
+        {
+          "id": "protective-ignition-ii",
+          "fault": null
+        },
+        {
+          "id": "redline-purge",
+          "fault": null
+        },
+        {
+          "id": "extended-alarm-iv",
+          "fault": null
+        },
+        {
+          "id": "reconstituted-fuel-iii",
+          "fault": null
+        }
+      ]
+    }
+  },
+  {
+    "id": "funniest-build-beat-kestar",
+    "title": "I was upgrading backer rewards and classes and found objectively the funniest build. I beat Kestar Bool with this",
+    "author": "YaBoyEden",
+    "post": "https://www.reddit.com/r/StarWarsGalacticRacer/comments/1x7f6qj/i_was_upgrading_backer_rewards_and_classes_and/",
+    "posted": "2026-10-16",
+    "media": "video",
+    "note": "A Tenacious Landspeeder built around Surging Autopilot II, with three of its four part slots filled. The post is a video; the build screen is from the poster's comment.",
+    "build": {
+      "classId": "landspeeder",
+      "styleId": "tenacious",
+      "styleRank": 2,
+      "tuning": {
+        "afterburner": 0,
+        "ramjet": 0,
+        "cornering": 0,
+        "resilience": 0,
+        "battery": 0,
+        "maneuvering": 0
+      },
+      "bonus": {
+        "afterburner": 1,
+        "ramjet": 3,
+        "cornering": 7,
+        "resilience": 0,
+        "battery": 6,
+        "maneuvering": 10
+      },
+      "abilities": [
+        "surging-autopilot-ii",
+        null,
+        null,
+        null
+      ],
+      "crashAbility": null,
+      "parts": [
+        {
+          "id": "ramming-jet-i",
+          "fault": null
+        },
+        {
+          "id": "faster-attachments-iv",
+          "fault": null
+        },
+        {
+          "id": "purging-surge",
+          "fault": null
+        }
+      ]
+    }
+  }
+]

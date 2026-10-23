@@ -1,5 +1,5 @@
 import { STAT_IDS, type GameData, type StatId } from '../data/types';
-import { decodeBuild, topSpeed, totalBoxes, tuningCost, vehicleLevel, type Build } from './build';
+import { combinedBoxes, decodeBuild, topSpeed, totalBoxes, tuningCost, vehicleLevel, type Build } from './build';
 
 /** Accepts a full share link, a /?b= editor link, or a bare code. */
 export function parseBuildInput(input: string): Build | null {
@@ -48,7 +48,7 @@ export function diffBuilds(a: Build, b: Build, data: GameData): BuildDiff {
   const base = (x: Build) => data.vehicleClasses.find((c) => c.id === x.classId);
   const speed = (x: Build) => {
     const c = base(x);
-    return c ? topSpeed(c.baseSpeed, x.tuning, c.id === 'podracer') : 0;
+    return c ? topSpeed(c.baseSpeed, combinedBoxes(x.tuning, x.bonus), c.id === 'podracer') : 0;
   };
   const faultOf = (x: Build, id: string) => x.parts.find((p) => p.id === id)?.fault ?? null;
   const partsA = a.parts.map((p) => p.id);
@@ -59,7 +59,7 @@ export function diffBuilds(a: Build, b: Build, data: GameData): BuildDiff {
     speed: { a: speed(a), b: speed(b) },
     level: { a: vehicleLevel(a.tuning), b: vehicleLevel(b.tuning) },
     points: { a: tuningCost(totalBoxes(a.tuning)), b: tuningCost(totalBoxes(b.tuning)) },
-    stats: STAT_IDS.map((stat) => ({ stat, a: a.tuning[stat], b: b.tuning[stat] })),
+    stats: STAT_IDS.map((stat) => ({ stat, a: a.tuning[stat] + a.bonus[stat], b: b.tuning[stat] + b.bonus[stat] })),
     traits: only(styleTraitNames(a, data), styleTraitNames(b, data)),
     abilities: only(abilityIds(a), abilityIds(b)),
     parts: only(partsA, partsB),

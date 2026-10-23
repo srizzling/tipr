@@ -3,6 +3,16 @@
   "name": "thisispodracing",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-10-01",
+  // The builds board (functions/api/builds). Created by OpenTofu: run `tofu output builds_database_id` in infra/ and paste it
+  // below. Until then the zero id works for local development (`pnpm dev:functions`) but a deploy fails, by design.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "thisispodracing-builds",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
   "vars": {
     // "1" renders a per-build preview image on demand. Needs Cloudflare's paid Workers plan (CPU limit).
     "DYNAMIC_OG": "0"

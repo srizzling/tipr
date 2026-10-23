@@ -40,7 +40,32 @@ describe('buildCardSvg', () => {
     expect(svg).toContain('THERMAL INVERTER');
     expect(svg).toContain('CALIBRATING LANDINGS III');
     expect(svg).toContain('Corroded'); // from the Acidic Fuel fault
-    expect(svg).toContain('2/4');
+    expect(svg).toContain('2/6');
+  });
+
+  it('fits all six parts in the panel, with a fault, on tighter rows', () => {
+    const b = sample();
+    b.parts = ['thermal-inverter', 'ramjet-power-iv', 'optimized-surge-iii', 'calibrating-landings-iii', 'lethal-velocity-iv', 'scrap-reclaimer'].map((id, i) => ({
+      id,
+      fault: i === 3 ? 'acidic-fuel' : null,
+    }));
+    const svg = buildCardSvg(b, gameData);
+    expect(svg).toContain('6/6');
+    for (const name of ['THERMAL INVERTER', 'RAMJET POWER IV', 'OPTIMIZED SURGE III', 'CALIBRATING LANDINGS III', 'LETHAL VELOCITY IV', 'SCRAP RECLAIMER']) {
+      expect(svg).toContain(name);
+    }
+    // The last row must end inside the 474px-tall panel that starts at y=120 (so before y=594).
+    const ys = [...svg.matchAll(/<rect x="832" y="(\d+)" width="320" height="(\d+)"/g)].map((m) => Number(m[1]) + Number(m[2]));
+    expect(ys).toHaveLength(6);
+    expect(Math.max(...ys)).toBeLessThanOrEqual(594);
+  });
+
+  it('draws extra boxes in gold and counts them in the speed', () => {
+    const b = sample();
+    b.bonus = { ...emptyTuning(), cornering: 4 };
+    const svg = buildCardSvg(b, gameData);
+    expect(svg).toContain('>334<'); // 298 + (5 + 4) boxes * 4 km/h
+    expect(svg.match(/fill="#e8b04a" \/>/g)?.length).toBe(4);
   });
 
   it('draws one filled box per tuning box', () => {

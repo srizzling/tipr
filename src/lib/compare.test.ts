@@ -42,6 +42,19 @@ describe('diffBuilds', () => {
   });
 });
 
+describe('diffBuilds with extra boxes', () => {
+  it('counts extra boxes in speed and in the per-stat boxes', () => {
+    const a = make();
+    const b = make();
+    b.bonus = { ...emptyTuning(), ramjet: 3 };
+    const d = diffBuilds(a, b, gameData);
+    expect(d.speed).toEqual({ a: 298, b: 310 });
+    expect(d.stats.find((s) => s.stat === 'ramjet')).toMatchObject({ a: 0, b: 3 });
+    expect(d.level).toEqual({ a: 1, b: 1 }); // level follows Tuning Points only
+    expect(d.identical).toBe(false);
+  });
+});
+
 describe('parseBuildInput', () => {
   it('accepts share links, editor links and bare codes', () => {
     const code = encodeBuild(make());

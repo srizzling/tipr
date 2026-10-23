@@ -26,5 +26,10 @@ provider quirk. Anything else is a real change.
 
 ## Notes
 - Branch and tag rulesets are on (`enable_rulesets`); release PRs need an admin merge past the required checks.
-- The Pages token has only "Pages Write". Add DNS permissions to it when a custom domain is set up.
+- The Pages token has only "Pages Write" and "D1 Write" (the builds board database). An older token needs `--rotate` to gain D1. Add DNS permissions to it when a custom domain is set up.
 - CI never applies infrastructure; it only runs `fmt` and `validate` (no credentials needed).
+
+## The builds board database
+`cloudflare_d1_database.builds` creates the D1 database. After the first `tofu apply`, copy `tofu output builds_database_id`
+into `wrangler.jsonc` (`d1_databases[0].database_id`). The release workflow then applies `migrations/` before each deploy.
+To work on it locally: `pnpm db:local`, then `pnpm dev:functions` (a local copy of the database lives in `.wrangler/`).

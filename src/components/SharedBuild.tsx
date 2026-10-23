@@ -44,6 +44,9 @@ export function SharedBuild({
           <a className="pill action" href={`/compare?a=${code}`}>
             Compare
           </a>
+          <a className="pill action" href={`/builds/?add=${code}`}>
+            Add a video
+          </a>
           <button className="pill action" onClick={onImage}>
             {imageLabel}
           </button>

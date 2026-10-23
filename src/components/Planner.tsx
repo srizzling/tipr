@@ -3,6 +3,7 @@ import {
   CURRENT_BUILD_KEY,
   MAX_PARTS,
   MAX_TUNING_BOXES,
+  clampBonus,
   decodeBuild,
   emptyTuning,
   encodeBuild,
@@ -46,6 +47,7 @@ export default function Planner() {
   const [verdictSeed, setVerdictSeed] = useState(0);
   const [garage, setGarage] = useState<SavedBuild[]>([]);
   const [justSaved, setJustSaved] = useState(false);
+  const [editing, setEditing] = useState<'points' | 'extra'>('points');
   const [imageState, setImageState] = useState<'idle' | 'working' | 'copied' | 'failed'>('idle');
 
   // hydrate from share link, then keep the URL in sync
@@ -71,6 +73,7 @@ export default function Planner() {
 
   const verdict = useMemo(() => buildVerdict(build, data, verdictSeed), [build, data, verdictSeed]);
   const spent = tuningCost(totalBoxes(build.tuning));
+  const extraBoxes = totalBoxes(build.bonus);
   const campaignStyles = data.racerStyles.filter((s) => !s.multiplayerOnly);
   const traits = style ? style.ranks.filter((r) => r.rank <= build.styleRank).flatMap((r) => r.traits) : [];
 
@@ -119,7 +122,7 @@ export default function Planner() {
       else if (k === 'c') goCompare();
       else if (k === 'i') void shareImage('copy');
       else if (k === 'd') void shareImage('save');
-      else if (k === 'r') update({ tuning: emptyTuning() });
+      else if (k === 'r') update({ tuning: emptyTuning(), bonus: emptyTuning() });
       else return;
       e.preventDefault();
     };
@@ -178,7 +181,10 @@ export default function Planner() {
             <input type="range" min={0} max={163} value={earned} onChange={(e) => {
                 const v = +e.target.value;
                 setEarned(v);
-                setBuild((b) => ({ ...b, tuning: fitToBudget(b.tuning, v) }));
+                setBuild((b) => {
+                  const tuning = fitToBudget(b.tuning, v);
+                  return { ...b, tuning, bonus: clampBonus(tuning, b.bonus) };
+                });
               }} />
           </label>
           <p className="hint">Save-file import will fill these in automatically.</p>
@@ -211,13 +217,32 @@ export default function Planner() {
               ›
             </button>
           </div>
+          <div className="seg small" role="group" aria-label="Which boxes the clicks fill">
+            <button className={editing === 'points' ? 'on' : ''} onClick={() => setEditing('points')}>
+              Tuning Points
+            </button>
+            <button className={editing === 'extra' ? 'on' : ''} onClick={() => setEditing('extra')}>
+              Extra boxes
+            </button>
+          </div>
           <StatRows
             cls={cls}
             tuning={build.tuning}
-            onSet={(stat, boxes) => update({ tuning: setTuning(build.tuning, stat, boxes, budget) })}
+            bonus={build.bonus}
+            editing={editing}
+            onSet={(stat, boxes) => {
+              const tuning = setTuning(build.tuning, stat, boxes, budget);
+              update({ tuning, bonus: clampBonus(tuning, build.bonus) });
+            }}
+            onSetBonus={(bonus) => update({ bonus })}
           />
           <p className="hint">
             Level {vehicleLevel(build.tuning)} / {MAX_TUNING_BOXES + 1} · {spent} point{spent === 1 ? '' : 's'} spent
+            {extraBoxes > 0 && ` · ${extraBoxes} extra box${extraBoxes === 1 ? '' : 'es'}`}
+          </p>
+          <p className="hint tight">
+            Bright boxes are bought with Tuning Points (14 at most). Gold ones are extra boxes from other sources, such as the
+            in-tour and shop +1 upgrades. Both add speed and Energy.
           </p>
           <p className="hint">
             {nextBoxCost(build.tuning) === null
@@ -331,7 +356,7 @@ export default function Planner() {
         <Key k="C" onClick={goCompare}>
           Compare
         </Key>
-        <Key k="R" onClick={() => update({ tuning: emptyTuning() })}>
+        <Key k="R" onClick={() => update({ tuning: emptyTuning(), bonus: emptyTuning() })}>
           Respec
         </Key>
       </div>
