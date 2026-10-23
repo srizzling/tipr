@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import {
+  MAX_STAT_BOXES,
   MAX_TUNING_BOXES,
   addAbility,
+  clampBonus,
+  combinedBoxes,
+  setBonusTotal,
   placeAbility,
   decodeBuild,
   emptyTuning,
@@ -89,6 +93,14 @@ describe('share link', () => {
     expect(decodeBuild(encodeBuild(b))).toEqual(b);
   });
 
+  it('keeps up to six parts, the number of slots on the build screen', () => {
+    const b = newBuild('landspeeder');
+    b.parts = ['a', 'b', 'c', 'd', 'e', 'f'].map((id) => ({ id: `part-${id}`, fault: null }));
+    expect(decodeBuild(encodeBuild(b))?.parts).toHaveLength(6);
+    const seven = decodeBuild(btoa(JSON.stringify(['landspeeder', null, 1, [0, 0, 0, 0, 0, 0], [null, null, null, null], null, [...b.parts.map((p) => p.id), 'part-g']])).replace(/=+$/, ''));
+    expect(seven?.parts).toHaveLength(6);
+  });
+
   it('rejects garbage', () => {
     expect(decodeBuild('not a build')).toBeNull();
   });
@@ -149,5 +161,54 @@ describe('ability placement', () => {
     const full = { ...base(), abilities: ['a', 'b', 'c', 'd'] };
     expect(addAbility(full, 'shield', crash)).toEqual(full);
     expect(addAbility(base(), 'ion-blast', crash).crashAbility).toBe('ion-blast');
+  });
+});
+
+describe('extra boxes', () => {
+  const codeArray = (code: string): unknown[] => JSON.parse(atob(code.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - (code.length % 4)) % 4)));
+
+  it('adds the same speed and Energy as Tuning Point boxes', () => {
+    const b = newBuild('landspeeder');
+    b.tuning = setTuning(emptyTuning(), 'battery', 2);
+    b.bonus = { ...emptyTuning(), battery: 3, ramjet: 4 };
+    const all = combinedBoxes(b.tuning, b.bonus);
+    expect(all.battery).toBe(5);
+    expect(topSpeed(298, all)).toBe(298 + 9 * 4);
+    expect(maxEnergy(all)).toBe(3 + 5);
+  });
+
+  it('never lets a stat hold more than ten boxes in all', () => {
+    const tuning = setTuning(emptyTuning(), 'ramjet', 7);
+    expect(clampBonus(tuning, { ...emptyTuning(), ramjet: 9, cornering: 12, battery: -3 })).toMatchObject({ ramjet: MAX_STAT_BOXES - 7, cornering: MAX_STAT_BOXES, battery: 0 });
+    // Setting a stat's total below its Tuning Point boxes leaves no extra boxes, and never removes Tuning Point boxes.
+    expect(setBonusTotal(tuning, emptyTuning(), 'ramjet', 4).ramjet).toBe(0);
+    expect(setBonusTotal(tuning, emptyTuning(), 'ramjet', 9).ramjet).toBe(2);
+    expect(setBonusTotal(tuning, emptyTuning(), 'ramjet', 99).ramjet).toBe(3);
+  });
+
+  it('keeps the old share code for builds without extra boxes', () => {
+    const b = newBuild('landspeeder');
+    b.tuning = setTuning(emptyTuning(), 'ramjet', 5);
+    expect(codeArray(encodeBuild(b))).toHaveLength(7);
+  });
+
+  it('round-trips extra boxes', () => {
+    const b = newBuild('landspeeder');
+    b.tuning = setTuning(emptyTuning(), 'ramjet', 5);
+    b.bonus = { ...emptyTuning(), ramjet: 5, cornering: 10 };
+    expect(decodeBuild(encodeBuild(b))).toEqual(b);
+  });
+
+  it('reads old seven-part codes as having no extra boxes', () => {
+    const old = btoa(JSON.stringify(['landspeeder', null, 1, [0, 0, 0, 0, 0, 0], [null, null, null, null], null, []])).replace(/=+$/, '');
+    expect(decodeBuild(old)?.bonus).toEqual(emptyTuning());
+  });
+
+  it('clamps hostile extra-box values', () => {
+    const enc = (v: unknown) => btoa(JSON.stringify(v)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    const b = decodeBuild(enc(['landspeeder', null, 1, [0, 0, 0, 0, 0, 7], [null, null, null, null], null, [], [99, -4, 'x', null, 2.9, 5]]));
+    expect(b?.bonus).toEqual({ afterburner: 10, ramjet: 0, cornering: 0, resilience: 0, battery: 2, maneuvering: 3 });
+    // Not an array: ignored.
+    expect(decodeBuild(enc(['landspeeder', null, 1, [0, 0, 0, 0, 0, 0], [null, null, null, null], null, [], 'zzz']))?.bonus).toEqual(emptyTuning());
   });
 });

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { decodeBuild, topSpeed, vehicleLevel } from '../lib/build';
+import { combinedBoxes, decodeBuild, topSpeed, vehicleLevel } from '../lib/build';
 import { gameData as data } from '../data';
 import { deleteBuild, loadGarage, renameBuild, type SavedBuild } from '../lib/garage';
 import { buildVerdict } from '../lib/verdict';
@@ -68,7 +68,7 @@ export default function Garage() {
               )}
               <p className="sub">
                 {cls.name} · {nameOf(data.racerStyles, build.styleId) ?? 'No style'} · Level {vehicleLevel(build.tuning)} ·{' '}
-                {topSpeed(cls.baseSpeed, build.tuning, cls.id === 'podracer')} km/h
+                {topSpeed(cls.baseSpeed, combinedBoxes(build.tuning, build.bonus), cls.id === 'podracer')} km/h
               </p>
               <p className="verdict-mini">
                 <b>{verdict.title}.</b> {verdict.line}

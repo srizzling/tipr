@@ -3,6 +3,8 @@ import { STAT_IDS } from '../data/types';
 import {
   MAX_BOXES_PER_STAT,
   MAX_ENERGY_SCALE,
+  MAX_STAT_BOXES,
+  combinedBoxes,
   MAX_PARTS,
   maxEnergy,
   topSpeed,
@@ -112,7 +114,8 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
   };
 
   const boxes = totalBoxes(build.tuning);
-  const speed = topSpeed(cls.baseSpeed, build.tuning, cls.id === 'podracer');
+  const allBoxes = combinedBoxes(build.tuning, build.bonus);
+  const speed = topSpeed(cls.baseSpeed, allBoxes, cls.id === 'podracer');
   const parts: string[] = [];
   const push = (s: string) => parts.push(s);
   const img = (url: string | null) => (url ? opts.images?.[url] : undefined);
@@ -161,13 +164,17 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
     push(rect(LX + 12, y, 316, 44, 6, C.row));
     push(statGlyph(stat, LX + 22, y + 11, 22));
     push(t(LX + 54, y + 16, 12, C.muted, escapeXml((stat === 'maneuvering' ? cls.maneuveringName : STAT_LABELS[stat]).toUpperCase()), 'font-weight="600" letter-spacing="1.5"'));
-    for (let b = 0; b < MAX_BOXES_PER_STAT; b++) {
-      push(rect(LX + 54 + b * 19, y + 24, 15, 12, 4, b < build.tuning[stat] ? C.bright : C.box, b < build.tuning[stat] ? '' : 'opacity="0.55"'));
+    // 7 small boxes then 3 large ones. Tuning Point boxes are bright, extra boxes gold, empty ones dim.
+    for (let b = 0; b < MAX_STAT_BOXES; b++) {
+      const small = b < MAX_BOXES_PER_STAT;
+      const fill = b < build.tuning[stat] ? C.bright : b < allBoxes[stat] ? C.gold : C.box;
+      const lit = b < allBoxes[stat];
+      const x = small ? LX + 54 + b * 19 : LX + 54 + 7 * 19 + 2 + (b - MAX_BOXES_PER_STAT) * 24;
+      push(small ? rect(x, y + 24, 15, 12, 4, fill, lit ? '' : 'opacity="0.55"') : rect(x, y + 22, 20, 15, 4, fill, lit ? '' : 'opacity="0.35"'));
     }
-    for (let b = 0; b < 3; b++) push(rect(LX + 54 + 7 * 19 + 2 + b * 24, y + 22, 20, 15, 4, C.box, 'opacity="0.35"'));
   });
   push(t(LX + 18, 552, 12, C.muted, 'MAX ENERGY', 'font-weight="600" letter-spacing="1.5"'));
-  const energy = maxEnergy(build.tuning);
+  const energy = maxEnergy(allBoxes);
   for (let d = 0; d < MAX_ENERGY_SCALE; d++) {
     push(`<circle cx="${LX + 22 + d * 19}" cy="574" r="5" fill="${d < energy ? C.bright : C.box}" ${d < energy ? '' : 'opacity="0.5"'}/>`);
   }
@@ -228,21 +235,40 @@ export function buildCardSvg(build: Build, data: GameData, opts: CardOptions = {
     return part ? [{ part, fault: find(p.fault) }] : [];
   });
   panel(RX, 120, 344, 474, 'Installed parts', `${list.length}/${MAX_PARTS}`);
+  // Four rows have room for two lines of text; five or six use a tighter row so they still fit the panel.
+  const compact = list.length > 4;
+  const step = compact ? 70 : 106;
+  const rowH = step - 6;
+  const [tw, th] = compact ? [56, 30] : [76, 40];
   list.forEach(({ part, fault }, i) => {
-    const y = 166 + i * 106;
-    push(rect(RX + 12, y, 320, 100, 8, C.row));
+    const y = 166 + i * step;
+    push(rect(RX + 12, y, 320, rowH, 8, C.row));
     const card = img(partThumbUrl(part));
+    const ty = compact ? y + 8 : y + 10;
     if (card) {
-      push(`<clipPath id="pc${i}"><rect x="${RX + 22}" y="${y + 10}" width="76" height="40" rx="8"/></clipPath>`);
-      push(`<image href="${card}" x="${RX + 22}" y="${y + 10}" width="76" height="40" preserveAspectRatio="xMidYMid slice" clip-path="url(#pc${i})"/>`);
+      push(`<clipPath id="pc${i}"><rect x="${RX + 22}" y="${ty}" width="${tw}" height="${th}" rx="8"/></clipPath>`);
+      push(`<image href="${card}" x="${RX + 22}" y="${ty}" width="${tw}" height="${th}" preserveAspectRatio="xMidYMid slice" clip-path="url(#pc${i})"/>`);
     } else {
-      push(rect(RX + 22, y + 10, 40, 40, 8, 'rgba(255,255,255,0.1)'));
+      push(rect(RX + 22, ty, 40, 40, 8, 'rgba(255,255,255,0.1)'));
       const tone = part.rarity === 'legendary' ? C.gold : part.rarity === 'epic' ? '#c4a0ec' : part.rarity === 'rare' ? '#8cc0ee' : C.bright;
-      push(icon('part', RX + 29, y + 17, 26, tone));
+      push(icon('part', RX + 29, ty + 7, 26, tone));
     }
-    const tx = card ? RX + 108 : RX + 74;
-    if (fault) push(card ? `<rect x="${RX + 26}" y="${y + 34}" width="16" height="16" rx="4" fill="rgba(18,12,12,0.75)"/>${icon('fault', RX + 28, y + 36, 12, C.red)}` : icon('fault', RX + 24, y + 36, 12, C.red));
-    push(t(tx, y + 22, 16, C.bright, escapeXml(fit(part.name.toUpperCase(), card ? 24 : 26)), 'font-weight="700" letter-spacing="1"'));
+    const tx = card ? RX + 22 + tw + 10 : RX + 74;
+    const fy = ty + th - 16; // the fault marker sits in the thumbnail's bottom-left corner
+    if (fault) push(card ? `<rect x="${RX + 26}" y="${fy}" width="16" height="16" rx="4" fill="rgba(18,12,12,0.75)"/>${icon('fault', RX + 28, fy + 2, 12, C.red)}` : icon('fault', RX + 24, y + 36, 12, C.red));
+    push(t(tx, y + (compact ? 20 : 22), compact ? 15 : 16, C.bright, escapeXml(fit(part.name.toUpperCase(), card ? 24 : 26)), 'font-weight="700" letter-spacing="1"'));
+    if (compact) {
+      // One line each: the fault replaces the description, since both will not fit.
+      if (fault) {
+        const [line = ''] = wrap(fault.text, 38, 1);
+        push(rect(tx, y + rowH - 28, RX + 328 - tx, 24, 5, C.redBg, `stroke="${C.red}" stroke-width="1"`));
+        push(t(tx + 8, y + rowH - 12, 12.5, C.text, rich(line), ''));
+      } else {
+        const [line = ''] = wrap(part.text, card ? 38 : 46, 1);
+        push(t(tx, y + 38, 13, C.text, rich(line), ''));
+      }
+      return;
+    }
     wrap(part.text, card ? 32 : 42, 2).forEach((line, li) => push(t(tx, y + 40 + li * 15, 14, C.text, rich(line), '')));
     if (fault) {
       const fl = wrap(fault.text, 42, 2);

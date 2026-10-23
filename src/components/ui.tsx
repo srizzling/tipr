@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { MAX_BOXES_PER_STAT, MAX_ENERGY_SCALE, maxEnergy, topSpeed, type InstalledPart } from '../lib/build';
+import { MAX_BOXES_PER_STAT, MAX_ENERGY_SCALE, MAX_STAT_BOXES, combinedBoxes, maxEnergy, setBonusTotal, topSpeed, type InstalledPart } from '../lib/build';
 import { STAT_IDS, type Ability, type Part, type StatId, type VehicleClass } from '../data/types';
 import { abilityArtUrl, partThumbUrl, statArtUrl, type StatArt } from '../lib/game-art';
 import { STAT_LABEL, highlight } from './highlight';
@@ -93,47 +93,58 @@ export const Key = ({ k, children, onClick }: { k: string; children: ReactNode; 
 );
 
 /**
- * Speed plus the six stat rows and the Max Energy dots. Pass `onSet` to make the boxes clickable;
- * without it the rows are read-only (shared builds, compare).
+ * Speed plus the six stat rows and the Max Energy dots. Each row has 10 boxes (7 small, 3 large). Boxes bought with
+ * Tuning Points are bright and extra boxes are gold; both count towards speed and Energy. Pass `onSet` to make the
+ * Tuning Point boxes clickable, or `onSetBonus` (with `editing="extra"`) to edit the extra ones. Without them the rows
+ * are read-only (shared builds, compare).
  */
 export function StatRows({
   cls,
   tuning,
+  bonus,
+  editing = 'points',
   onSet,
+  onSetBonus,
 }: {
   cls: VehicleClass;
   tuning: Record<StatId, number>;
+  bonus: Record<StatId, number>;
+  editing?: 'points' | 'extra';
   onSet?: (stat: StatId, boxes: number) => void;
+  onSetBonus?: (bonus: Record<StatId, number>) => void;
 }) {
-  const energy = maxEnergy(tuning);
+  const boxes = combinedBoxes(tuning, bonus);
+  const energy = maxEnergy(boxes);
+  const interactive = editing === 'extra' ? !!onSetBonus : !!onSet;
   return (
     <>
       <div className="speed">
         <StatIcon stat="speed" />
         <span>Speed</span>
-        <b>{topSpeed(cls.baseSpeed, tuning, cls.id === 'podracer')}</b>
+        <b>{topSpeed(cls.baseSpeed, boxes, cls.id === 'podracer')}</b>
       </div>
       {STAT_IDS.map((stat) => (
         <div className="stat" key={stat}>
           <StatIcon stat={stat} />
           <div className="stat-main">
             <span className="stat-name">{stat === 'maneuvering' ? cls.maneuveringName : STAT_LABEL[stat]}</span>
-            <div className="boxes" role={onSet ? 'group' : undefined} aria-label={onSet ? `${stat} boxes` : undefined}>
-              {Array.from({ length: MAX_BOXES_PER_STAT }, (_, i) =>
-                onSet ? (
-                  <button
-                    key={i}
-                    className={i < tuning[stat] ? 'box on' : 'box'}
-                    aria-label={`Set ${stat} to ${i + 1}`}
-                    onClick={() => onSet(stat, tuning[stat] === i + 1 ? i : i + 1)}
-                  />
+            <div className="boxes" role={interactive ? 'group' : undefined} aria-label={interactive ? `${stat} boxes` : undefined}>
+              {Array.from({ length: MAX_STAT_BOXES }, (_, i) => {
+                const kind = i < tuning[stat] ? 'on' : i < boxes[stat] ? 'extra' : '';
+                const className = ['box', i >= MAX_BOXES_PER_STAT && 'big', kind].filter(Boolean).join(' ');
+                // Tuning Points only reach the 7 small boxes; extra boxes can fill all 10.
+                const click =
+                  editing === 'extra' && onSetBonus
+                    ? () => onSetBonus(setBonusTotal(tuning, bonus, stat, boxes[stat] === i + 1 ? i : i + 1))
+                    : editing === 'points' && onSet && i < MAX_BOXES_PER_STAT
+                      ? () => onSet(stat, tuning[stat] === i + 1 ? i : i + 1)
+                      : null;
+                return click ? (
+                  <button key={i} className={className} aria-label={`Set ${stat} to ${i + 1}`} onClick={click} />
                 ) : (
-                  <span key={i} className={i < tuning[stat] ? 'box on' : 'box'} />
-                ),
-              )}
-              {[0, 1, 2].map((i) => (
-                <span key={i} className="box big" title="Filled by in-tour +1 upgrades" />
-              ))}
+                  <span key={i} className={className} />
+                );
+              })}
             </div>
           </div>
         </div>

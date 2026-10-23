@@ -1,5 +1,5 @@
 import { STAT_IDS, type GameData, type StatId } from '../data/types';
-import { MAX_TUNING_BOXES, encodeBuild, totalBoxes, type Build } from './build';
+import { MAX_PARTS, MAX_TUNING_BOXES, encodeBuild, totalBoxes, type Build } from './build';
 
 export interface Verdict {
   /** Short, shareable headline, e.g. "Pod racer in a trench coat". */
@@ -20,6 +20,8 @@ interface Facts {
   classId: string;
   styleId: string | null;
   boxes: number;
+  /** Extra (non Tuning Point) boxes, which do not count towards `boxes` but do make a build non-empty. */
+  extra: number;
   stats: Record<StatId, number>;
   top: StatId;
   topName: string;
@@ -44,7 +46,7 @@ interface Rule {
 const RULES: Rule[] = [
   {
     id: 'empty',
-    when: (f) => f.boxes === 0 && f.parts === 0 && f.abilities === 0 && !f.styleId,
+    when: (f) => f.boxes === 0 && f.extra === 0 && f.parts === 0 && f.abilities === 0 && !f.styleId,
     titles: ['Fresh off the lot', 'Stock and proud', 'Blank canvas, no brush'],
     lines: ['Zero upgrades. The vehicle is doing its best.', 'Nothing installed, so nothing to blame.', 'Technically a build. Technically.'],
   },
@@ -124,9 +126,9 @@ const RULES: Rule[] = [
   },
   {
     id: 'well-kept',
-    when: (f) => f.parts >= 4 && f.faults === 0,
+    when: (f) => f.parts >= MAX_PARTS && f.faults === 0,
     titles: ['Suspiciously well maintained', 'Mechanic of the month'],
-    lines: ['Four parts, zero faults. Is this a trap?', 'Not a single fault. Someone has been reading the manual.'],
+    lines: ['A full set of parts, zero faults. Is this a trap?', 'Not a single fault. Someone has been reading the manual.'],
   },
   {
     id: 'podracer',
@@ -188,6 +190,7 @@ function factsOf(build: Build, data: GameData): Facts {
     classId: build.classId,
     styleId: build.styleId,
     boxes,
+    extra: totalBoxes(build.bonus),
     stats,
     top,
     topName: top === 'maneuvering' ? (cls?.maneuveringName ?? 'Maneuvering') : STAT_NAMES[top],

@@ -1,5 +1,5 @@
 import type { GameData } from '../data/types';
-import { topSpeed, vehicleLevel, type Build } from './build';
+import { combinedBoxes, topSpeed, vehicleLevel, type Build } from './build';
 import { buildVerdict } from './verdict';
 
 const nameOf = (list: { id: string; name: string }[], id: string | null) => list.find((x) => x.id === id)?.name;
@@ -15,7 +15,7 @@ export function buildSummary(build: Build, data: GameData): { title: string; des
 
   const title = [style, cls?.name, 'build'].filter(Boolean).join(' ') + ' · This Is Pod Racing';
   const facts = [
-    cls ? `${cls.name}, level ${vehicleLevel(build.tuning)}, ${topSpeed(cls.baseSpeed, build.tuning, cls.id === 'podracer')} km/h` : null,
+    cls ? `${cls.name}, level ${vehicleLevel(build.tuning)}, ${topSpeed(cls.baseSpeed, combinedBoxes(build.tuning, build.bonus), cls.id === 'podracer')} km/h` : null,
     style ? `${style} rank ${build.styleRank}` : null,
     abilities.length ? `Abilities: ${abilities.join(', ')}` : null,
     parts.length ? `Parts: ${parts.join(', ')}` : null,
